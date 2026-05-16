@@ -1,0 +1,6 @@
+data/images/
+data/*.db
+__pycache__/
+*.pyc
+*.log
+.venv/

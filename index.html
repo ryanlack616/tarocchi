@@ -1,0 +1,1507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>tarocchi.help — the cards help you think</title>
+<meta name="description" content="A serious tarot reading tool. 78 cards, 5 spreads, AI synthesis.">
+<meta property="og:title" content="tarocchi.help">
+<meta property="og:description" content="The cards help you think. 78-card reader with AI synthesis.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://tarocchi.help/">
+<meta name="theme-color" content="#0d0a14">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'><rect width='40' height='40' rx='4' fill='%230d0a14'/><path d='M20 6 L24 14 L32 14 L26 19 L28 27 L20 22 L12 27 L14 19 L8 14 L16 14 Z' stroke='%23c9a84c' stroke-width='1.2' fill='none'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0d0a14;
+  --surface: #1a1428;
+  --surface2: #221c35;
+  --border: #2e2548;
+  --accent: #c9a84c;
+  --accent2: #7b4fa6;
+  --accent-glow: rgba(201,168,76,0.15);
+  --violet-glow: rgba(123,79,166,0.2);
+  --text: #e8e0f0;
+  --muted: #7a6e8a;
+  --card-back: #1e1632;
+  --card-back2: #160e2a;
+  --starfield-1: rgba(123,79,166,0.08);
+  --starfield-2: rgba(201,168,76,0.05);
+  --card-scale: 1;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Inter', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+}
+
+[data-theme="light"] {
+  --bg: #f5f1e8;
+  --surface: #ffffff;
+  --surface2: #ebe4d4;
+  --border: #d4c9b0;
+  --accent: #8a6a25;
+  --accent2: #6b3e94;
+  --accent-glow: rgba(138,106,37,0.18);
+  --violet-glow: rgba(107,62,148,0.15);
+  --text: #2a2038;
+  --muted: #6e6478;
+  --card-back: #e8dec8;
+  --card-back2: #d9cbab;
+  --starfield-1: rgba(107,62,148,0.06);
+  --starfield-2: rgba(138,106,37,0.04);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── Starfield ── */
+#stars {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background:
+    radial-gradient(ellipse at 20% 30%, var(--starfield-1) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 70%, var(--starfield-2) 0%, transparent 50%),
+    var(--bg);
+  transition: background 0.3s ease;
+}
+body { transition: background 0.3s ease, color 0.3s ease; }
+
+/* ── Views ── */
+.view { display: none; position: relative; z-index: 1; }
+.view.active { display: flex; flex-direction: column; min-height: 100vh; }
+
+/* ══════════════════════════════
+   LANDING
+══════════════════════════════ */
+#view-landing {
+  align-items: center; justify-content: center; text-align: center;
+  padding: 60px 24px;
+}
+.landing-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--accent); opacity: 0.7; margin-bottom: 24px;
+}
+.landing-title {
+  font-family: var(--font-serif);
+  font-size: clamp(52px, 8vw, 96px);
+  font-weight: 300; letter-spacing: -0.01em;
+  color: var(--text); line-height: 1;
+  margin-bottom: 8px;
+}
+.landing-title span { color: var(--accent); }
+.landing-subtitle {
+  font-family: var(--font-serif);
+  font-size: clamp(16px, 2.5vw, 22px);
+  font-weight: 300; font-style: italic;
+  color: var(--muted); margin-bottom: 56px;
+}
+.landing-cards-preview {
+  display: flex; gap: 12px; justify-content: center;
+  margin-bottom: 56px; perspective: 800px;
+}
+.preview-card {
+  width: 72px; height: 120px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--card-back), var(--card-back2));
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; color: var(--accent); opacity: 0.6;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform: rotateY(var(--ry, 0deg)) rotateX(var(--rx, 0deg));
+}
+.preview-card:nth-child(1) { --ry: -8deg; --rx: 2deg; }
+.preview-card:nth-child(2) { --ry: 0deg; --rx: -1deg; opacity: 0.85; }
+.preview-card:nth-child(3) { --ry: 8deg; --rx: 2deg; }
+.preview-card:nth-child(1) svg, .preview-card:nth-child(3) svg { opacity: 0.5; }
+.btn-primary {
+  display: inline-block;
+  padding: 16px 40px;
+  background: transparent;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 13px; letter-spacing: 0.15em; text-transform: uppercase;
+  cursor: pointer; border-radius: 2px;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+.btn-primary:hover {
+  background: var(--accent); color: var(--bg);
+  box-shadow: 0 0 32px var(--accent-glow);
+}
+.landing-footer {
+  margin-top: 80px;
+  font-family: var(--font-mono);
+  font-size: 10px; color: var(--muted); opacity: 0.4;
+  letter-spacing: 0.1em;
+}
+
+/* ══════════════════════════════
+   SPREAD SELECTION
+══════════════════════════════ */
+#view-spread { padding: 60px 24px; align-items: center; }
+.view-header {
+  text-align: center; margin-bottom: 48px;
+}
+.view-header h2 {
+  font-family: var(--font-serif); font-size: clamp(32px, 5vw, 52px);
+  font-weight: 300; color: var(--text); margin-bottom: 8px;
+}
+.view-header p {
+  font-family: var(--font-serif); font-style: italic;
+  color: var(--muted); font-size: 16px;
+}
+.spread-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px; max-width: 900px; width: 100%;
+}
+.spread-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 8px; padding: 28px 24px; cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, transform 0.2s;
+  position: relative; overflow: hidden;
+}
+.spread-card::before {
+  content: ''; position: absolute; inset: 0;
+  background: var(--violet-glow); opacity: 0;
+  transition: opacity 0.2s;
+}
+.spread-card:hover { border-color: var(--accent2); transform: translateY(-2px); }
+.spread-card:hover::before { opacity: 1; }
+.spread-card-count {
+  font-family: var(--font-mono); font-size: 10px;
+  color: var(--accent); letter-spacing: 0.15em;
+  text-transform: uppercase; margin-bottom: 12px;
+}
+.spread-card-name {
+  font-family: var(--font-serif); font-size: 22px;
+  font-weight: 500; color: var(--text); margin-bottom: 8px;
+  line-height: 1.2;
+}
+.spread-card-name-it {
+  font-family: var(--font-serif); font-style: italic;
+  font-size: 13px; color: var(--muted); margin-bottom: 12px;
+}
+.spread-card-desc {
+  font-size: 13px; color: var(--muted); line-height: 1.6;
+}
+
+/* ══════════════════════════════
+   SHUFFLE & DRAW
+══════════════════════════════ */
+#view-draw { padding: 40px 24px; align-items: center; }
+.draw-header { text-align: center; margin-bottom: 40px; }
+.draw-header h2 {
+  font-family: var(--font-serif); font-size: clamp(28px, 4vw, 42px);
+  font-weight: 300; margin-bottom: 8px;
+}
+.draw-instruction {
+  font-family: var(--font-serif); font-style: italic;
+  color: var(--muted); font-size: 15px;
+}
+.spread-layout {
+  width: 100%; max-width: 800px;
+  display: flex; flex-wrap: wrap; gap: 16px; justify-content: center;
+  margin-bottom: 40px;
+}
+.card-slot {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  width: calc(100px * var(--card-scale));
+}
+.card-slot.wide { width: calc(220px * var(--card-scale)); }
+.slot-label {
+  font-family: var(--font-mono); font-size: 9px;
+  color: var(--muted); letter-spacing: 0.15em; text-transform: uppercase;
+  text-align: center; min-height: 28px;
+}
+.tarot-card {
+  width: calc(90px * var(--card-scale));
+  height: calc(150px * var(--card-scale));
+  border-radius: 8px;
+  position: relative; cursor: pointer;
+  perspective: 600px;
+  transition: width 0.2s ease, height 0.2s ease;
+}
+.tarot-card.cross { transform: rotate(90deg); }
+.card-inner {
+  width: 100%; height: 100%; position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.tarot-card.flipped .card-inner { transform: rotateY(180deg); }
+.tarot-card.reversed .card-inner { transform: rotateY(180deg) rotate(180deg); }
+.card-face, .card-back-face {
+  position: absolute; inset: 0; border-radius: 8px;
+  backface-visibility: hidden; overflow: hidden;
+}
+.card-back-face {
+  background: linear-gradient(135deg, var(--card-back) 0%, var(--card-back2) 100%);
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+}
+.card-back-pattern {
+  width: 70%; height: 70%;
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  background: repeating-linear-gradient(
+    45deg, transparent, transparent 4px,
+    rgba(123,79,166,0.05) 4px, rgba(123,79,166,0.05) 8px
+  );
+}
+.card-back-symbol { color: var(--accent); opacity: 0.3; font-size: 24px; }
+.card-face {
+  transform: rotateY(180deg);
+  background: var(--surface2);
+  border: 1px solid var(--accent);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 8px; gap: 4px;
+}
+.card-face.reversed-face { border-color: var(--accent2); }
+.card-arcana-badge {
+  font-family: var(--font-mono); font-size: 7px;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--accent); opacity: 0.7;
+}
+.card-art { width: 48px; height: 48px; }
+.card-name-display {
+  font-family: var(--font-serif); font-size: 10px;
+  color: var(--text); text-align: center; line-height: 1.3;
+}
+.card-reversed-label {
+  font-family: var(--font-mono); font-size: 7px;
+  color: var(--accent2); letter-spacing: 0.1em;
+}
+.tarot-card:not(.occupied) .card-back-face {
+  border-style: dashed; border-color: var(--border); opacity: 0.4;
+}
+.tarot-card.occupied .card-back-face:hover {
+  border-color: var(--accent); box-shadow: 0 0 20px var(--accent-glow);
+}
+.deck-area {
+  display: flex; flex-direction: column; align-items: center; gap: 16px;
+  margin-bottom: 32px;
+}
+.deck-stack {
+  position: relative;
+  width: calc(90px * var(--card-scale));
+  height: calc(150px * var(--card-scale));
+  cursor: pointer;
+}
+.deck-stack-card {
+  position: absolute;
+  width: calc(90px * var(--card-scale));
+  height: calc(150px * var(--card-scale));
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--card-back), var(--card-back2));
+  border: 1px solid var(--border);
+  transition: transform 0.3s ease;
+}
+.deck-stack-card:nth-child(1) { transform: translate(-3px, -3px) rotate(-2deg); }
+.deck-stack-card:nth-child(2) { transform: translate(-1px, -1px) rotate(-0.5deg); }
+.deck-stack-card:nth-child(3) { transform: translate(0, 0); border-color: var(--accent); opacity: 0.7; }
+.deck-stack:hover .deck-stack-card:nth-child(1) { transform: translate(-5px, -5px) rotate(-3deg); }
+.deck-stack:hover .deck-stack-card:nth-child(2) { transform: translate(-2px, -2px) rotate(-1deg); }
+.deck-stack:hover .deck-stack-card:nth-child(3) { border-color: var(--accent); box-shadow: 0 0 20px var(--accent-glow); opacity: 1; }
+.deck-count {
+  font-family: var(--font-mono); font-size: 11px;
+  color: var(--muted); letter-spacing: 0.1em;
+}
+.btn-secondary {
+  padding: 10px 24px;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+  cursor: pointer; border-radius: 2px;
+  transition: border-color 0.2s, color 0.2s;
+}
+.btn-secondary:hover { border-color: var(--muted); color: var(--text); }
+
+/* ══════════════════════════════
+   READING / BRIEF
+══════════════════════════════ */
+#view-reading { padding: 40px 24px; align-items: center; }
+.reading-header { text-align: center; margin-bottom: 40px; }
+.reading-header h2 {
+  font-family: var(--font-serif); font-size: clamp(28px, 4vw, 42px);
+  font-weight: 300; margin-bottom: 8px;
+}
+.reading-cards-row {
+  display: flex; flex-wrap: wrap; gap: 16px; justify-content: center;
+  max-width: 900px; width: 100%; margin-bottom: 40px;
+}
+.reading-card-item {
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  width: calc(120px * var(--card-scale)); cursor: pointer;
+}
+.reading-card-item .tarot-card { width: calc(90px * var(--card-scale)); height: calc(150px * var(--card-scale)); }
+.reading-card-item .tarot-card .card-inner { transform: rotateY(180deg); }
+.reading-card-item.reversed-item .tarot-card .card-inner { transform: rotateY(180deg) rotate(180deg); }
+.reading-pos-label {
+  font-family: var(--font-mono); font-size: 8px;
+  color: var(--muted); letter-spacing: 0.12em;
+  text-transform: uppercase; text-align: center;
+}
+.reading-card-name {
+  font-family: var(--font-serif); font-size: 12px;
+  color: var(--text); text-align: center; line-height: 1.3;
+}
+.reading-card-name em { color: var(--accent2); font-style: italic; }
+
+/* Card meanings panel */
+.card-meanings {
+  max-width: 680px; width: 100%; margin-bottom: 40px;
+}
+.card-meaning-item {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 8px; padding: 24px; margin-bottom: 16px;
+}
+.card-meaning-item.selected { border-color: var(--accent); }
+.meaning-position {
+  font-family: var(--font-mono); font-size: 9px;
+  color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.meaning-card-name {
+  font-family: var(--font-serif); font-size: 22px; font-weight: 500;
+  color: var(--text); margin-bottom: 4px;
+}
+.meaning-card-name-it {
+  font-family: var(--font-serif); font-style: italic;
+  font-size: 13px; color: var(--muted); margin-bottom: 14px;
+}
+.meaning-keywords {
+  display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px;
+}
+.keyword-pill {
+  padding: 3px 10px;
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: 20px;
+  font-family: var(--font-mono); font-size: 9px;
+  color: var(--muted); letter-spacing: 0.08em;
+}
+.keyword-pill.shadow { border-color: rgba(123,79,166,0.3); color: var(--accent2); }
+.meaning-text {
+  font-family: var(--font-serif); font-size: 16px;
+  color: var(--text); line-height: 1.7;
+}
+.meaning-orientation {
+  font-family: var(--font-mono); font-size: 9px;
+  color: var(--accent2); letter-spacing: 0.1em; margin-top: 8px;
+}
+
+/* AI Brief */
+.ai-brief-panel {
+  max-width: 680px; width: 100%;
+  background: var(--surface); border: 1px solid var(--accent);
+  border-radius: 8px; padding: 28px; margin-bottom: 40px;
+  box-shadow: 0 0 40px var(--accent-glow);
+}
+.ai-brief-header {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
+}
+.ai-brief-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--accent); animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; } 50% { opacity: 0.3; }
+}
+.ai-brief-label {
+  font-family: var(--font-mono); font-size: 10px;
+  color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase;
+}
+.ai-brief-text {
+  font-family: var(--font-mono); font-size: 13px;
+  color: var(--text); line-height: 1.8;
+  white-space: pre-wrap;
+}
+.ai-brief-text.loading { color: var(--muted); }
+
+/* Reading actions */
+.reading-actions {
+  display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;
+  margin-bottom: 40px;
+}
+
+/* Share toast */
+.share-toast {
+  position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%);
+  background: var(--surface2); border: 1px solid var(--accent);
+  padding: 12px 24px; border-radius: 4px;
+  font-family: var(--font-mono); font-size: 11px; color: var(--accent);
+  letter-spacing: 0.1em; opacity: 0;
+  transition: opacity 0.3s; pointer-events: none; z-index: 100;
+}
+.share-toast.visible { opacity: 1; }
+
+/* Journal */
+#view-journal { padding: 40px 24px; align-items: center; }
+.journal-list { max-width: 680px; width: 100%; }
+.journal-entry {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 8px; padding: 20px; margin-bottom: 12px;
+  cursor: pointer; transition: border-color 0.2s;
+}
+.journal-entry:hover { border-color: var(--accent2); }
+.journal-entry-date {
+  font-family: var(--font-mono); font-size: 9px;
+  color: var(--muted); letter-spacing: 0.1em; margin-bottom: 6px;
+}
+.journal-entry-spread {
+  font-family: var(--font-serif); font-size: 18px;
+  color: var(--text); margin-bottom: 6px;
+}
+.journal-entry-cards {
+  font-family: var(--font-serif); font-style: italic;
+  font-size: 13px; color: var(--muted);
+}
+
+/* Nav */
+.top-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 24px;
+  background: linear-gradient(to bottom, var(--bg) 0%, transparent 100%);
+}
+.nav-logo {
+  font-family: var(--font-serif); font-size: 18px;
+  color: var(--accent); cursor: pointer; letter-spacing: 0.03em;
+}
+.nav-links { display: flex; gap: 24px; }
+.nav-link {
+  font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--muted); cursor: pointer;
+  transition: color 0.2s;
+}
+.nav-link:hover { color: var(--accent); }
+
+/* SVG card art symbols */
+.card-svg { width: 48px; height: 48px; }
+
+/* RWS image mode */
+.card-face.rws-face {
+  padding: 0; overflow: hidden; background: #111;
+}
+.card-face.rws-face img {
+  width: 100%; height: 100%; object-fit: cover; object-position: center; display: block;
+}
+.card-face.rws-face .card-reversed-label {
+  position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%);
+  background: rgba(0,0,0,0.75); border-radius: 2px; white-space: nowrap;
+}
+
+/* Art picker on landing */
+.art-picker {
+  display: flex; align-items: center; gap: 10px; margin-top: 20px; justify-content: center;
+  font-family: var(--font-mono); font-size: 10px; color: var(--muted); letter-spacing: 0.1em;
+  flex-wrap: wrap;
+}
+.art-opt {
+  background: transparent; border: 1px solid var(--border);
+  color: var(--muted); font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 12px;
+  border-radius: 2px; cursor: pointer; transition: border-color 0.2s, color 0.2s;
+}
+.art-opt:hover { border-color: var(--muted); color: var(--text); }
+.art-opt.active { border-color: var(--accent); color: var(--accent); }
+.deck-select {
+  background: var(--surface); color: var(--text);
+  border: 1px solid var(--border); padding: 5px 10px;
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em;
+  text-transform: uppercase; border-radius: 2px; cursor: pointer;
+  min-width: 220px;
+}
+.deck-select:hover { border-color: var(--accent); }
+.deck-select:focus { outline: none; border-color: var(--accent); }
+.deck-note {
+  font-family: var(--font-mono); font-size: 9px; color: var(--muted);
+  letter-spacing: 0.08em; text-transform: uppercase;
+  margin-top: 6px; text-align: center; min-height: 12px;
+}
+
+/* Size slider */
+.size-slider {
+  -webkit-appearance: none; appearance: none;
+  width: 160px; height: 2px; background: var(--border);
+  border-radius: 1px; outline: none; cursor: pointer;
+}
+.size-slider::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--accent); cursor: pointer;
+  border: 1px solid var(--bg);
+}
+.size-slider::-moz-range-thumb {
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--accent); cursor: pointer; border: 1px solid var(--bg);
+}
+.size-value {
+  font-family: var(--font-mono); font-size: 10px;
+  color: var(--muted); min-width: 36px; text-align: left;
+}
+
+/* Theme toggle (nav link variant) */
+.theme-toggle { cursor: pointer; font-size: 14px; user-select: none; }
+.theme-toggle:hover { color: var(--accent); }
+
+/* Floating settings corner (landing only) */
+.settings-corner {
+  position: fixed; top: 20px; right: 20px; z-index: 10;
+  display: flex; gap: 8px;
+}
+.settings-btn {
+  width: 34px; height: 34px; border-radius: 50%;
+  background: var(--surface); border: 1px solid var(--border);
+  color: var(--muted); cursor: pointer; font-size: 14px;
+  display: flex; align-items: center; justify-content: center;
+  transition: border-color 0.2s, color 0.2s, transform 0.2s;
+}
+.settings-btn:hover { border-color: var(--accent); color: var(--accent); transform: rotate(15deg); }
+
+/* ── Intention ── */
+#view-intention { padding: 60px 24px; align-items: center; }
+.intention-wrap {
+  max-width: 480px; width: 100%;
+  display: flex; flex-direction: column; align-items: center; gap: 16px;
+}
+.intention-input {
+  width: 100%;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 8px; padding: 16px;
+  color: var(--text); font-family: var(--font-serif);
+  font-size: 16px; font-style: italic; line-height: 1.6;
+  resize: vertical; outline: none; min-height: 100px;
+  transition: border-color 0.2s;
+}
+.intention-input:focus { border-color: var(--accent2); }
+.intention-input::placeholder { color: var(--muted); }
+.intention-hint {
+  font-family: var(--font-mono); font-size: 10px;
+  color: var(--muted); letter-spacing: 0.08em; text-align: center;
+}
+
+/* ── Celtic Cross ── */
+.celtic-wrapper {
+  display: flex; gap: 40px; align-items: center; justify-content: center;
+  flex-wrap: wrap; max-width: 820px; width: 100%;
+}
+.cross-grid { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.cross-row { display: flex; justify-content: center; }
+.cross-middle-row { display: flex; align-items: flex-start; gap: 8px; }
+.cross-center-wrap {
+  position: relative; width: 150px; height: 170px; flex-shrink: 0;
+}
+.cross-center-wrap .card-slot {
+  position: absolute; left: 30px; top: 0; z-index: 1;
+}
+.cross-center-wrap #slot-1 { z-index: 2; }
+.cross-center-wrap #slot-1 .slot-label { display: none; }
+.cross-staff { display: flex; flex-direction: column; gap: 8px; align-items: center; }
+
+/* ── Year Ahead ── */
+.year-theme-wrap { display: flex; justify-content: center; margin-bottom: 24px; }
+.year-month-grid {
+  display: grid; grid-template-columns: repeat(4, 80px); gap: 12px;
+  justify-content: center;
+}
+.card-slot.compact { width: 80px; }
+.card-slot.compact .tarot-card { width: 72px; height: 110px; }
+.card-slot.compact .slot-label { font-size: 8px; }
+
+/* ── Draw: occupied hover hint ── */
+.tarot-card.occupied:not(.flipped) .card-back-face {
+  border-color: rgba(201,168,76,0.5);
+  box-shadow: 0 0 16px var(--accent-glow);
+  cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .spread-grid { grid-template-columns: 1fr 1fr; }
+  .reading-card-item { width: 90px; }
+  .reading-card-item .tarot-card { width: 72px; height: 120px; }
+  .year-month-grid { grid-template-columns: repeat(3, 80px); }
+  .celtic-wrapper { gap: 24px; }
+}
+</style>
+</head>
+<body>
+
+<div id="stars"></div>
+
+<!-- Nav -->
+<nav class="top-nav" id="top-nav" style="display:none">
+  <div class="nav-logo" onclick="goHome()">tarocchi</div>
+  <div class="nav-links">
+    <span class="nav-link" onclick="showView('view-spread')">New Reading</span>
+    <span class="nav-link" id="nav-journal-btn" onclick="showView('view-journal')">Journal</span>
+    <a class="nav-link" href="explorer.html" style="text-decoration:none">Historical Explorer</a>
+    <span class="nav-link theme-toggle" onclick="toggleTheme()" title="Toggle light/dark"><span id="theme-icon">☀</span></span>
+  </div>
+</nav>
+
+<!-- Floating settings corner (visible on landing) -->
+<div class="settings-corner" id="settings-corner">
+  <button class="settings-btn" onclick="toggleTheme()" title="Toggle light/dark"><span id="theme-icon-corner">☀</span></button>
+</div>
+
+<!-- ══ LANDING ══ -->
+<div id="view-landing" class="view active">
+  <div class="landing-eyebrow">78 cards · 5 spreads · AI synthesis</div>
+  <h1 class="landing-title">tarocchi<span>.</span>help</h1>
+  <p class="landing-subtitle">the cards help you think</p>
+  <div class="landing-cards-preview">
+    <div class="preview-card">
+      <svg viewBox="0 0 40 40" width="28" height="28" fill="none">
+        <circle cx="20" cy="20" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="20" y1="6" x2="20" y2="34" stroke="currentColor" stroke-width="1"/>
+        <line x1="6" y1="20" x2="34" y2="20" stroke="currentColor" stroke-width="1"/>
+      </svg>
+    </div>
+    <div class="preview-card">
+      <svg viewBox="0 0 40 40" width="32" height="32" fill="none">
+        <path d="M20 4 L36 32 L4 32 Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+        <circle cx="20" cy="22" r="5" stroke="currentColor" stroke-width="1"/>
+      </svg>
+    </div>
+    <div class="preview-card">
+      <svg viewBox="0 0 40 40" width="28" height="28" fill="none">
+        <path d="M20 4 L20 36 M8 16 L32 16 M8 28 L32 28" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="20" cy="4" r="3" fill="currentColor"/>
+      </svg>
+    </div>
+  </div>
+  <button class="btn-primary" onclick="startReading()">Begin Reading</button>
+  <div class="art-picker">
+    <span>Deck:</span>
+    <select class="deck-select" id="deck-picker" onchange="setArtDeck(this.value)">
+      <option value="svg">Minimal SVG (default)</option>
+    </select>
+  </div>
+  <div class="deck-note" id="deck-note"></div>
+  <div class="art-picker" style="margin-top:12px">
+    <span>Size:</span>
+    <input type="range" class="size-slider" id="size-slider" min="0.7" max="1.6" step="0.05" value="1" oninput="setCardScale(this.value)" title="Card size">
+    <span class="size-value" id="size-value">100%</span>
+  </div>
+  <div class="landing-footer">
+    tarocchi.help · a tool for clarity, not prophecy
+    &ensp;·&ensp;
+    <a href="explorer.html" style="color:var(--muted);text-decoration:none;transition:color 0.2s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--muted)'">historical explorer</a>
+  </div>
+</div>
+
+<!-- ══ SPREAD SELECTION ══ -->
+<div id="view-spread" class="view">
+  <div class="view-header">
+    <h2>Choose Your Spread</h2>
+    <p>How many cards does this question need?</p>
+  </div>
+  <div class="spread-grid" id="spread-grid"></div>
+</div>
+
+<!-- ══ INTENTION ══ -->
+<div id="view-intention" class="view">
+  <div class="view-header" style="padding-top:80px">
+    <h2>Set Your Intention</h2>
+    <p>Hold a question or theme in mind before you draw.</p>
+  </div>
+  <div class="intention-wrap">
+    <textarea id="intention-input" class="intention-input"
+      placeholder="What are you seeking clarity on? (optional — leaving blank is fine)"
+      maxlength="280"></textarea>
+    <div class="intention-hint">The cards respond to what you bring. This is for you, not the cards.</div>
+    <button class="btn-primary" onclick="confirmIntention()">Choose Your Spread →</button>
+  </div>
+  <button class="btn-secondary" onclick="goHome()" style="margin-top:24px">← Back</button>
+</div>
+
+<!-- ══ DRAW ══ -->
+<div id="view-draw" class="view">
+  <div class="draw-header">
+    <h2 id="draw-title">Draw Your Cards</h2>
+    <p class="draw-instruction" id="draw-instruction">Click the deck to draw. Click drawn cards to reveal.</p>
+  </div>
+  <div class="spread-layout" id="spread-layout"></div>
+  <div class="deck-area">
+    <div class="deck-stack" id="deck-stack" onclick="drawCard()">
+      <div class="deck-stack-card"></div>
+      <div class="deck-stack-card"></div>
+      <div class="deck-stack-card"></div>
+    </div>
+    <div class="deck-count" id="deck-count">78 cards remaining</div>
+    <button class="btn-secondary" id="btn-read" onclick="showReading()" style="display:none">Read the Cards →</button>
+  </div>
+  <button class="btn-secondary" onclick="showView('view-spread')" style="margin-top:8px">← Change Spread</button>
+</div>
+
+<!-- ══ READING ══ -->
+<div id="view-reading" class="view">
+  <div class="reading-header" style="padding-top:70px">
+    <h2 id="reading-title">Your Reading</h2>
+    <p style="font-family:var(--font-serif);font-style:italic;color:var(--muted);font-size:15px" id="reading-spread-name"></p>
+    <p id="reading-intention" style="font-family:var(--font-serif);font-style:italic;color:var(--accent);font-size:14px;margin-top:8px;display:none"></p>
+  </div>
+  <div class="reading-cards-row" id="reading-cards-row"></div>
+  <div class="card-meanings" id="card-meanings"></div>
+  <div class="ai-brief-panel" id="ai-brief-panel">
+    <div class="ai-brief-header">
+      <div class="ai-brief-dot"></div>
+      <div class="ai-brief-label">Synthesis</div>
+    </div>
+    <div class="ai-brief-text loading" id="ai-brief-text">Weaving the threads…</div>
+  </div>
+  <div class="reading-actions">
+    <button class="btn-primary" onclick="shareReading()">Share Reading</button>
+    <button class="btn-secondary" onclick="startReading()">New Reading</button>
+    <button class="btn-secondary" onclick="goHome()">Home</button>
+  </div>
+</div>
+
+<!-- ══ JOURNAL ══ -->
+<div id="view-journal" class="view">
+  <div class="view-header" style="padding-top:70px">
+    <h2>Reading Journal</h2>
+    <p>Your last 10 readings, saved locally.</p>
+  </div>
+  <div class="journal-list" id="journal-list"></div>
+  <button class="btn-secondary" onclick="goHome()" style="margin-top:16px">← Home</button>
+</div>
+
+<div class="share-toast" id="share-toast">Link copied to clipboard</div>
+
+<script>
+// ══════════════════════════════
+//  DATA — loaded inline from JSON
+// ══════════════════════════════
+let CARDS = [];
+let SPREADS = [];
+let MANIFEST = {};      // deck_id -> {card_id: path}
+let DECK_META = {};     // deck_id -> {name, date_earliest, ...}
+
+async function loadData() {
+  const [cardsResp, spreadsResp, manifestResp, decksResp] = await Promise.all([
+    fetch('data/cards.json'),
+    fetch('data/spreads.json'),
+    fetch('data/images/manifest.json').catch(() => null),
+    fetch('data/historical_decks.json').catch(() => null),
+  ]);
+  CARDS = await cardsResp.json();
+  SPREADS = await spreadsResp.json();
+  MANIFEST = manifestResp ? await manifestResp.json() : {};
+  if (decksResp) {
+    const dd = await decksResp.json();
+    for (const d of (dd.decks || [])) DECK_META[d.id] = d;
+  }
+}
+
+// ══════════════════════════════
+//  STATE
+// ══════════════════════════════
+let state = {
+  spread: null,
+  deck: [],
+  drawn: [],       // [{card, reversed, positionIndex}]
+  reading: null,
+  intention: '',
+  artDeck: 'svg'   // 'svg' | any deck_id present in MANIFEST
+};
+
+// ══════════════════════════════
+//  NAVIGATION
+// ══════════════════════════════
+function showView(id) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.getElementById('top-nav').style.display = id === 'view-landing' ? 'none' : 'flex';
+  const sc = document.getElementById('settings-corner');
+  if (sc) sc.style.display = id === 'view-landing' ? 'flex' : 'none';
+  window.scrollTo(0, 0);
+}
+
+function goHome() { showView('view-landing'); }
+function startReading() {
+  const inp = document.getElementById('intention-input');
+  if (inp) inp.value = '';
+  state.intention = '';
+  showView('view-intention');
+}
+
+function confirmIntention() {
+  state.intention = (document.getElementById('intention-input').value || '').trim();
+  buildSpreadGrid();
+  showView('view-spread');
+}
+
+// ══════════════════════════════
+//  SPREAD SELECTION
+// ══════════════════════════════
+function buildSpreadGrid() {
+  const grid = document.getElementById('spread-grid');
+  grid.innerHTML = '';
+  SPREADS.forEach(sp => {
+    const el = document.createElement('div');
+    el.className = 'spread-card';
+    el.innerHTML = `
+      <div class="spread-card-count">${sp.card_count} card${sp.card_count > 1 ? 's' : ''}</div>
+      <div class="spread-card-name">${sp.name}</div>
+      <div class="spread-card-name-it">${sp.name_it}</div>
+      <div class="spread-card-desc">${sp.description}</div>
+    `;
+    el.onclick = () => selectSpread(sp);
+    grid.appendChild(el);
+  });
+}
+
+function selectSpread(sp) {
+  state.spread = sp;
+  state.deck = shuffle([...CARDS]);
+  state.drawn = [];
+  buildDrawLayout();
+  updateDeckCount();
+  showView('view-draw');
+}
+
+// ══════════════════════════════
+//  SHUFFLE
+// ══════════════════════════════
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+// ══════════════════════════════
+//  DRAW LAYOUT
+// ══════════════════════════════
+function createCardSlotEl(pos, i) {
+  const slot = document.createElement('div');
+  slot.className = 'card-slot';
+  slot.id = `slot-${i}`;
+
+  const label = document.createElement('div');
+  label.className = 'slot-label';
+  label.textContent = pos.label;
+
+  const card = document.createElement('div');
+  card.className = 'tarot-card' + (pos.label === 'The Cross' ? ' cross' : '');
+  card.id = `card-slot-${i}`;
+  card.innerHTML = `
+    <div class="card-inner">
+      <div class="card-face"></div>
+      <div class="card-back-face">
+        <div class="card-back-pattern">
+          <div class="card-back-symbol">✦</div>
+        </div>
+      </div>
+    </div>`;
+
+  card.addEventListener('click', () => {
+    if (card.classList.contains('occupied') && !card.classList.contains('flipped')) {
+      flipCard(i);
+    }
+  });
+
+  slot.appendChild(label);
+  slot.appendChild(card);
+  return slot;
+}
+
+function buildDrawLayout() {
+  const layout = document.getElementById('spread-layout');
+  layout.innerHTML = '';
+  document.getElementById('draw-title').textContent = state.spread.name;
+  document.getElementById('draw-instruction').textContent =
+    'Click the deck to draw a card into each position.';
+  document.getElementById('btn-read').style.display = 'none';
+  document.getElementById('deck-stack').style.opacity = '1';
+  document.getElementById('deck-stack').style.pointerEvents = 'auto';
+
+  if (state.spread.id === 'celtic-cross') {
+    buildCelticCrossLayout(layout);
+  } else if (state.spread.id === 'year-ahead') {
+    buildYearAheadLayout(layout);
+  } else {
+    state.spread.positions.forEach((pos, i) => layout.appendChild(createCardSlotEl(pos, i)));
+  }
+}
+
+function buildCelticCrossLayout(layout) {
+  const sp = state.spread;
+  const wrapper = document.createElement('div');
+  wrapper.className = 'celtic-wrapper';
+
+  // Cross section
+  const crossDiv = document.createElement('div');
+  crossDiv.className = 'cross-grid';
+
+  // Crown (pos 4) — top row
+  const topRow = document.createElement('div');
+  topRow.className = 'cross-row';
+  topRow.appendChild(createCardSlotEl(sp.positions[4], 4));
+  crossDiv.appendChild(topRow);
+
+  // Middle: Past(3) + Center(0+1 overlaid) + Future(5)
+  const midRow = document.createElement('div');
+  midRow.className = 'cross-row cross-middle-row';
+  midRow.appendChild(createCardSlotEl(sp.positions[3], 3));
+  const centerWrap = document.createElement('div');
+  centerWrap.className = 'cross-center-wrap';
+  centerWrap.appendChild(createCardSlotEl(sp.positions[0], 0));
+  centerWrap.appendChild(createCardSlotEl(sp.positions[1], 1));
+  midRow.appendChild(centerWrap);
+  midRow.appendChild(createCardSlotEl(sp.positions[5], 5));
+  crossDiv.appendChild(midRow);
+
+  // Root (pos 2) — bottom row
+  const botRow = document.createElement('div');
+  botRow.className = 'cross-row';
+  botRow.appendChild(createCardSlotEl(sp.positions[2], 2));
+  crossDiv.appendChild(botRow);
+
+  // Staff: 9 (Outcome) at top down to 6 (Self) at bottom
+  const staffDiv = document.createElement('div');
+  staffDiv.className = 'cross-staff';
+  [9, 8, 7, 6].forEach(idx => staffDiv.appendChild(createCardSlotEl(sp.positions[idx], idx)));
+
+  wrapper.appendChild(crossDiv);
+  wrapper.appendChild(staffDiv);
+  layout.appendChild(wrapper);
+}
+
+function buildYearAheadLayout(layout) {
+  const sp = state.spread;
+  // Theme card (pos 12) at top
+  const themeWrap = document.createElement('div');
+  themeWrap.className = 'year-theme-wrap';
+  themeWrap.appendChild(createCardSlotEl(sp.positions[12], 12));
+  layout.appendChild(themeWrap);
+  // Month grid: positions 0–11, 4 cols × 3 rows
+  const monthGrid = document.createElement('div');
+  monthGrid.className = 'year-month-grid';
+  for (let i = 0; i < 12; i++) {
+    const slot = createCardSlotEl(sp.positions[i], i);
+    slot.classList.add('compact');
+    monthGrid.appendChild(slot);
+  }
+  layout.appendChild(monthGrid);
+}
+
+function flipCard(index) {
+  const cardEl = document.getElementById(`card-slot-${index}`);
+  if (!cardEl || !cardEl.classList.contains('occupied')) return;
+  const d = state.drawn[index];
+  if (d && d.reversed) cardEl.classList.add('reversed');
+  cardEl.classList.add('flipped');
+  checkAllFlipped();
+}
+
+function checkAllFlipped() {
+  if (state.drawn.length < state.spread.positions.length) return;
+  const allFlipped = state.drawn.every((_, i) =>
+    document.getElementById(`card-slot-${i}`)?.classList.contains('flipped')
+  );
+  if (allFlipped) {
+    document.getElementById('draw-instruction').textContent = 'All cards revealed. Ready to read.';
+  }
+}
+
+function drawCard() {
+  const nextIndex = state.drawn.length;
+  if (nextIndex >= state.spread.positions.length) return;
+  if (state.deck.length === 0) return;
+
+  const card = state.deck.pop();
+  const reversed = Math.random() < 0.3;
+  state.drawn.push({ card, reversed, positionIndex: nextIndex });
+
+  const cardEl = document.getElementById(`card-slot-${nextIndex}`);
+  cardEl.classList.add('occupied');
+
+  // Fill face content (hidden until card is clicked to reveal)
+  const face = cardEl.querySelector('.card-face');
+  const imgSrc = cardImageSrc(card.id);
+  if (imgSrc) {
+    face.classList.add('rws-face');
+    face.innerHTML = `
+      <img src="${imgSrc}" alt="${card.name}" onerror="this.parentElement.innerHTML='<div style=\'font-family:var(--font-mono);font-size:9px;color:var(--muted);text-align:center;padding:8px\'>${card.name}</div>'">
+      ${reversed ? '<div class="card-reversed-label">reversed</div>' : ''}`;
+  } else {
+    face.innerHTML = `
+      <div class="card-arcana-badge">${card.suit || card.arcana}</div>
+      ${renderCardArt(card, 40)}
+      <div class="card-name-display">${card.name}</div>
+      ${reversed ? '<div class="card-reversed-label">reversed</div>' : ''}
+    `;
+  }
+  if (reversed) face.classList.add('reversed-face');
+
+  updateDeckCount();
+  if (state.drawn.length === state.spread.positions.length) {
+    document.getElementById('deck-stack').style.opacity = '0.3';
+    document.getElementById('deck-stack').style.pointerEvents = 'none';
+    document.getElementById('draw-instruction').textContent = 'All cards drawn — click each to reveal, or read them now.';
+    document.getElementById('btn-read').style.display = 'block';
+  }
+}
+
+function updateDeckCount() {
+  const remaining = state.deck.length;
+  const drawn = state.drawn.length;
+  const total = state.spread.positions.length;
+  document.getElementById('deck-count').textContent =
+    drawn < total
+      ? `${remaining} cards remaining · ${drawn}/${total} drawn`
+      : `Reading complete`;
+}
+
+// ══════════════════════════════
+//  READING VIEW
+// ══════════════════════════════
+function showReading() {
+  state.reading = {
+    id: Date.now().toString(36),
+    spreadId: state.spread.id,
+    spreadName: state.spread.name,
+    drawn: state.drawn,
+    intention: state.intention,
+    timestamp: new Date().toISOString()
+  };
+  saveToJournal(state.reading);
+  buildReadingView();
+  showView('view-reading');
+  generateBrief();
+}
+
+function buildReadingView() {
+  document.getElementById('reading-title').textContent = state.spread.name;
+  document.getElementById('reading-spread-name').textContent = state.spread.name_it;
+  const intentionEl = document.getElementById('reading-intention');
+  if (intentionEl) {
+    if (state.intention) {
+      intentionEl.textContent = `“${state.intention}”`;
+      intentionEl.style.display = 'block';
+    } else {
+      intentionEl.style.display = 'none';
+    }
+  }
+
+  // Cards row
+  const row = document.getElementById('reading-cards-row');
+  row.innerHTML = '';
+  state.drawn.forEach((d, i) => {
+    const pos = state.spread.positions[i];
+    const item = document.createElement('div');
+    item.className = 'reading-card-item' + (d.reversed ? ' reversed-item' : '');
+    const imgSrc = cardImageSrc(d.card.id);
+    const faceClass = `card-face${d.reversed ? ' reversed-face' : ''}${imgSrc ? ' rws-face' : ''}`;
+    const faceContent = imgSrc
+      ? `<img src="${imgSrc}" alt="${d.card.name}" onerror="this.style.display='none'">${d.reversed ? '<div class="card-reversed-label">reversed</div>' : ''}`
+      : `<div class="card-arcana-badge">${d.card.suit || d.card.arcana}</div>
+            ${renderCardArt(d.card, 40)}
+            <div class="card-name-display">${d.card.name}</div>
+            ${d.reversed ? '<div class="card-reversed-label">reversed</div>' : ''}`;
+    item.innerHTML = `
+      <div class="tarot-card">
+        <div class="card-inner">
+          <div class="${faceClass}">${faceContent}</div>
+          <div class="card-back-face"><div class="card-back-pattern"><div class="card-back-symbol">✦</div></div></div>
+        </div>
+      </div>
+      <div class="reading-pos-label">${pos.label}</div>
+      <div class="reading-card-name">${d.card.name}${d.reversed ? ' <em>(R)</em>' : ''}</div>
+    `;
+    item.onclick = () => scrollToMeaning(i);
+    row.appendChild(item);
+  });
+
+  // Meanings
+  const meanings = document.getElementById('card-meanings');
+  meanings.innerHTML = '';
+  state.drawn.forEach((d, i) => {
+    const pos = state.spread.positions[i];
+    const meaning = d.reversed ? d.card.reversed_meaning : d.card.upright_meaning;
+    const kws = d.reversed ? d.card.shadow_keywords : d.card.keywords;
+    const item = document.createElement('div');
+    item.className = 'card-meaning-item';
+    item.id = `meaning-${i}`;
+    item.innerHTML = `
+      <div class="meaning-position">${pos.label}</div>
+      <div class="meaning-card-name">${d.card.name}</div>
+      <div class="meaning-card-name-it">${d.card.name_it}</div>
+      <div class="meaning-keywords">
+        ${kws.map(k => `<span class="keyword-pill${d.reversed ? ' shadow' : ''}">${k}</span>`).join('')}
+      </div>
+      <div class="meaning-text">${meaning}</div>
+      ${d.reversed ? '<div class="meaning-orientation">↓ reversed</div>' : ''}
+    `;
+    meanings.appendChild(item);
+  });
+}
+
+function scrollToMeaning(i) {
+  document.querySelectorAll('.card-meaning-item').forEach(el => el.classList.remove('selected'));
+  const el = document.getElementById(`meaning-${i}`);
+  if (el) {
+    el.classList.add('selected');
+    el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+
+// ══════════════════════════════
+//  AI BRIEF
+// ══════════════════════════════
+async function generateBrief() {
+  const brief = document.getElementById('ai-brief-text');
+  brief.classList.add('loading');
+
+  // Build context for the AI
+  const cardLines = state.drawn.map((d, i) => {
+    const pos = state.spread.positions[i];
+    const orientation = d.reversed ? 'reversed' : 'upright';
+    const meaning = d.reversed ? d.card.reversed_meaning : d.card.upright_meaning;
+    return `Position: ${pos.label}\nCard: ${d.card.name} (${orientation})\nMeaning: ${meaning}\nKeywords: ${(d.reversed ? d.card.shadow_keywords : d.card.keywords).join(', ')}`;
+  }).join('\n\n');
+
+  const intentionLine = state.intention ? `\nThe querent's question: "${state.intention}"` : '';
+  const prompt = `You are a thoughtful, grounded tarot reader.${intentionLine} The querent has drawn the following cards in a ${state.spread.name} spread:\n\n${cardLines}\n\nWrite a synthesis of 3-5 sentences that weaves these cards together into a coherent, compassionate reading. Focus on actionable insight and honest reflection. Do not be vague or generic. Speak to the specific energies at play. Do not use the word "journey."`;
+
+  // Try speed_layer endpoint first, fall back to static synthesis
+  let text = '';
+  try {
+    const response = await fetch('/ai', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ prompt, max_tokens: 300 }),
+      signal: AbortSignal.timeout(12000)
+    });
+    if (response.ok) {
+      const data = await response.json();
+      text = data.text || data.content || data.response || '';
+    }
+  } catch (e) {
+    // AI unavailable — generate static synthesis
+    text = buildStaticSynthesis();
+  }
+
+  if (!text) text = buildStaticSynthesis();
+
+  brief.classList.remove('loading');
+  typewriterEffect(brief, text);
+}
+
+function buildStaticSynthesis() {
+  const d = state.drawn;
+  if (d.length === 1) {
+    const card = d[0];
+    const kws = card.reversed ? card.card.shadow_keywords : card.card.keywords;
+    return `${card.card.name} ${card.reversed ? '(reversed) ' : ''}carries the energy of ${kws.slice(0, 3).join(', ')}. ${card.reversed ? card.card.reversed_meaning : card.card.upright_meaning} Sit with this energy today — notice where it shows up.`;
+  }
+  const names = d.map((x, i) => `${state.spread.positions[i].label}: ${x.card.name}${x.reversed ? ' (R)' : ''}`).join(' · ');
+  const allKws = d.flatMap(x => x.reversed ? x.card.shadow_keywords : x.card.keywords).slice(0, 5);
+  return `This spread — ${names} — speaks to the interplay of ${allKws.slice(0, 3).join(', ')}. ${d[0].reversed ? d[0].card.reversed_meaning : d[0].card.upright_meaning} As you move forward, the energy of ${d[d.length-1].card.name} offers ${(d[d.length-1].reversed ? d[d.length-1].card.shadow_keywords : d[d.length-1].card.keywords)[0]}. Consider what each position is asking of you honestly.`;
+}
+
+function typewriterEffect(el, text) {
+  el.textContent = '';
+  let i = 0;
+  const timer = setInterval(() => {
+    el.textContent += text[i];
+    i++;
+    if (i >= text.length) clearInterval(timer);
+  }, 18);
+}
+
+// ══════════════════════════════
+//  SHARE
+// ══════════════════════════════
+function shareReading() {
+  if (!state.reading) return;
+  const hash = btoa(JSON.stringify({
+    s: state.reading.spreadId,
+    c: state.drawn.map(d => ({ id: d.card.id, r: d.reversed ? 1 : 0 }))
+  }));
+  const url = `${location.origin}${location.pathname}#r=${hash}`;
+  const showToast = () => {
+    const toast = document.getElementById('share-toast');
+    toast.classList.add('visible');
+    setTimeout(() => toast.classList.remove('visible'), 2500);
+  };
+  if (navigator.clipboard && location.protocol !== 'file:') {
+    navigator.clipboard.writeText(url).then(showToast).catch(() => prompt('Copy this link:', url));
+  } else {
+    prompt('Copy this link:', url);
+  }
+}
+
+function loadFromHash() {
+  const hash = location.hash;
+  if (!hash.startsWith('#r=')) return false;
+  try {
+    const data = JSON.parse(atob(hash.slice(3)));
+    const spread = SPREADS.find(s => s.id === data.s);
+    if (!spread) return false;
+    state.spread = spread;
+    const drawn = data.c.map((entry, i) => {
+      const card = CARDS.find(c => c.id === entry.id);
+      if (!card) return null;
+      return { card, reversed: entry.r === 1, positionIndex: i };
+    }).filter(Boolean);
+    if (drawn.length !== data.c.length) return false;
+    state.drawn = drawn;
+    state.intention = '';
+    state.reading = {
+      id: Date.now().toString(36),
+      spreadId: spread.id,
+      spreadName: spread.name,
+      drawn: state.drawn,
+      timestamp: new Date().toISOString()
+    };
+    buildReadingView();
+    showView('view-reading');
+    generateBrief();
+    return true;
+  } catch (e) { return false; }
+}
+
+// ══════════════════════════════
+//  JOURNAL
+// ══════════════════════════════
+function saveToJournal(reading) {
+  let journal = JSON.parse(localStorage.getItem('tarocchi_journal') || '[]');
+  journal.unshift(reading);
+  journal = journal.slice(0, 10);
+  localStorage.setItem('tarocchi_journal', JSON.stringify(journal));
+}
+
+function buildJournalView() {
+  const list = document.getElementById('journal-list');
+  const journal = JSON.parse(localStorage.getItem('tarocchi_journal') || '[]');
+  list.innerHTML = '';
+  if (journal.length === 0) {
+    list.innerHTML = '<p style="font-family:var(--font-serif);font-style:italic;color:var(--muted);text-align:center;padding:40px">No readings yet.</p>';
+    return;
+  }
+  journal.forEach(reading => {
+    const date = new Date(reading.timestamp);
+    const entry = document.createElement('div');
+    entry.className = 'journal-entry';
+    entry.innerHTML = `
+      <div class="journal-entry-date">${date.toLocaleDateString('en-US', { weekday:'long', year:'numeric', month:'long', day:'numeric' })}</div>
+      <div class="journal-entry-spread">${reading.spreadName}</div>
+      <div class="journal-entry-cards">${reading.drawn.map(d => d.card.name + (d.reversed ? ' (R)' : '')).join(' · ')}</div>
+    `;
+    entry.onclick = () => replayReading(reading);
+    list.appendChild(entry);
+  });
+}
+
+function replayReading(reading) {
+  const spread = SPREADS.find(s => s.id === reading.spreadId);
+  if (!spread) return;
+  state.spread = spread;
+  state.drawn = reading.drawn;
+  state.reading = reading;
+  state.intention = reading.intention || '';
+  buildReadingView();
+  showView('view-reading');
+  generateBrief();
+}
+
+// ══════════════════════════════
+//  ART DECK
+// ══════════════════════════════
+
+// Fallback chain for card image lookup:
+//   user's deck → rider-waite-smith → null (SVG fallback)
+function cardImageSrc(cardId) {
+  if (state.artDeck === 'svg') return null;
+  const cur = MANIFEST[state.artDeck];
+  if (cur && cur[cardId]) return cur[cardId];
+  const rws = MANIFEST['rider-waite-smith'];
+  if (rws && rws[cardId]) return rws[cardId];
+  return null;
+}
+
+// Does the current art deck use photographic images (vs minimal SVG)?
+function usingPhotoDeck() { return state.artDeck !== 'svg'; }
+
+// Build the landing-page <select> from loaded data. Ordered by
+// chronology then RWS-first. Only decks with >= 22 images (enough for majors)
+// are offered; annotate those missing full minor coverage.
+function populateDeckPicker() {
+  const sel = document.getElementById('deck-picker');
+  if (!sel) return;
+
+  // Preserve 'svg' as first option
+  const opts = [];
+  const deckIds = Object.keys(MANIFEST)
+    .filter(id => Object.keys(MANIFEST[id] || {}).length >= 22)
+    .sort((a, b) => {
+      if (a === 'rider-waite-smith') return -1;
+      if (b === 'rider-waite-smith') return 1;
+      const da = (DECK_META[a] && DECK_META[a].date_earliest) || 9999;
+      const db = (DECK_META[b] && DECK_META[b].date_earliest) || 9999;
+      return da - db;
+    });
+
+  for (const id of deckIds) {
+    const m = MANIFEST[id];
+    const majorCount = Object.keys(m).filter(k => k.startsWith('major-')).length;
+    const minorCount = Object.keys(m).filter(k => /^(wands|cups|swords|pents|pentacles)-/.test(k)).length;
+    const meta = DECK_META[id] || {};
+    const year = meta.date_earliest ? ` (${meta.date_earliest})` : '';
+    const name = meta.name || id.replace(/-/g, ' ');
+    const coverage = minorCount >= 40 ? '' : ' — majors';
+    opts.push(`<option value="${id}">${name}${year}${coverage}</option>`);
+  }
+
+  // Keep the SVG option + append discovered decks
+  sel.innerHTML =
+    `<option value="svg">Minimal SVG (default)</option>` +
+    opts.join('');
+
+  // Restore last choice from localStorage
+  let saved = 'svg';
+  try { saved = localStorage.getItem('tarocchi-deck') || 'svg'; } catch(e){}
+  const valid = saved === 'svg' || (MANIFEST[saved] && Object.keys(MANIFEST[saved]).length >= 22);
+  setArtDeck(valid ? saved : 'svg');
+}
+
+function setArtDeck(deck) {
+  state.artDeck = deck;
+  const sel = document.getElementById('deck-picker');
+  if (sel && sel.value !== deck) sel.value = deck;
+
+  const note = document.getElementById('deck-note');
+  if (note) {
+    if (deck === 'svg') { note.textContent = ''; }
+    else {
+      const m = MANIFEST[deck] || {};
+      const minorCount = Object.keys(m).filter(k => /^(wands|cups|swords|pents|pentacles)-/.test(k)).length;
+      if (minorCount < 40) {
+        note.textContent = '↳ minors fall back to Rider–Waite–Smith';
+      } else {
+        note.textContent = '';
+      }
+    }
+  }
+  try { localStorage.setItem('tarocchi-deck', deck); } catch(e){}
+}
+
+// ══════════════════════════════
+//  CARD ART — minimal SVG symbols or real images
+// ══════════════════════════════
+const MAJOR_SYMBOLS = {
+  'major-00': `<path d="M20 6 L24 14 L32 14 L26 19 L28 27 L20 22 L12 27 L14 19 L8 14 L16 14 Z" stroke="currentColor" stroke-width="1.2" fill="none"/>`,
+  'major-01': `<line x1="20" y1="8" x2="20" y2="32" stroke="currentColor" stroke-width="1.5"/><circle cx="20" cy="8" r="3" stroke="currentColor" stroke-width="1.2" fill="none"/><path d="M14 20 L20 20 M20 20 L26 16 M20 20 L26 24" stroke="currentColor" stroke-width="1"/>`,
+  'major-02': `<rect x="13" y="8" width="14" height="24" rx="2" stroke="currentColor" stroke-width="1.2" fill="none"/><line x1="13" y1="20" x2="27" y2="20" stroke="currentColor" stroke-width="1"/><circle cx="20" cy="14" r="2" fill="currentColor"/>`,
+  'major-03': `<circle cx="20" cy="18" r="10" stroke="currentColor" stroke-width="1.2" fill="none"/><path d="M14 28 Q20 34 26 28" stroke="currentColor" stroke-width="1" fill="none"/><circle cx="20" cy="18" r="4" stroke="currentColor" stroke-width="1" fill="none"/>`,
+  'major-04': `<rect x="10" y="10" width="20" height="20" rx="1" stroke="currentColor" stroke-width="1.2" fill="none"/><line x1="10" y1="20" x2="30" y2="20" stroke="currentColor" stroke-width="1"/><line x1="20" y1="10" x2="20" y2="30" stroke="currentColor" stroke-width="1"/>`,
+  'major-05': `<path d="M20 8 L14 16 L26 16 Z" stroke="currentColor" stroke-width="1.2" fill="none"/><path d="M20 32 L14 24 L26 24 Z" stroke="currentColor" stroke-width="1.2" fill="none"/><line x1="20" y1="16" x2="20" y2="24" stroke="currentColor" stroke-width="1.2"/>`,
+  'major-06': `<circle cx="14" cy="22" r="5" stroke="currentColor" stroke-width="1.2" fill="none"/><circle cx="26" cy="22" r="5" stroke="currentColor" stroke-width="1.2" fill="none"/><path d="M14 12 Q20 6 26 12" stroke="currentColor" stroke-width="1.5" fill="none"/>`,
+  'major-07': `<rect x="12" y="14" width="16" height="18" rx="2" stroke="currentColor" stroke-width="1.2" fill="none"/><path d="M16 14 L16 10 L24 10 L24 14" stroke="currentColor" stroke-width="1.2" fill="none"/><line x1="20" y1="6" x2="20" y2="10" stroke="currentColor" stroke-width="2"/>`,
+  'major-08': `<path d="M12 20 Q12 10 20 10 Q28 10 28 20" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="20" cy="26" r="6" stroke="currentColor" stroke-width="1.2" fill="none"/><path d="M8 8 Q14 14 8 8" stroke="currentColor" stroke-width="1"/>`,
+  'major-09': `<line x1="20" y1="8" x2="20" y2="30" stroke="currentColor" stroke-width="1.5"/><circle cx="20" cy="8" r="5" stroke="currentColor" stroke-width="1" fill="none"/><path d="M15 22 L20 28 L25 22" stroke="currentColor" stroke-width="1" fill="none"/>`,
+  'major-10': `<circle cx="20" cy="20" r="12" stroke="currentColor" stroke-width="1.2" fill="none"/><circle cx="20" cy="20" r="6" stroke="currentColor" stroke-width="1" fill="none"/><line x1="20" y1="8" x2="20" y2="32" stroke="currentColor" stroke-width="0.8"/><line x1="8" y1="20" x2="32" y2="20" stroke="currentColor" stroke-width="0.8"/>`,
+  'major-11': `<path d="M12 14 L20 8 L28 14" stroke="currentColor" stroke-width="1.5" fill="none"/><line x1="14" y1="20" x2="26" y2="20" stroke="currentColor" stroke-width="2"/><path d="M14 20 L14 30 M26 20 L26 30" stroke="currentColor" stroke-width="1.2"/>`,
+  'major-12': `<line x1="20" y1="8" x2="20" y2="14" stroke="currentColor" stroke-width="1.5"/><circle cx="20" cy="20" r="7" stroke="currentColor" stroke-width="1.2" fill="none"/><line x1="20" y1="27" x2="20" y2="34" stroke="currentColor" stroke-width="1.5"/>`,
+  'major-13': `<path d="M14 28 L20 8 L26 28" stroke="currentColor" stroke-width="1.2" fill="none"/><line x1="12" y1="28" x2="28" y2="28" stroke="currentColor" stroke-width="1.5"/><circle cx="20" cy="18" r="3" fill="currentColor"/>`,
+  'major-14': `<circle cx="14" cy="16" r="5" stroke="currentColor" stroke-width="1.2" fill="none"/><circle cx="26" cy="24" r="5" stroke="currentColor" stroke-width="1.2" fill="none"/><path d="M14 16 Q20 20 26 24" stroke="currentColor" stroke-width="1.5"/>`,
+  'major-15': `<path d="M20 8 L8 30 L32 30 Z" stroke="currentColor" stroke-width="1.2" fill="none"/><circle cx="20" cy="20" r="4" stroke="currentColor" stroke-width="1" fill="none"/><line x1="12" y1="30" x2="12" y2="34" stroke="currentColor" stroke-width="1"/><line x1="28" y1="30" x2="28" y2="34" stroke="currentColor" stroke-width="1"/>`,
+  'major-16': `<rect x="12" y="10" width="16" height="18" rx="1" stroke="currentColor" stroke-width="1.2" fill="none"/><path d="M8 8 L20 8 L28 16" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="24" cy="8" r="3" fill="currentColor"/>`,
+  'major-17': `<circle cx="20" cy="14" r="4" fill="currentColor"/>${[0,1,2,3,4,5,6].map(i=>`<circle cx="${20+8*Math.cos(i*Math.PI*2/7)}" cy="${14+8*Math.sin(i*Math.PI*2/7)}" r="2" fill="currentColor"/>`).join('')}`,
+  'major-18': `<path d="M8 32 Q14 20 20 20 Q26 20 32 32" stroke="currentColor" stroke-width="1.2" fill="none"/><circle cx="20" cy="12" r="6" stroke="currentColor" stroke-width="1.2" fill="none"/><path d="M17 12 Q20 8 23 12" stroke="currentColor" stroke-width="1" fill="none"/>`,
+  'major-19': `<circle cx="20" cy="16" r="8" stroke="currentColor" stroke-width="1.5" fill="none"/>${[0,4,8,12,16].map(i=>`<line x1="20" y1="16" x2="${20+14*Math.cos(i*Math.PI/10)}" y2="${16+14*Math.sin(i*Math.PI/10)}" stroke="currentColor" stroke-width="0.8"/>`).join('')}`,
+  'major-20': `<path d="M10 26 Q14 14 20 14 Q26 14 30 26" stroke="currentColor" stroke-width="1.2" fill="none"/><line x1="20" y1="6" x2="20" y2="14" stroke="currentColor" stroke-width="1.5"/><path d="M16 6 L24 6" stroke="currentColor" stroke-width="1"/>`,
+  'major-21': `<ellipse cx="20" cy="20" rx="12" ry="14" stroke="currentColor" stroke-width="1.2" fill="none"/><circle cx="20" cy="20" r="4" stroke="currentColor" stroke-width="1" fill="none"/>`
+};
+
+const SUIT_SYMBOLS = {
+  wands: `<path d="M20 8 L20 32 M14 14 L26 14 M14 20 L26 20 M14 26 L26 26" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="20" cy="8" r="2" fill="currentColor"/>`,
+  cups: `<path d="M13 14 Q13 26 20 28 Q27 26 27 14 Z" stroke="currentColor" stroke-width="1.2" fill="none"/><line x1="16" y1="28" x2="24" y2="28" stroke="currentColor" stroke-width="1"/><line x1="18" y1="28" x2="18" y2="32" stroke="currentColor" stroke-width="1"/>`,
+  swords: `<line x1="20" y1="6" x2="20" y2="32" stroke="currentColor" stroke-width="1.5"/><path d="M14 12 L20 6 L26 12" stroke="currentColor" stroke-width="1.2" fill="none"/><line x1="14" y1="26" x2="26" y2="26" stroke="currentColor" stroke-width="1"/>`,
+  pentacles: `<circle cx="20" cy="20" r="10" stroke="currentColor" stroke-width="1.2" fill="none"/><path d="M20 10 L22 17 L29 17 L24 21 L26 28 L20 24 L14 28 L16 21 L11 17 L18 17 Z" stroke="currentColor" stroke-width="1" fill="none"/>`
+};
+
+function renderCardArt(card, size = 48) {
+  const imgSrc = cardImageSrc(card.id);
+  if (imgSrc) {
+    return `<img src="${imgSrc}" style="width:${size}px;height:${Math.round(size*1.6)}px;object-fit:cover;object-position:center;border-radius:1px;flex-shrink:0" onerror="this.style.display='none'" alt="${card.name}">`;
+  }
+  const symbol = MAJOR_SYMBOLS[card.id] || SUIT_SYMBOLS[card.suit] || '';
+  return `<svg class="card-svg" viewBox="0 0 40 40" width="${size}" height="${size}" fill="none" xmlns="http://www.w3.org/2000/svg" style="color:var(--accent);flex-shrink:0">${symbol}</svg>`;
+}
+
+// ══════════════════════════════
+//  INIT
+// ══════════════════════════════
+// Render journal list when navigated to
+document.getElementById('nav-journal-btn').addEventListener('click', () => {
+  setTimeout(buildJournalView, 50);
+});
+
+async function init() {
+  applyStoredPrefs();
+  await loadData();
+  populateDeckPicker();
+  // Check for shared reading in URL hash
+  if (!loadFromHash()) {
+    showView('view-landing');
+  }
+}
+
+// ═══ THEME + SIZE ═══
+function applyStoredPrefs() {
+  let theme = 'dark';
+  try { theme = localStorage.getItem('tarocchi-theme') || 'dark'; } catch(e){}
+  setTheme(theme, false);
+
+  let scale = 1;
+  try { scale = parseFloat(localStorage.getItem('tarocchi-card-scale')) || 1; } catch(e){}
+  setCardScale(scale);
+}
+function setTheme(theme, persist = true) {
+  const root = document.documentElement;
+  if (theme === 'light') root.setAttribute('data-theme', 'light');
+  else root.removeAttribute('data-theme');
+  const icons = [document.getElementById('theme-icon'), document.getElementById('theme-icon-corner')];
+  icons.forEach(el => { if (el) el.textContent = theme === 'light' ? '☾' : '☀'; });
+  // Update mobile theme-color meta so iOS chrome matches
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) meta.setAttribute('content', theme === 'light' ? '#f5f1e8' : '#0d0a14');
+  if (persist) { try { localStorage.setItem('tarocchi-theme', theme); } catch(e){} }
+}
+function toggleTheme() {
+  const cur = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+  setTheme(cur === 'light' ? 'dark' : 'light');
+}
+function setCardScale(val) {
+  const n = Math.max(0.7, Math.min(1.6, parseFloat(val) || 1));
+  document.documentElement.style.setProperty('--card-scale', n);
+  const slider = document.getElementById('size-slider');
+  if (slider && parseFloat(slider.value) !== n) slider.value = n;
+  const label = document.getElementById('size-value');
+  if (label) label.textContent = Math.round(n * 100) + '%';
+  try { localStorage.setItem('tarocchi-card-scale', String(n)); } catch(e){}
+}
+
+init();
+</script>
+</body>
+</html>

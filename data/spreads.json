@@ -1,0 +1,81 @@
+[
+  {
+    "id": "single",
+    "name": "Daily Draw",
+    "name_it": "Carta del Giorno",
+    "description": "One card. One question. One moment of clarity.",
+    "card_count": 1,
+    "positions": [
+      {"index": 0, "label": "The Message", "description": "What the day holds, or what you need to see right now."}
+    ]
+  },
+  {
+    "id": "three-card",
+    "name": "Past · Present · Future",
+    "name_it": "Passato · Presente · Futuro",
+    "description": "Three cards trace the arc of where you've been, where you are, and where you're heading.",
+    "card_count": 3,
+    "positions": [
+      {"index": 0, "label": "Past", "description": "What has shaped this situation. Influences, foundations, what has passed."},
+      {"index": 1, "label": "Present", "description": "The current energy, the heart of the matter, where things stand now."},
+      {"index": 2, "label": "Future", "description": "The likely outcome if the current path continues. Not fixed — potential."}
+    ]
+  },
+  {
+    "id": "horseshoe",
+    "name": "The Horseshoe",
+    "name_it": "Il Ferro di Cavallo",
+    "description": "Seven cards in an arc for a fuller picture of influences, obstacles, and outcome.",
+    "card_count": 7,
+    "positions": [
+      {"index": 0, "label": "The Past", "description": "Past influences still acting on the situation."},
+      {"index": 1, "label": "The Present", "description": "Where things stand today."},
+      {"index": 2, "label": "Hidden Influences", "description": "What is not immediately visible but is at work."},
+      {"index": 3, "label": "Obstacles", "description": "What stands in the way."},
+      {"index": 4, "label": "Outside Influences", "description": "People or forces from outside affecting the situation."},
+      {"index": 5, "label": "Advice", "description": "What the cards suggest you do."},
+      {"index": 6, "label": "Outcome", "description": "The likely result if the current path continues."}
+    ]
+  },
+  {
+    "id": "celtic-cross",
+    "name": "Celtic Cross",
+    "name_it": "Croce Celtica",
+    "description": "The classic ten-card spread. A deep, comprehensive reading of any question or situation.",
+    "card_count": 10,
+    "positions": [
+      {"index": 0, "label": "The Heart", "description": "The core of the matter. The central energy or theme."},
+      {"index": 1, "label": "The Cross", "description": "What crosses or challenges you. An opposing or complicating force. (Placed sideways.)"},
+      {"index": 2, "label": "The Root", "description": "The foundation. What lies beneath — subconscious influences or distant past."},
+      {"index": 3, "label": "The Past", "description": "What is passing away. Recent influences that are leaving."},
+      {"index": 4, "label": "The Crown", "description": "The best outcome possible. What you aspire to or could achieve."},
+      {"index": 5, "label": "The Future", "description": "What is approaching. The immediate next development."},
+      {"index": 6, "label": "Your Position", "description": "How you see yourself, or your attitude toward the situation."},
+      {"index": 7, "label": "Outside View", "description": "How others see you, or outside influences on the situation."},
+      {"index": 8, "label": "Hopes & Fears", "description": "What you hope for — or what you fear. Often both at once."},
+      {"index": 9, "label": "The Outcome", "description": "The final result. Where all these forces lead if the current path continues."}
+    ]
+  },
+  {
+    "id": "year-ahead",
+    "name": "Year Ahead",
+    "name_it": "L'Anno Davanti",
+    "description": "Thirteen cards: one for each month, and a synthesis card for the year's overarching theme.",
+    "card_count": 13,
+    "positions": [
+      {"index": 0, "label": "January", "description": "The energy and theme of the first month."},
+      {"index": 1, "label": "February", "description": ""},
+      {"index": 2, "label": "March", "description": ""},
+      {"index": 3, "label": "April", "description": ""},
+      {"index": 4, "label": "May", "description": ""},
+      {"index": 5, "label": "June", "description": ""},
+      {"index": 6, "label": "July", "description": ""},
+      {"index": 7, "label": "August", "description": ""},
+      {"index": 8, "label": "September", "description": ""},
+      {"index": 9, "label": "October", "description": ""},
+      {"index": 10, "label": "November", "description": ""},
+      {"index": 11, "label": "December", "description": "The energy and theme of the final month."},
+      {"index": 12, "label": "The Year's Theme", "description": "The overarching energy, lesson, or gift of the year as a whole."}
+    ]
+  }
+]

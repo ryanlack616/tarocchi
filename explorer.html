@@ -1,0 +1,1773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>tarocchi.help — Historical Explorer</title>
+<meta name="description" content="1100 years of tarot history: 39 decks, genealogy, card witnesses, and the people who shaped the tradition.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'><rect width='40' height='40' rx='4' fill='%230d0a14'/><path d='M20 6 L24 14 L32 14 L26 19 L28 27 L20 22 L12 27 L14 19 L8 14 L16 14 Z' stroke='%23c9a84c' stroke-width='1.2' fill='none'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0d0a14;
+  --surface: #1a1428;
+  --surface2: #221c35;
+  --border: #2e2548;
+  --accent: #c9a84c;
+  --accent2: #7b4fa6;
+  --accent-glow: rgba(201,168,76,0.15);
+  --violet-glow: rgba(123,79,166,0.2);
+  --text: #e8e0f0;
+  --muted: #7a6e8a;
+  --starfield-1: rgba(123,79,166,0.08);
+  --starfield-2: rgba(201,168,76,0.05);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Inter', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+}
+[data-theme="light"] {
+  --bg: #f5f1e8;
+  --surface: #ffffff;
+  --surface2: #ebe4d4;
+  --border: #d4c9b0;
+  --accent: #8a6a25;
+  --accent2: #6b3e94;
+  --accent-glow: rgba(138,106,37,0.18);
+  --violet-glow: rgba(107,62,148,0.15);
+  --text: #2a2038;
+  --muted: #6e6478;
+  --starfield-1: rgba(107,62,148,0.06);
+  --starfield-2: rgba(138,106,37,0.04);
+}
+body { transition: background 0.3s ease, color 0.3s ease; }
+.theme-toggle-btn {
+  position: fixed; top: 20px; right: 20px; z-index: 100;
+  width: 34px; height: 34px; border-radius: 50%;
+  background: var(--surface); border: 1px solid var(--border);
+  color: var(--muted); cursor: pointer; font-size: 14px;
+  display: flex; align-items: center; justify-content: center;
+  transition: border-color 0.2s, color 0.2s, transform 0.2s;
+}
+.theme-toggle-btn:hover { border-color: var(--accent); color: var(--accent); transform: rotate(15deg); }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: var(--font-sans); min-height: 100vh; overflow-x: hidden; }
+
+#stars {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background:
+    radial-gradient(ellipse at 20% 30%, var(--starfield-1) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 70%, var(--starfield-2) 0%, transparent 50%),
+    var(--bg);
+  transition: background 0.3s ease;
+}
+
+/* ── Header ── */
+.site-header {
+  position: relative; z-index: 10;
+  display: flex; align-items: center; gap: 24px;
+  padding: 20px 32px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(13,10,20,0.9);
+  backdrop-filter: blur(8px);
+}
+.back-link {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em;
+  color: var(--muted); text-decoration: none; text-transform: uppercase;
+  transition: color 0.2s;
+}
+.back-link:hover { color: var(--accent); }
+.header-title {
+  font-family: var(--font-serif); font-size: 22px; font-weight: 400;
+  color: var(--text); flex: 1;
+}
+.header-title span { color: var(--accent); }
+.header-sub {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--muted);
+}
+
+/* ── Tab Nav ── */
+.tab-nav {
+  position: sticky; top: 0; z-index: 9;
+  display: flex; gap: 0;
+  border-bottom: 1px solid var(--border);
+  background: rgba(13,10,20,0.95);
+  backdrop-filter: blur(8px);
+  padding: 0 32px;
+}
+.tab-btn {
+  background: none; border: none; cursor: pointer;
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--muted);
+  padding: 14px 20px;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.tab-btn:hover { color: var(--text); }
+.tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* ── Tab Panels ── */
+.tab-panel { display: none; position: relative; z-index: 1; }
+.tab-panel.active { display: block; }
+
+/* ══════════════════════════════
+   TIMELINE TAB
+══════════════════════════════ */
+#tab-timeline { padding: 40px 32px 80px; max-width: 960px; margin: 0 auto; }
+
+.timeline-intro {
+  font-family: var(--font-serif); font-size: 16px; font-style: italic;
+  color: var(--muted); margin-bottom: 48px; line-height: 1.7;
+}
+
+.timeline-track {
+  position: relative;
+  padding-left: 120px;
+}
+.timeline-track::before {
+  content: '';
+  position: absolute; left: 90px; top: 0; bottom: 0; width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--border) 5%, var(--border) 95%, transparent);
+}
+
+.timeline-item {
+  position: relative; margin-bottom: 8px;
+}
+.timeline-year {
+  position: absolute; left: -120px; width: 80px; text-align: right;
+  font-family: var(--font-mono); font-size: 11px; color: var(--muted);
+  padding-top: 14px;
+}
+.timeline-dot {
+  position: absolute; left: -6px; top: 17px;
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--surface2); border: 1.5px solid var(--border);
+  transition: background 0.2s, border-color 0.2s;
+}
+.timeline-item.extant .timeline-dot { border-color: var(--accent); background: rgba(201,168,76,0.2); }
+.timeline-item.fragmentary .timeline-dot { border-color: #7b9fa6; background: rgba(123,159,166,0.2); }
+.timeline-item.documented .timeline-dot { border-color: var(--muted); }
+
+.timeline-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 6px; padding: 14px 18px;
+  cursor: pointer; transition: border-color 0.2s, background 0.2s;
+  margin-left: 10px;
+}
+.timeline-card:hover { border-color: var(--accent2); background: var(--surface2); }
+.timeline-card.open { border-color: var(--accent); }
+
+.tc-header { display: flex; align-items: baseline; gap: 12px; }
+.tc-name {
+  font-family: var(--font-serif); font-size: 18px; font-weight: 400;
+  color: var(--text);
+}
+.tc-date {
+  font-family: var(--font-mono); font-size: 10px; color: var(--muted);
+}
+.tc-badges { margin-left: auto; display: flex; gap: 6px; align-items: center; }
+.badge {
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.1em;
+  text-transform: uppercase; padding: 2px 7px; border-radius: 2px;
+  background: var(--surface2); border: 1px solid var(--border); color: var(--muted);
+}
+.badge.extant { border-color: rgba(201,168,76,0.4); color: var(--accent); }
+.badge.fragmentary { border-color: rgba(123,159,166,0.4); color: #7b9fa6; }
+.badge.documented { }
+
+.tc-body { display: none; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); }
+.timeline-card.open .tc-body { display: block; }
+
+.tc-significance {
+  font-family: var(--font-serif); font-size: 15px; font-style: italic;
+  color: var(--muted); line-height: 1.7; margin-bottom: 14px;
+}
+.tc-detail-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+  font-size: 13px; margin-bottom: 14px;
+}
+@media (max-width: 600px) { .tc-detail-grid { grid-template-columns: 1fr; } }
+.tc-detail-label {
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 4px;
+}
+.tc-detail-val { color: var(--text); line-height: 1.5; }
+
+.tc-holdings { margin-bottom: 12px; }
+.tc-holdings-row {
+  display: flex; gap: 8px; align-items: center; font-size: 12px;
+  padding: 5px 0; border-bottom: 1px solid rgba(46,37,72,0.5);
+}
+.tc-holdings-row:last-child { border-bottom: none; }
+.holding-inst { color: var(--text); flex: 1; }
+.holding-cards {
+  font-family: var(--font-mono); font-size: 11px; color: var(--accent);
+}
+.holding-city { color: var(--muted); font-size: 11px; }
+.holding-dig { font-size: 10px; color: #7b9fa6; margin-left: 4px; }
+
+.tc-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+.tag {
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.08em;
+  padding: 2px 8px; border-radius: 2px;
+  background: rgba(123,79,166,0.12); border: 1px solid rgba(123,79,166,0.2);
+  color: var(--accent2);
+}
+
+.tc-edges { margin-top: 10px; }
+.tc-edge {
+  font-size: 12px; padding: 4px 0;
+  display: flex; align-items: center; gap: 8px; color: var(--muted);
+  border-bottom: 1px solid rgba(46,37,72,0.4);
+}
+.tc-edge:last-child { border-bottom: none; }
+.edge-rel {
+  font-family: var(--font-mono); font-size: 9px;
+  padding: 2px 6px; border-radius: 2px;
+  border: 1px solid; flex-shrink: 0;
+}
+.edge-arrow { color: var(--border); }
+.edge-deck { color: var(--text); }
+
+/* Era separators */
+.era-header {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--accent2); opacity: 0.7;
+  padding: 24px 0 10px; margin-left: 10px;
+}
+
+/* ══════════════════════════════
+   GENEALOGY TAB
+══════════════════════════════ */
+#tab-genealogy {
+  display: none;
+  flex-direction: column;
+  padding: 24px 32px 24px;
+}
+#tab-genealogy.active { display: flex; }
+
+.gen-header {
+  display: flex; align-items: center; gap: 16px; margin-bottom: 16px; flex-wrap: wrap;
+}
+.gen-header-title {
+  font-family: var(--font-serif); font-size: 20px; font-weight: 400; color: var(--text);
+}
+.gen-legend { display: flex; flex-wrap: wrap; gap: 10px; margin-left: auto; }
+.gen-legend-item {
+  display: flex; align-items: center; gap: 5px;
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.08em; color: var(--muted);
+}
+.gen-legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+.gen-controls {
+  display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; align-items: center;
+}
+.gen-control-btn {
+  background: var(--surface); border: 1px solid var(--border);
+  color: var(--muted); font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: 0.1em; text-transform: uppercase; padding: 6px 12px;
+  border-radius: 2px; cursor: pointer; transition: color 0.2s, border-color 0.2s;
+}
+.gen-control-btn:hover { color: var(--text); border-color: var(--accent2); }
+.gen-hint {
+  font-family: var(--font-mono); font-size: 10px; color: var(--muted);
+  opacity: 0.6;
+}
+
+.gen-wrap {
+  position: relative; flex: 1;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 6px;
+  overflow: hidden; cursor: grab; min-height: 600px;
+}
+.gen-wrap:active { cursor: grabbing; }
+
+#gen-svg {
+  width: 100%; height: 100%; display: block;
+  user-select: none;
+}
+
+.gen-tooltip {
+  position: absolute; pointer-events: none;
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: 4px; padding: 8px 12px;
+  font-size: 12px; max-width: 260px;
+  opacity: 0; transition: opacity 0.15s;
+  z-index: 100;
+}
+.gen-tooltip.visible { opacity: 1; }
+.gen-tooltip-name {
+  font-family: var(--font-serif); font-size: 15px; color: var(--text); margin-bottom: 2px;
+}
+.gen-tooltip-date { font-family: var(--font-mono); font-size: 10px; color: var(--muted); }
+.gen-tooltip-sig { font-size: 12px; color: var(--muted); margin-top: 6px; line-height: 1.5; }
+
+/* ══════════════════════════════
+   WITNESSES TAB
+══════════════════════════════ */
+#tab-witnesses { padding: 32px 32px 80px; max-width: 1100px; margin: 0 auto; }
+
+.wit-intro {
+  font-family: var(--font-serif); font-size: 16px; font-style: italic;
+  color: var(--muted); margin-bottom: 24px; line-height: 1.7;
+}
+.wit-filters {
+  display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; align-items: center;
+}
+.wit-filter-label {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--muted);
+}
+.wit-filter-select {
+  background: var(--surface); border: 1px solid var(--border);
+  color: var(--text); font-family: var(--font-mono); font-size: 11px;
+  padding: 6px 10px; border-radius: 2px; cursor: pointer;
+}
+.wit-filter-select:focus { outline: none; border-color: var(--accent2); }
+.wit-count {
+  font-family: var(--font-mono); font-size: 10px; color: var(--muted);
+  margin-left: auto;
+}
+
+.wit-table-wrap { overflow-x: auto; }
+table.wit-table {
+  width: 100%; border-collapse: collapse;
+  font-size: 13px;
+}
+.wit-table th {
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--muted);
+  padding: 8px 12px; text-align: left;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+.wit-table td {
+  padding: 10px 12px; border-bottom: 1px solid rgba(46,37,72,0.5);
+  vertical-align: top; line-height: 1.5;
+}
+.wit-table tr:hover td { background: rgba(34,28,53,0.5); }
+.wit-deck-name { color: var(--text); font-weight: 500; }
+.wit-card-id { font-family: var(--font-mono); font-size: 11px; color: var(--accent2); }
+.wit-desc { color: var(--muted); }
+.wit-notes { color: var(--muted); font-style: italic; font-size: 12px; }
+.conf-high { color: #70c870; }
+.conf-probable { color: var(--accent); }
+.conf-possible { color: #7b9fa6; }
+.conf-theoretical { color: var(--muted); }
+
+/* ══════════════════════════════
+   PEOPLE TAB
+══════════════════════════════ */
+#tab-people { padding: 40px 32px 80px; max-width: 1100px; margin: 0 auto; }
+
+.people-intro {
+  font-family: var(--font-serif); font-size: 16px; font-style: italic;
+  color: var(--muted); margin-bottom: 40px; line-height: 1.7;
+}
+.people-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px;
+}
+.person-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 6px; padding: 20px;
+  transition: border-color 0.2s;
+  display: flex; gap: 14px; align-items: flex-start;
+}
+.person-card:hover { border-color: var(--accent2); }
+.person-portrait {
+  flex-shrink: 0;
+  width: 72px; height: 96px;
+  border-radius: 4px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-serif);
+  font-size: 26px; font-weight: 300;
+  color: var(--muted);
+  position: relative;
+}
+.person-portrait img {
+  width: 100%; height: 100%; object-fit: cover; object-position: center top;
+  display: block;
+}
+.person-portrait.loading::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.04), transparent);
+  animation: portraitShimmer 1.4s infinite;
+}
+@keyframes portraitShimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+.person-body { flex: 1; min-width: 0; }
+.person-name {
+  font-family: var(--font-serif); font-size: 20px; font-weight: 400;
+  color: var(--text); margin-bottom: 2px;
+}
+.person-dates {
+  font-family: var(--font-mono); font-size: 10px; color: var(--muted);
+  margin-bottom: 8px;
+}
+.person-role {
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--accent2); margin-bottom: 10px;
+}
+.person-bio {
+  font-size: 13px; color: var(--muted); line-height: 1.65; margin-bottom: 12px;
+}
+.person-decks {
+  display: flex; flex-wrap: wrap; gap: 5px;
+}
+.person-deck-tag {
+  font-family: var(--font-mono); font-size: 9px; padding: 2px 7px;
+  border-radius: 2px; background: rgba(201,168,76,0.08);
+  border: 1px solid rgba(201,168,76,0.2); color: var(--accent);
+}
+
+/* ── Card Image Strip ── */
+.tc-images { margin: 14px 0; }
+.tc-images-label {
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 8px;
+}
+.tc-images-strip { display: flex; gap: 6px; flex-wrap: wrap; align-items: flex-end; }
+.tc-card-thumb {
+  width: 52px; height: 84px; object-fit: cover;
+  border-radius: 3px; border: 1px solid var(--border);
+  transition: transform 0.18s, border-color 0.18s; cursor: pointer;
+  background: var(--surface2);
+}
+.tc-card-thumb:hover { transform: scale(1.08); border-color: var(--accent); }
+.tc-images-more {
+  font-family: var(--font-mono); font-size: 10px; color: var(--muted);
+  align-self: center; padding-left: 4px;
+}
+.wit-img-cell { width: 50px; text-align: center; }
+.wit-thumb {
+  width: 38px; height: 60px; object-fit: cover;
+  border-radius: 2px; border: 1px solid var(--border);
+  display: block; margin: 0 auto;
+}
+
+/* ── Cards Browser Tab ── */
+#tab-cards { padding: 32px 32px 80px; max-width: 1100px; margin: 0 auto; }
+.cards-header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
+.cards-header-title { font-family: var(--font-serif); font-size: 20px; font-weight: 400; color: var(--text); }
+.cards-deck-select {
+  background: var(--surface); border: 1px solid var(--border);
+  color: var(--text); font-family: var(--font-mono); font-size: 11px;
+  padding: 6px 12px; border-radius: 2px; cursor: pointer;
+}
+.cards-deck-select:focus { outline: none; border-color: var(--accent2); }
+.cards-count { font-family: var(--font-mono); font-size: 10px; color: var(--muted); }
+.cards-filter-row { display: flex; gap: 10px; align-items: center; margin-bottom: 16px; flex-wrap: wrap; }
+.cards-search {
+  background: var(--surface); border: 1px solid var(--border);
+  color: var(--text); font-family: var(--font-mono); font-size: 11px;
+  padding: 6px 10px; border-radius: 2px; width: 160px;
+}
+.cards-search::placeholder { color: var(--muted); }
+.cards-search:focus { outline: none; border-color: var(--accent2); }
+.cards-suit-select {
+  background: var(--surface); border: 1px solid var(--border);
+  color: var(--text); font-family: var(--font-mono); font-size: 11px;
+  padding: 6px 10px; border-radius: 2px; cursor: pointer;
+}
+.cards-suit-select:focus { outline: none; border-color: var(--accent2); }
+.cards-note { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent2); padding: 2px 8px; border: 1px solid rgba(123,79,166,0.3); border-radius: 2px; }
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(68px, 1fr));
+  gap: 8px;
+}
+.cards-grid-img {
+  width: 100%; aspect-ratio: 52 / 84; object-fit: cover;
+  border-radius: 3px; border: 1px solid var(--border);
+  cursor: pointer; background: var(--surface2);
+  transition: transform 0.18s, border-color 0.18s;
+}
+.cards-grid-img:hover { transform: scale(1.06); border-color: var(--accent); }
+.card-lightbox {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,0.82); z-index: 1000;
+  align-items: center; justify-content: center;
+}
+.card-lightbox.open { display: flex; }
+.card-lb-inner {
+  position: relative; max-width: 320px; width: 90%;
+  padding: 14px; background: var(--surface);
+  border: 1px solid var(--border); border-radius: 6px;
+}
+.card-lb-img { width: 100%; border-radius: 3px; display: block; }
+.card-lb-meta { margin-top: 10px; }
+.card-lb-name { font-family: var(--font-serif); font-size: 16px; color: var(--text); text-align: center; margin-bottom: 2px; }
+.card-lb-id { font-family: var(--font-mono); font-size: 10px; color: var(--muted); text-align: center; }
+.card-lb-close {
+  position: absolute; top: -13px; right: -13px;
+  width: 26px; height: 26px; border-radius: 50%;
+  background: var(--surface2); border: 1px solid var(--border);
+  color: var(--muted); cursor: pointer; font-size: 15px;
+  display: flex; align-items: center; justify-content: center;
+  line-height: 1;
+}
+.card-lb-close:hover { color: var(--text); border-color: var(--accent); }
+.card-lb-actions { margin-top: 10px; display: flex; justify-content: center; gap: 8px; }
+.card-lb-btn {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--accent);
+  background: transparent; border: 1px solid var(--border);
+  padding: 6px 12px; border-radius: 3px; cursor: pointer;
+  transition: all 0.2s;
+}
+.card-lb-btn:hover { border-color: var(--accent); background: var(--accent-glow); }
+
+/* ── Lineage ── */
+.lineage-header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
+.lineage-header-title {
+  font-family: var(--font-serif); font-size: 22px; font-weight: 400; color: var(--text);
+  flex-shrink: 0;
+}
+.lineage-card-select {
+  font-family: var(--font-sans); font-size: 13px; color: var(--text);
+  background: var(--surface); border: 1px solid var(--border);
+  padding: 8px 12px; border-radius: 3px; min-width: 200px;
+}
+.lineage-count { font-family: var(--font-mono); font-size: 10px; color: var(--muted); margin-left: auto; letter-spacing: 0.12em; text-transform: uppercase; }
+.lineage-intro { font-family: var(--font-serif); font-size: 15px; color: var(--muted); font-style: italic; margin-bottom: 18px; max-width: 640px; line-height: 1.55; }
+.lineage-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 22px;
+}
+.lineage-tile {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 4px; overflow: hidden; cursor: pointer;
+  transition: all 0.2s; display: flex; flex-direction: column;
+}
+.lineage-tile:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 4px 18px rgba(0,0,0,0.4); }
+.lineage-tile-img-wrap {
+  aspect-ratio: 2/3; background: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.lineage-tile-img {
+  width: 100%; height: 100%; object-fit: contain;
+  transition: transform 0.3s;
+}
+.lineage-tile:hover .lineage-tile-img { transform: scale(1.04); }
+.lineage-tile-meta { padding: 10px 12px; border-top: 1px solid var(--border); }
+.lineage-tile-date {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em;
+  color: var(--accent); text-transform: uppercase; margin-bottom: 3px;
+}
+.lineage-tile-name {
+  font-family: var(--font-serif); font-size: 13px; color: var(--text);
+  line-height: 1.3;
+}
+.lineage-tile-origin {
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.1em;
+  color: var(--muted); text-transform: uppercase; margin-top: 3px;
+}
+.lineage-empty {
+  font-family: var(--font-serif); font-style: italic; color: var(--muted);
+  text-align: center; padding: 60px 20px; font-size: 15px;
+}
+.lineage-era-divider {
+  grid-column: 1 / -1;
+  display: flex; align-items: center; gap: 12px;
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.18em;
+  color: var(--muted); text-transform: uppercase;
+  margin: 10px 0 -6px;
+}
+.lineage-era-divider::before, .lineage-era-divider::after {
+  content: ''; flex: 1; height: 1px; background: var(--border);
+}
+
+/* ── Genealogy tooltip image ── */
+.gen-tooltip-img {
+  width: 50px; height: 80px; object-fit: cover;
+  border-radius: 3px; border: 1px solid var(--border);
+  float: left; margin: 0 10px 6px 0; flex-shrink: 0;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+</style>
+</head>
+<body>
+<div id="stars"></div>
+
+<header class="site-header">
+  <a href="index.html" class="back-link">← reader</a>
+  <div class="header-title">tarocchi — <span>historical explorer</span></div>
+  <div class="header-sub">39 decks · 1100 years · 65 genealogy edges</div>
+</header>
+
+<nav class="tab-nav">
+  <button class="tab-btn active" data-tab="timeline">Timeline</button>
+  <button class="tab-btn" data-tab="genealogy">Genealogy</button>
+  <button class="tab-btn" data-tab="witnesses">Witnesses</button>
+  <button class="tab-btn" data-tab="people">People</button>
+  <button class="tab-btn" data-tab="cards">Cards</button>
+  <button class="tab-btn" data-tab="lineage">Lineage</button>
+</nav>
+<button class="theme-toggle-btn" id="theme-btn" onclick="toggleTheme()" title="Toggle light/dark"><span id="theme-icon">☀</span></button>
+
+<div id="tab-timeline" class="tab-panel active"></div>
+<div id="tab-genealogy" class="tab-panel"></div>
+<div id="tab-witnesses" class="tab-panel"></div>
+<div id="tab-people" class="tab-panel"></div>
+<div id="tab-cards" class="tab-panel"></div>
+<div id="tab-lineage" class="tab-panel"></div>
+
+<div class="gen-tooltip" id="gen-tooltip">
+  <img class="gen-tooltip-img" id="tt-img" src="" alt="" style="display:none">
+  <div class="gen-tooltip-name" id="tt-name"></div>
+  <div class="gen-tooltip-date" id="tt-date"></div>
+  <div class="gen-tooltip-sig" id="tt-sig"></div>
+  <div style="clear:both"></div>
+</div>
+
+<div class="card-lightbox" id="card-lightbox">
+  <div class="card-lb-inner">
+    <button class="card-lb-close" id="card-lb-close">&#x2715;</button>
+    <img class="card-lb-img" id="card-lb-img" src="" alt="">
+    <div class="card-lb-meta">
+      <div class="card-lb-name" id="card-lb-name"></div>
+      <div class="card-lb-id" id="card-lb-id"></div>
+      <div class="card-lb-actions">
+        <button class="card-lb-btn" id="card-lb-lineage">See across history →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ─── card name map ─────────────────────────── */
+const CARD_NAMES = {
+  'major-00': 'The Fool',        'major-01': 'The Magician',
+  'major-02': 'The High Priestess','major-03': 'The Empress',
+  'major-04': 'The Emperor',     'major-05': 'The Hierophant',
+  'major-06': 'The Lovers',      'major-07': 'The Chariot',
+  'major-08': 'Strength',        'major-09': 'The Hermit',
+  'major-10': 'Wheel of Fortune','major-11': 'Justice',
+  'major-12': 'The Hanged Man',  'major-13': 'Death',
+  'major-14': 'Temperance',      'major-15': 'The Devil',
+  'major-16': 'The Tower',       'major-17': 'The Star',
+  'major-18': 'The Moon',        'major-19': 'The Sun',
+  'major-20': 'Judgement',       'major-21': 'The World',
+  'wands-01': 'Ace of Wands',    'wands-02': 'Two of Wands',    'wands-03': 'Three of Wands',
+  'wands-04': 'Four of Wands',   'wands-05': 'Five of Wands',   'wands-06': 'Six of Wands',
+  'wands-07': 'Seven of Wands',  'wands-08': 'Eight of Wands',  'wands-09': 'Nine of Wands',
+  'wands-10': 'Ten of Wands',    'wands-11': 'Page of Wands',   'wands-12': 'Knight of Wands',
+  'wands-13': 'Queen of Wands',  'wands-14': 'King of Wands',
+  'cups-01':  'Ace of Cups',     'cups-02':  'Two of Cups',     'cups-03':  'Three of Cups',
+  'cups-04':  'Four of Cups',    'cups-05':  'Five of Cups',    'cups-06':  'Six of Cups',
+  'cups-07':  'Seven of Cups',   'cups-08':  'Eight of Cups',   'cups-09':  'Nine of Cups',
+  'cups-10':  'Ten of Cups',     'cups-11':  'Page of Cups',    'cups-12':  'Knight of Cups',
+  'cups-13':  'Queen of Cups',   'cups-14':  'King of Cups',
+  'swords-01':'Ace of Swords',   'swords-02':'Two of Swords',   'swords-03':'Three of Swords',
+  'swords-04':'Four of Swords',  'swords-05':'Five of Swords',  'swords-06':'Six of Swords',
+  'swords-07':'Seven of Swords', 'swords-08':'Eight of Swords', 'swords-09':'Nine of Swords',
+  'swords-10':'Ten of Swords',   'swords-11':'Page of Swords',  'swords-12':'Knight of Swords',
+  'swords-13':'Queen of Swords', 'swords-14':'King of Swords',
+  'pents-01': 'Ace of Pentacles','pents-02': 'Two of Pentacles','pents-03': 'Three of Pentacles',
+  'pents-04': 'Four of Pentacles','pents-05':'Five of Pentacles','pents-06': 'Six of Pentacles',
+  'pents-07': 'Seven of Pentacles','pents-08':'Eight of Pentacles','pents-09':'Nine of Pentacles',
+  'pents-10': 'Ten of Pentacles','pents-11': 'Page of Pentacles','pents-12':'Knight of Pentacles',
+  'pents-13': 'Queen of Pentacles','pents-14':'King of Pentacles',
+};
+
+function cardName(id) {
+  if (CARD_NAMES[id]) return CARD_NAMES[id];
+  // Visconti / Conver numeric IDs
+  const m = id.match(/^card-(\d+)$/);
+  if (m) return 'Card ' + parseInt(m[1]);
+  return id;
+}
+
+/* ─── data ─────────────────────────────────── */
+let DECKS = [], GENEALOGY = [], WITNESSES = [], MANIFEST = {};
+
+const PEOPLE = [
+  {
+    name: "Bonifacio Bembo",
+    dates: "fl. c. 1447–1480",
+    role: "Court painter / card artist",
+    wikipedia: "Bonifacio_Bembo",
+    bio: "Cremonese painter working for the Sforza court in Milan. Attributed as the primary artist of the Visconti-Sforza Tarot, the finest surviving hand-painted 15th-century deck. His miniaturist technique influenced the iconographic vocabulary used by all later Italian decks.",
+    decks: ["Visconti-Sforza Tarot", "Visconti di Modrone Tarot"]
+  },
+  {
+    name: "Antoine Court de Gébelin",
+    dates: "1725–1784",
+    role: "Occultist / proto-Egyptologist",
+    wikipedia: "Antoine_Court_de_G%C3%A9belin",
+    bio: "Swiss Protestant pastor who, in 1781, published the first major claim that tarot originated in ancient Egypt — an assertion with no historical basis, but one that launched Western esotericism's obsession with the cards. His Monde Primitif essay effectively invented tarot as occult object.",
+    decks: ["Grand Etteilla"]
+  },
+  {
+    name: "Jean-Baptiste Alliette (Etteilla)",
+    dates: "1738–1791",
+    role: "Cartomancer / deck designer",
+    wikipedia: "Etteilla",
+    bio: "Parisian engraver who adopted the pen name 'Etteilla' (his name reversed). First professional tarot reader, first to publish a how-to guide for cartomancy (1770), and designer of the Grand Etteilla — the first deck explicitly created for divination rather than gaming. His numbered card system and reversed-meaning doctrine persisted into the 20th century.",
+    decks: ["Grand Etteilla"]
+  },
+  {
+    name: "Eliphas Lévi",
+    dates: "1810–1875",
+    role: "Occultist / Kabbalist",
+    wikipedia: "%C3%89liphas_L%C3%A9vi",
+    bio: "Born Alphonse Louis Constant. The most influential occultist of the 19th century, who in Dogme et Rituel de la Haute Magie (1854–56) systematically linked the 22 Major Arcana to the 22 letters of the Hebrew alphabet — a correspondence now embedded in virtually every esoteric tarot tradition. His Baphomet image inspired card XV in most post-1875 decks.",
+    decks: ["Oswald Wirth Tarot (1889)", "Rider-Waite-Smith Tarot", "Thoth Tarot"]
+  },
+  {
+    name: "Stanislas de Guaita",
+    dates: "1861–1897",
+    role: "Rosicrucian / patron",
+    wikipedia: "Stanislas_de_Guaita",
+    bio: "French Rosicrucian and symbolist poet who commissioned Oswald Wirth in 1889 to create the first esoteric tarot with visual Kabbalistic symbolism. His Ordre Kabbalistique de la Rose-Croix (co-founded with Joséphin Péladan) was the French occultist milieu that bridged Lévi's theory to the Golden Dawn's practice.",
+    decks: ["Oswald Wirth Tarot (1889)"]
+  },
+  {
+    name: "Oswald Wirth",
+    dates: "1860–1943",
+    role: "Occultist / deck designer",
+    wikipedia: "Oswald_Wirth",
+    bio: "Swiss Freemason and occultist who in 1889 designed 22 Major Arcana cards integrating Kabbalistic, astrological, and Martinist symbolism. Only 350 copies were printed. His lemniscate above The Magician — the first appearance of the symbol on the card — passed directly into the Rider-Waite-Smith tradition. His later 1926 republication added a full 78-card deck.",
+    decks: ["Oswald Wirth Tarot (1889)"]
+  },
+  {
+    name: "Arthur Edward Waite",
+    dates: "1857–1942",
+    role: "Mystic / deck co-creator",
+    wikipedia: "A._E._Waite",
+    bio: "Anglo-American mystic and member of the Hermetic Order of the Golden Dawn. Commissioned Pamela Colman Smith to illustrate a new tarot according to his esoteric specifications. The Rider-Waite-Smith deck (1909) was the first to feature fully illustrated pip cards and became the dominant template for 20th and 21st century tarot publishing.",
+    decks: ["Rider-Waite-Smith Tarot"]
+  },
+  {
+    name: "Pamela Colman Smith",
+    dates: "1878–1951",
+    role: "Artist / illustrator",
+    wikipedia: "Pamela_Colman_Smith",
+    bio: "Jamaican-British illustrator, synesthete, and Golden Dawn initiate known as 'Pixie.' Drew all 78 cards of the Rider-Waite-Smith deck in 1909, delivering fully-realised scenic pip cards that had never existed before. Her pictorial system for the Minor Arcana created the visual language most tarot users know today. She died in poverty, having earned no royalties.",
+    decks: ["Rider-Waite-Smith Tarot"]
+  },
+  {
+    name: "Aleister Crowley",
+    dates: "1875–1947",
+    role: "Occultist / deck co-creator",
+    wikipedia: "Aleister_Crowley",
+    bio: "English occultist and founder of Thelema who worked with Lady Frieda Harris from 1938 to 1943 to produce the Thoth Tarot. Crowley restructured the card order (swapping Justice and Strength, among other changes), renamed the Majors, and wrote the Book of Thoth to accompany the deck. Publication was posthumous (1969).",
+    decks: ["Thoth Tarot"]
+  },
+  {
+    name: "Lady Frieda Harris",
+    dates: "1877–1962",
+    role: "Artist / Projective Geometry painter",
+    wikipedia: "Frieda_Harris",
+    bio: "British painter and student of Rudolf Steiner's Anthroposophy. Created the artwork for the Thoth Tarot using 'Projective Geometry' — a non-Euclidean visual system that produces impossible-perspective, interpenetrating geometric forms. Her paintings required four years of revision under Crowley's demanding direction.",
+    decks: ["Thoth Tarot"]
+  },
+  {
+    name: "Alejandro Jodorowsky",
+    dates: "1929–",
+    role: "Artist / restorer / tarosophist",
+    wikipedia: "Alejandro_Jodorowsky",
+    bio: "Chilean-French filmmaker and comic artist who devoted decades to restoring the Nicolas Conver 1761 Marseille Tarot. Working with cartographer Philippe Camoin (a descendant of Conver's successors), Jodorowsky's 1997 Tarot de Marseille restoration recovered original woodblock proportions and color relationships considered definitive by the Marseille tradition.",
+    decks: ["Tarot de Marseille (Conver, 1761)"]
+  },
+  {
+    name: "Giuseppe Maria Mitelli",
+    dates: "1634–1718",
+    role: "Engraver / Baroque court artist",
+    wikipedia: "Giuseppe_Maria_Mitelli",
+    bio: "Bolognese painter and copperplate engraver, court artist to the Bentivoglio family. His 1664 Tarocchino engravings are the single most artistically ambitious surviving 17th-century tarot — Baroque in composition, signed, and executed in intaglio rather than the woodblock of contemporaneous French cardmakers. His plates preserve the Bolognese tarocchino tradition (62 cards, 16 pip cards removed) that is still played in Emilia-Romagna today.",
+    decks: ["Tarocchino Bolognese (Mitelli)"]
+  },
+  {
+    name: "Éliphas Lévi",
+    dates: "1810–1875",
+    role: "Occultist / theoretical writer",
+    wikipedia: "%C3%89liphas_L%C3%A9vi",
+    bio: "Born Alphonse Louis Constant, defrocked Catholic seminarian who rebuilt himself as the pivotal theorist of 19th-century Western esotericism. His 1854–1856 Dogme et Rituel de la Haute Magie mapped the 22 Major Arcana to the 22 letters of the Hebrew alphabet and to the 22 paths of the Kabbalistic Tree of Life — the framework every later esoteric deck (Wirth, Papus, Waite, Crowley, Case) implements. His Baphomet woodcut is the source of nearly every post-1875 depiction of The Devil. The single most influential figure in the history of esoteric tarot.",
+    decks: ["Lévi — Dogme et Rituel de la Haute Magie", "Oswald Wirth Tarot (1889)", "Rider-Waite-Smith Tarot", "Thoth Tarot"]
+  },
+  {
+    name: "Jean-Baptiste Pitois (Paul Christian)",
+    dates: "1811–1877",
+    role: "Occultist / Napoleonic archivist",
+    wikipedia: "Paul_Christian_(occultist)",
+    bio: "French occultist who worked under Charles Nodier at the Bibliothèque de l'Arsenal and wrote under the pen name 'Paul Christian.' His Histoire de la Magie (1863) is the first text anywhere to use the terms 'arcanes majeurs' and 'arcanes mineurs' — the direct origin of the English 'Major Arcana' / 'Minor Arcana' terminology now universal in tarot. His elaborate Egyptian-initiation-temple framing of the 22 trumps shaped the Golden Dawn's ritual conception of the cards.",
+    decks: ["Paul Christian — Histoire de la Magie"]
+  },
+  {
+    name: "Paul Foster Case",
+    dates: "1884–1954",
+    role: "Occultist / deck designer / pedagogue",
+    wikipedia: "Paul_Foster_Case",
+    bio: "American occultist, former stage magician, and former Alpha et Omega (Golden Dawn offshoot) member who founded the Builders of the Adytum (B.O.T.A.) in Los Angeles in 1922. His 1929–1931 B.O.T.A. deck is the primary American esoteric tarot — line-art derivatives of the Rider-Waite-Smith with Case's Qabalistic modifications (notably swapping the Hebrew-letter attributions of The Emperor and The Star). The B.O.T.A. correspondence course remains the major pedagogical tradition for Qabalistic tarot study in the United States.",
+    decks: ["B.O.T.A. Tarot (Paul Foster Case)"]
+  },
+  {
+    name: "Paul Marteau",
+    dates: "1885–1966",
+    role: "Publisher / colorist / cartomancer",
+    bio: "French occultist and editor at B.P. Grimaud. His 1930 recoloration of the Tarot de Marseille — based on 18th-century Conver-lineage line drawings — became the standard Marseille deck of the 20th century. His 1949 book *Le Tarot de Marseille* was the dominant French-language Marseille reference until Jodorowsky's 1997 restoration. Most mid-20th-century French cartomancers, from Kardec-era spiritualists to 1970s occultists, learned tarot from the Grimaud-Marteau deck.",
+    decks: ["Ancien Tarot de Marseille (Grimaud / Paul Marteau, 1930)"]
+  },
+  {
+    name: "David Palladini",
+    dates: "1946–2020",
+    role: "Commercial illustrator / deck designer",
+    wikipedia: "David_Palladini",
+    bio: "American illustrator working in Art Nouveau and Art Deco idioms. His 1970 Aquarian Tarot preserved Pamela Colman Smith's RWS scenic pip compositions while recasting the trumps in stylized modernist linework. The Aquarian was for many 1970s–80s Americans the first non-RWS deck they encountered and established the template for post-RWS 'illustrated art decks' — a lineage that runs through every indie-era illustrated tarot to the present.",
+    decks: ["Aquarian Tarot (David Palladini, 1970)"]
+  },
+  {
+    name: "Godfrey Dowson",
+    dates: "1923–2005",
+    role: "Occultist / artist / Golden Dawn scholar",
+    bio: "British occultist-artist and longtime student of the Golden Dawn ritual material. His 1979 Hermetic Tarot is the most faithful visual transcription of the original Golden Dawn symbolic system ever attempted — densely annotated with Hebrew letters, zodiacal sigils, decan attributions, and Sephiroth correspondences in stark black-and-white linework. It is the scholarly-reference companion to Waite's RWS and Crowley's Thoth for the Golden Dawn tradition.",
+    decks: ["Hermetic Tarot (Godfrey Dowson, 1979)"]
+  },
+  {
+    name: "Karen Vogel & Vicki Noble",
+    dates: "1949– / 1947–",
+    role: "Feminist spirituality researchers / deck designers",
+    wikipedia: "Motherpeace_Tarot",
+    bio: "American feminist spirituality researchers and artists who collaborated in Berkeley from 1978 to design the Motherpeace Tarot, published 1983. Drawing on second-wave feminism, Marija Gimbutas's goddess-civilization archaeology, and cross-cultural ritual research, they reframed the entire 78-card tarot structure around pre-patriarchal goddess imagery and non-hierarchical court ranks (Daughter/Son/Priestess/Shaman). Motherpeace is the founding document of feminist tarot and the precedent for every post-RWS deck that treats the 78-card structure as a vehicle for reimagined cultural content — including most of the indie-deck wave of the 2010s–2020s.",
+    decks: ["Motherpeace Tarot (Karen Vogel & Vicki Noble, 1981)"]
+  }
+];
+
+const EDGE_COLORS = {
+  ancestor: "#c9a84c",
+  same_workshop_tradition: "#60b8e0",
+  parallel_workshop: "#4090b0",
+  parallel_workshop_tradition: "#60b8e0",
+  ancestor_via_woodblock_tradition: "#d4a060",
+  reaction_against: "#e05555",
+  direct_iconographic_source: "#70c870",
+  influenced_by: "#a070d0",
+  esoteric_source_material: "#d060d0",
+  parallel_golden_dawn_tradition: "#b080e0",
+  parallel_regional_variant: "#50a878",
+  parallel_regional_tradition: "#50a878",
+  copy_of: "#e0d060",
+  derives_from: "#c0a840",
+  direct_intellectual_source: "#d060d0",
+  iconographic_reference: "#70c870",
+  direct_reference_source: "#70c870",
+  direct_derivative: "#c0a840",
+  direct_descendant: "#c0a840",
+  piracy_continuation: "#e0d060",
+  parallel_paris_tradition: "#4090b0",
+  parallel_printed_tradition: "#d4a060",
+  same_iconographic_period: "#60b8e0",
+  canonical_order_evidence: "#f0c040",
+  regional_iconographic_continuity: "#50a878",
+  typographic_sibling: "#4090b0",
+  direct_typographic_source: "#c9a84c",
+  reframed_derivative: "#e05555"
+};
+
+/* ─── tabs ─────────────────────────────────── */
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+    if (btn.dataset.tab === 'genealogy') renderGenealogyOnce();
+    if (btn.dataset.tab === 'cards') { cardsRendered ? null : renderCards(); cardsRendered = true; }
+    if (btn.dataset.tab === 'lineage') renderLineageOnce();
+  });
+});
+
+function switchToTab(name) {
+  const btn = document.querySelector(`.tab-btn[data-tab="${name}"]`);
+  if (btn) btn.click();
+}
+
+/* ─── load data ─────────────────────────────── */
+async function init() {
+  const [decksRes, witRes, manifestRes] = await Promise.all([
+    fetch('data/historical_decks.json'),
+    fetch('data/card_witnesses.json'),
+    fetch('data/images/manifest.json').catch(() => null)
+  ]);
+  const decksData = await decksRes.json();
+  const witData = await witRes.json();
+  MANIFEST = manifestRes ? await manifestRes.json() : {};
+
+  DECKS = decksData.decks.slice().sort((a, b) => (a.date_earliest || 0) - (b.date_earliest || 0));
+  GENEALOGY = decksData.genealogy;
+  WITNESSES = Array.isArray(witData) ? witData : (witData.witnesses || []);
+
+  renderTimeline();
+  renderWitnesses();
+  renderPeople();
+}
+
+/* ─── timeline ─────────────────────────────── */
+const ERAS = [
+  { year: 800,  label: "Gaming Origins (Pre-tarot)" },
+  { year: 1430, label: "Italian Courts (Trionfi)" },
+  { year: 1490, label: "Regional Variants" },
+  { year: 1550, label: "Marseille Tradition" },
+  { year: 1750, label: "Cartomancy & Occultism" },
+  { year: 1880, label: "Esoteric Revival" },
+  { year: 1905, label: "Modern Synthesis" },
+];
+
+function currentEra(year) {
+  let label = ERAS[0].label;
+  for (const e of ERAS) { if (year >= e.year) label = e.label; }
+  return label;
+}
+
+function formatHoldings(holdings) {
+  if (!holdings || !holdings.length) return '<em style="color:var(--muted)">No known physical holdings</em>';
+  return holdings.map(h => `
+    <div class="tc-holdings-row">
+      <span class="holding-inst">${h.institution}</span>
+      ${h.cards_held != null ? `<span class="holding-cards">${h.cards_held} cards</span>` : ''}
+      <span class="holding-city">${h.city || ''}${h.country ? ', ' + h.country : ''}</span>
+      ${h.digitized ? '<span class="holding-dig">digitized</span>' : ''}
+    </div>`).join('');
+}
+
+function getEdgesForDeck(id) {
+  const out = [], inn = [];
+  for (const e of GENEALOGY) {
+    if (e.from === id) out.push(e);
+    if (e.to === id) inn.push(e);
+  }
+  return { out, inn };
+}
+
+function deckNameById(id) {
+  const d = DECKS.find(d => d.id === id);
+  return d ? d.name : id;
+}
+
+function edgeColor(rel) {
+  return EDGE_COLORS[rel] || '#7a6e8a';
+}
+
+function renderEdgePill(rel) {
+  const c = edgeColor(rel);
+  return `<span class="edge-rel" style="color:${c};border-color:${c}40">${rel.replace(/_/g,' ')}</span>`;
+}
+
+function renderTimeline() {
+  const el = document.getElementById('tab-timeline');
+  let lastEra = '';
+  let html = `<p class="timeline-intro">From the Mamluk card game of 14th-century Egypt to Vogel and Noble's feminist Motherpeace circular deck — 39 decks and theoretical corpora across 1100 years, every institution that holds them, and the lineage that connects them.</p>
+    <div class="timeline-track">`;
+
+  for (const deck of DECKS) {
+    const era = currentEra(deck.date_earliest || 0);
+    if (era !== lastEra) {
+      html += `<div class="era-header">${era}</div>`;
+      lastEra = era;
+    }
+    const { out, inn } = getEdgesForDeck(deck.id);
+    const edgesHtml = [...inn.map(e =>
+      `<div class="tc-edge">${renderEdgePill(e.relation)} <span class="edge-arrow">←</span> <span class="edge-deck">${deckNameById(e.from)}</span></div>`
+    ), ...out.map(e =>
+      `<div class="tc-edge">${renderEdgePill(e.relation)} <span class="edge-arrow">→</span> <span class="edge-deck">${deckNameById(e.to)}</span></div>`
+    )].join('');
+
+    const tags = (deck.tags || []).map(t => `<span class="tag">${t}</span>`).join('');
+    const atts = (deck.attributions || []).map(a =>
+      `${a.name} <span style="color:var(--muted);font-size:11px">(${a.role}${a.confidence !== 'high' ? ', ' + a.confidence : ''})</span>`
+    ).join('; ');
+
+    html += `
+    <div class="timeline-item ${deck.survival_status || ''}">
+      <div class="timeline-year">${deck.date_earliest}</div>
+      <div class="timeline-dot"></div>
+      <div class="timeline-card" onclick="toggleCard(this)">
+        <div class="tc-header">
+          <div class="tc-name">${deck.name}</div>
+          <div class="tc-date">${deck.date_display}</div>
+          <div class="tc-badges">
+            <span class="badge ${deck.survival_status}">${deck.survival_status}</span>
+            ${deck.cards_known != null ? `<span class="badge">${deck.cards_known}${deck.cards_original ? '/'+deck.cards_original : ''} cards</span>` : ''}
+          </div>
+        </div>
+        <div class="tc-body">
+          ${deck.significance ? `<div class="tc-significance">${deck.significance}</div>` : ''}
+          <div class="tc-detail-grid">
+            <div>
+              <div class="tc-detail-label">Region</div>
+              <div class="tc-detail-val">${deck.region || '—'}</div>
+            </div>
+            <div>
+              <div class="tc-detail-label">Culture</div>
+              <div class="tc-detail-val">${deck.culture || '—'}</div>
+            </div>
+            <div>
+              <div class="tc-detail-label">Date basis</div>
+              <div class="tc-detail-val">${deck.date_basis || '—'} <span style="color:var(--muted);font-size:11px">(${deck.date_confidence || '?'} confidence)</span></div>
+            </div>
+            <div>
+              <div class="tc-detail-label">Attribution</div>
+              <div class="tc-detail-val">${atts || '—'}</div>
+            </div>
+            <div>
+              <div class="tc-detail-label">Structure</div>
+              <div class="tc-detail-val">${deck.structure || '—'}</div>
+            </div>
+            <div>
+              <div class="tc-detail-label">Primary purpose</div>
+              <div class="tc-detail-val">${deck.primary_purpose || '—'}</div>
+            </div>
+          </div>
+          <div class="tc-detail-label" style="margin-bottom:8px">Known holdings</div>
+          <div class="tc-holdings">${formatHoldings(deck.holdings)}</div>
+          ${(() => {
+            const deckImgMap = MANIFEST[deck.id] || {};
+            const entries = Object.entries(deckImgMap);
+            if (!entries.length) return '';
+            const shown = entries.slice(0, 10);
+            const more = entries.length - shown.length;
+            const did = deck.id;
+            return `<div class="tc-images">
+              <div class="tc-images-label">${entries.length} card images — <a href="#" style="color:var(--accent);text-decoration:none;font-size:10px" onclick="event.preventDefault();event.stopPropagation();switchToCards('${did}')">browse all →</a></div>
+              <div class="tc-images-strip">
+                ${shown.map(([cid,src]) => `<img class="tc-card-thumb" src="${src}" alt="${cardName(cid)}" title="${cardName(cid)}" loading="lazy" onerror="this.style.display='none'" onclick="event.stopPropagation();openLightbox('${src}','${cid}')">`).join('')}
+                ${more > 0 ? `<span class="tc-images-more" style="cursor:pointer" onclick="event.stopPropagation();switchToCards('${did}')">+${more} more →</span>` : ''}
+              </div></div>`;
+          })()}
+          ${tags ? `<div class="tc-tags">${tags}</div>` : ''}
+          ${edgesHtml ? `<div class="tc-detail-label" style="margin-bottom:6px;margin-top:8px">Genealogy</div><div class="tc-edges">${edgesHtml}</div>` : ''}
+        </div>
+      </div>
+    </div>`;
+  }
+  html += '</div>';
+  el.innerHTML = html;
+}
+
+function toggleCard(el) {
+  const isOpen = el.classList.contains('open');
+  document.querySelectorAll('.timeline-card.open').forEach(c => c.classList.remove('open'));
+  if (!isOpen) el.classList.add('open');
+}
+
+/* ─── genealogy ─────────────────────────────── */
+let genRendered = false;
+
+function renderGenealogyOnce() {
+  if (genRendered) return;
+  genRendered = true;
+  renderGenealogy();
+}
+
+// Manual X positions [0..1] — tuned to separate tradition clusters
+const GEN_X = {
+  "tang-dynasty-c868":           0.50,
+  "mamluk-c1375":                0.50,
+  "spanish-naipes-c1371":        0.28,
+  "charles-vi":                  0.60,
+  "visconti-di-modrone":         0.42,
+  "visconti-sforza":             0.50,
+  "sola-busca":                  0.18,
+  "minchiate-fiorentine":        0.80,
+  "catelin-geoffroy-1557":       0.38,
+  "tarot-de-besancon":           0.72,
+  "tarot-de-marseille-dodal":    0.48,
+  "marseille-conver-1761":       0.55,
+  "etteilla-grand-etteilla-1789":0.22,
+  "golden-dawn-corpus":          0.70,
+  "oswald-wirth-1889":           0.55,
+  "rider-waite-smith":           0.45,
+  "thoth-tarot":                 0.62,
+  "tarot-de-paris-c1600":        0.33,
+  "tarot-de-marseille-noblet":   0.43,
+  "papus-tarot-1889":            0.82,
+  "sforza-brambilla-c1491":      0.36,
+  "jacques-vieville-c1650":      0.27,
+  "court-de-gebelin-1781":       0.32,
+  "etteilla-ii-lismon-c1826":    0.18,
+  // new this batch (30-deck wave)
+  "cary-sheet-c1500":            0.55,
+  "tarocchino-mitelli-1664":     0.88,
+  "eliphas-levi-1855":           0.40,
+  "paul-christian-1863":         0.48,
+  "1jj-swiss-c1831":             0.65,
+  "bota-tarot-1929":             0.32,
+  // next-wave (39-deck)
+  "rosenwald-sheet-c1500":       0.62,
+  "steele-sermon-c1495":         0.12,
+  "pierpont-morgan-bergamo-c1500": 0.47,
+  "ferrara-este-c1470":          0.25,
+  "madenie-1709":                0.52,
+  "grimaud-marteau-1930":        0.60,
+  "aquarian-palladini-1970":     0.40,
+  "hermetic-dowson-1979":        0.58,
+  "motherpeace-1981":            0.25
+};
+
+function renderGenealogy() {
+  const panel = document.getElementById('tab-genealogy');
+
+  panel.innerHTML = `
+    <div class="gen-header">
+      <div class="gen-header-title">Deck Genealogy — 39 nodes · 65 edges</div>
+      <div class="gen-legend" id="gen-legend"></div>
+    </div>
+    <div class="gen-controls">
+      <button class="gen-control-btn" id="gen-fit">Fit to view</button>
+      <button class="gen-control-btn" id="gen-reset">Reset zoom</button>
+      <span class="gen-hint">Scroll to zoom · drag to pan · hover nodes for detail</span>
+    </div>
+    <div class="gen-wrap" id="gen-wrap">
+      <svg id="gen-svg" xmlns="http://www.w3.org/2000/svg"></svg>
+    </div>`;
+
+  // Legend
+  const legendEl = document.getElementById('gen-legend');
+  const usedRels = [...new Set(GENEALOGY.map(e => e.relation))];
+  legendEl.innerHTML = usedRels.map(rel => `
+    <div class="gen-legend-item">
+      <div class="gen-legend-dot" style="background:${edgeColor(rel)}"></div>
+      ${rel.replace(/_/g,' ')}
+    </div>`).join('');
+
+  const wrap = document.getElementById('gen-wrap');
+  const svg = document.getElementById('gen-svg');
+
+  const W = 900, H = 2200;
+  const PAD_TOP = 60, PAD_BOT = 60;
+  const MIN_YEAR = 850, MAX_YEAR = 1970;
+
+  function yearToY(year) {
+    return PAD_TOP + (year - MIN_YEAR) / (MAX_YEAR - MIN_YEAR) * (H - PAD_TOP - PAD_BOT);
+  }
+
+  // Build node positions
+  const nodePos = {};
+  for (const deck of DECKS) {
+    const x = (GEN_X[deck.id] || 0.5) * W;
+    const y = yearToY(deck.date_earliest || MIN_YEAR);
+    nodePos[deck.id] = { x, y, deck };
+  }
+
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  svg.setAttribute('width', W);
+  svg.setAttribute('height', H);
+
+  // Defs: arrowhead markers
+  const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+  const usedColors = [...new Set(Object.values(EDGE_COLORS))];
+  usedColors.forEach((color, i) => {
+    const marker = document.createElementNS('http://www.w3.org/2000/svg', 'marker');
+    marker.setAttribute('id', `arrow-${i}`);
+    marker.setAttribute('markerWidth', '8');
+    marker.setAttribute('markerHeight', '8');
+    marker.setAttribute('refX', '6');
+    marker.setAttribute('refY', '3');
+    marker.setAttribute('orient', 'auto');
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('d', 'M0,0 L0,6 L8,3 z');
+    path.setAttribute('fill', color);
+    path.setAttribute('opacity', '0.8');
+    marker.appendChild(path);
+    defs.appendChild(marker);
+  });
+  const colorToMarker = {};
+  usedColors.forEach((c, i) => colorToMarker[c] = `arrow-${i}`);
+  svg.appendChild(defs);
+
+  // Year axis labels
+  const axisG = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+  for (let yr = 900; yr <= 1950; yr += 50) {
+    const y = yearToY(yr);
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    line.setAttribute('x1', 0); line.setAttribute('x2', W);
+    line.setAttribute('y1', y); line.setAttribute('y2', y);
+    line.setAttribute('stroke', 'rgba(46,37,72,0.35)'); line.setAttribute('stroke-width', '1');
+    axisG.appendChild(line);
+    const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    text.setAttribute('x', 8); text.setAttribute('y', y - 3);
+    text.setAttribute('fill', 'rgba(122,110,138,0.5)');
+    text.setAttribute('font-size', '10');
+    text.setAttribute('font-family', 'IBM Plex Mono, monospace');
+    text.textContent = yr;
+    axisG.appendChild(text);
+  }
+  svg.appendChild(axisG);
+
+  // Edges
+  const edgesG = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+  edgesG.setAttribute('class', 'edges-group');
+  for (const edge of GENEALOGY) {
+    const from = nodePos[edge.from];
+    const to = nodePos[edge.to];
+    if (!from || !to) continue;
+    const color = edgeColor(edge.relation);
+    const marker = colorToMarker[color];
+
+    // Cubic bezier: control points offset horizontally
+    const dx = (to.x - from.x) * 0.4;
+    const dy = (to.y - from.y);
+    const cy1 = from.y + dy * 0.35;
+    const cy2 = to.y - dy * 0.35;
+
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    const d = `M${from.x},${from.y} C${from.x + dx},${cy1} ${to.x - dx},${cy2} ${to.x},${to.y}`;
+    path.setAttribute('d', d);
+    path.setAttribute('stroke', color);
+    path.setAttribute('stroke-width', '1.5');
+    path.setAttribute('fill', 'none');
+    path.setAttribute('opacity', '0.5');
+    if (marker) path.setAttribute('marker-end', `url(#${marker})`);
+    path.setAttribute('data-from', edge.from);
+    path.setAttribute('data-to', edge.to);
+    path.setAttribute('data-rel', edge.relation);
+    path.setAttribute('class', 'gen-edge');
+    edgesG.appendChild(path);
+  }
+  svg.appendChild(edgesG);
+
+  // Nodes
+  const nodesG = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+  nodesG.setAttribute('class', 'nodes-group');
+
+  const tooltip = document.getElementById('gen-tooltip');
+
+  for (const deck of DECKS) {
+    const pos = nodePos[deck.id];
+    const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    g.setAttribute('class', 'gen-node');
+    g.setAttribute('transform', `translate(${pos.x},${pos.y})`);
+    g.setAttribute('cursor', 'pointer');
+    g.setAttribute('data-id', deck.id);
+
+    const survivalColor = {
+      extant: '#c9a84c', fragmentary: '#7b9fa6', documented: '#7a6e8a'
+    }[deck.survival_status] || '#7a6e8a';
+
+    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    circle.setAttribute('r', '7');
+    circle.setAttribute('fill', 'rgba(26,20,40,0.9)');
+    circle.setAttribute('stroke', survivalColor);
+    circle.setAttribute('stroke-width', '1.5');
+    g.appendChild(circle);
+
+    // Label — offset based on X position (avoid edge)
+    const labelX = pos.x > W * 0.6 ? -12 : 12;
+    const anchor = pos.x > W * 0.6 ? 'end' : 'start';
+    const shortName = deck.name.replace('Tarot de Marseille', 'TdM').replace('Tarot', '').replace('  ', ' ').trim();
+    const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    text.setAttribute('x', labelX);
+    text.setAttribute('y', 4);
+    text.setAttribute('fill', '#c8c0d8');
+    text.setAttribute('font-size', '11');
+    text.setAttribute('font-family', 'Cormorant Garamond, Georgia, serif');
+    text.setAttribute('text-anchor', anchor);
+    text.setAttribute('pointer-events', 'none');
+    text.textContent = shortName;
+    g.appendChild(text);
+
+    // Hover
+    g.addEventListener('mouseenter', (ev) => {
+      const { inn, out } = getEdgesForDeck(deck.id);
+      const connected = new Set([...inn.map(e => e.from), ...out.map(e => e.to), deck.id]);
+      // Dim unconnected edges
+      document.querySelectorAll('.gen-edge').forEach(p => {
+        const relevant = connected.has(p.dataset.from) && connected.has(p.dataset.to);
+        p.style.opacity = relevant ? '0.9' : '0.08';
+      });
+      document.querySelectorAll('.gen-node').forEach(n => {
+        n.style.opacity = connected.has(n.dataset.id) ? '1' : '0.25';
+      });
+      // Tooltip
+      document.getElementById('tt-name').textContent = deck.name;
+      document.getElementById('tt-date').textContent = deck.date_display;
+      document.getElementById('tt-sig').textContent = (deck.significance || '').slice(0, 160) + '\u2026';
+      const ttImg = document.getElementById('tt-img');
+      const deckImgs = MANIFEST[deck.id];
+      if (deckImgs) {
+        const firstKey = Object.keys(deckImgs).find(k => k.startsWith('major-00') || k.startsWith('major-01')) || Object.keys(deckImgs)[0];
+        ttImg.src = deckImgs[firstKey];
+        ttImg.style.display = 'block';
+      } else {
+        ttImg.style.display = 'none';
+      }
+      tooltip.classList.add('visible');
+    });
+    g.addEventListener('mousemove', (ev) => {
+      const r = wrap.getBoundingClientRect();
+      let tx = ev.clientX - r.left + 14;
+      let ty = ev.clientY - r.top + 14;
+      if (tx + 280 > r.width) tx = ev.clientX - r.left - 280;
+      tooltip.style.left = tx + 'px';
+      tooltip.style.top = ty + 'px';
+    });
+    g.addEventListener('mouseleave', () => {
+      document.querySelectorAll('.gen-edge').forEach(p => p.style.opacity = '0.5');
+      document.querySelectorAll('.gen-node').forEach(n => n.style.opacity = '1');
+      tooltip.classList.remove('visible');
+    });
+
+    nodesG.appendChild(g);
+  }
+  svg.appendChild(nodesG);
+
+  // Pan + zoom
+  let scale = 1, ox = 0, oy = 0;
+  let dragging = false, startX, startY, startOx, startOy;
+
+  function applyTransform() {
+    svg.style.transform = `translate(${ox}px,${oy}px) scale(${scale})`;
+    svg.style.transformOrigin = '0 0';
+  }
+
+  wrap.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    const factor = e.deltaY < 0 ? 1.1 : 0.9;
+    const rect = wrap.getBoundingClientRect();
+    const mx = e.clientX - rect.left;
+    const my = e.clientY - rect.top;
+    ox = mx - factor * (mx - ox);
+    oy = my - factor * (my - oy);
+    scale = Math.max(0.2, Math.min(4, scale * factor));
+    applyTransform();
+  }, { passive: false });
+
+  wrap.addEventListener('mousedown', (e) => {
+    dragging = true; startX = e.clientX; startY = e.clientY;
+    startOx = ox; startOy = oy;
+  });
+  window.addEventListener('mousemove', (e) => {
+    if (!dragging) return;
+    ox = startOx + e.clientX - startX;
+    oy = startOy + e.clientY - startY;
+    applyTransform();
+  });
+  window.addEventListener('mouseup', () => { dragging = false; });
+
+  document.getElementById('gen-reset').addEventListener('click', () => {
+    scale = 1; ox = 0; oy = 0; applyTransform();
+  });
+  document.getElementById('gen-fit').addEventListener('click', () => {
+    const rect = wrap.getBoundingClientRect();
+    scale = Math.min(rect.width / W, rect.height / H) * 0.95;
+    ox = (rect.width - W * scale) / 2;
+    oy = 20;
+    applyTransform();
+  });
+
+  // Initial fit
+  setTimeout(() => document.getElementById('gen-fit').click(), 50);
+}
+
+/* ─── witnesses ─────────────────────────────── */
+function renderWitnesses() {
+  const el = document.getElementById('tab-witnesses');
+
+  const deckIds = [...new Set(WITNESSES.map(w => w.deck_id))].sort();
+  const deckNames = {};
+  for (const d of DECKS) deckNames[d.id] = d.name;
+
+  let html = `
+    <p class="wit-intro">Documentary evidence of specific cards crossing deck boundaries — borrowings, inversions, and iconographic inheritance catalogued with confidence ratings.</p>
+    <div class="wit-filters">
+      <span class="wit-filter-label">Deck</span>
+      <select class="wit-filter-select" id="wit-deck-filter">
+        <option value="">All decks</option>
+        ${deckIds.map(id => `<option value="${id}">${deckNames[id] || id}</option>`).join('')}
+      </select>
+      <span class="wit-filter-label" style="margin-left:12px">Confidence</span>
+      <select class="wit-filter-select" id="wit-conf-filter">
+        <option value="">All</option>
+        <option value="confirmed">Confirmed</option>
+        <option value="probable">Probable</option>
+        <option value="possible">Possible</option>
+        <option value="theoretical">Theoretical</option>
+      </select>
+      <span class="wit-count" id="wit-count">${WITNESSES.length} records</span>
+    </div>
+    <div class="wit-table-wrap">
+      <table class="wit-table">
+        <thead><tr>
+          <th class="wit-img-cell"></th>
+          <th>Deck</th>
+          <th>Card</th>
+          <th>Description</th>
+          <th>Confidence</th>
+          <th>Notes</th>
+        </tr></thead>
+        <tbody id="wit-tbody"></tbody>
+      </table>
+    </div>`;
+  el.innerHTML = html;
+
+  function renderRows() {
+    const deckF = document.getElementById('wit-deck-filter').value;
+    const confF = document.getElementById('wit-conf-filter').value;
+    const rows = WITNESSES.filter(w =>
+      (!deckF || w.deck_id === deckF) &&
+      (!confF || w.confidence === confF)
+    );
+    document.getElementById('wit-count').textContent = rows.length + ' records';
+    document.getElementById('wit-tbody').innerHTML = rows.map(w => {
+      const imgSrc = MANIFEST[w.deck_id] && MANIFEST[w.deck_id][w.card_id];
+      const imgCell = imgSrc
+        ? `<img class="wit-thumb" src="${imgSrc}" alt="" loading="lazy" onerror="this.style.display='none'">`
+        : '';
+      return `<tr>
+        <td class="wit-img-cell">${imgCell}</td>
+        <td class="wit-deck-name">${deckNames[w.deck_id] || w.deck_id}</td>
+        <td class="wit-card-id">${w.card_id}</td>
+        <td class="wit-desc">${w.description || '—'}</td>
+        <td class="conf-${w.confidence}">${w.confidence}</td>
+        <td class="wit-notes">${w.notes || ''}</td>
+      </tr>`;
+    }).join('');
+  }
+
+  document.getElementById('wit-deck-filter').addEventListener('change', renderRows);
+  document.getElementById('wit-conf-filter').addEventListener('change', renderRows);
+  renderRows();
+}
+
+/* ─── people ─────────────────────────────────── */
+function personInitials(name) {
+  return name.replace(/\([^)]*\)/g, '')
+    .split(/[\s&]+/).filter(Boolean).slice(0, 2)
+    .map(w => w[0]).join('').toUpperCase();
+}
+
+async function fetchPortrait(slug) {
+  const cacheKey = 'tarocchi-portrait-' + slug;
+  try {
+    const cached = localStorage.getItem(cacheKey);
+    if (cached !== null) return cached || null;
+  } catch(e){}
+  try {
+    const res = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${slug}`, {
+      headers: { 'Accept': 'application/json' }
+    });
+    if (!res.ok) throw new Error('status ' + res.status);
+    const data = await res.json();
+    const src = (data.thumbnail && data.thumbnail.source) || (data.originalimage && data.originalimage.source) || '';
+    try { localStorage.setItem(cacheKey, src); } catch(e){}
+    return src || null;
+  } catch(e) {
+    try { localStorage.setItem(cacheKey, ''); } catch(_){}
+    return null;
+  }
+}
+
+function renderPeople() {
+  const el = document.getElementById('tab-people');
+  el.innerHTML = `
+    <p class="people-intro">The individuals who shaped tarot's form, meaning, and reach — from anonymous Milanese court painters to occultist visionaries to midcentury filmmakers who restored a 250-year-old woodblock tradition.</p>
+    <div class="people-grid">
+      ${PEOPLE.map((p, i) => `
+        <div class="person-card">
+          <div class="person-portrait ${p.wikipedia ? 'loading' : ''}" data-portrait-idx="${i}" data-wiki="${p.wikipedia || ''}">
+            <span class="person-portrait-initials">${personInitials(p.name)}</span>
+          </div>
+          <div class="person-body">
+            <div class="person-name">${p.name}</div>
+            <div class="person-dates">${p.dates}</div>
+            <div class="person-role">${p.role}</div>
+            <div class="person-bio">${p.bio}</div>
+            <div class="person-decks">
+              ${p.decks.map(d => `<span class="person-deck-tag">${d}</span>`).join('')}
+            </div>
+          </div>
+        </div>`).join('')}
+    </div>`;
+
+  // Lazy-load portraits (sequential to stay polite to Wikipedia)
+  el.querySelectorAll('.person-portrait[data-wiki]').forEach(async node => {
+    const slug = node.dataset.wiki;
+    if (!slug) { node.classList.remove('loading'); return; }
+    const src = await fetchPortrait(slug);
+    node.classList.remove('loading');
+    if (!src) return;
+    const img = document.createElement('img');
+    img.alt = PEOPLE[+node.dataset.portraitIdx].name;
+    img.loading = 'lazy';
+    img.onload = () => {
+      const initials = node.querySelector('.person-portrait-initials');
+      if (initials) initials.remove();
+    };
+    img.onerror = () => { img.remove(); };
+    img.src = src;
+    node.appendChild(img);
+  });
+}
+
+/* ─── cards ─────────────────────────────────── */
+let cardsRendered = false;
+
+function renderCardsOnce() {
+  if (cardsRendered) return;
+  cardsRendered = true;
+  renderCards();
+}
+
+function renderCards(jumpToDeck) {
+  const el = document.getElementById('tab-cards');
+  const deckIds = Object.keys(MANIFEST).filter(id => Object.keys(MANIFEST[id]).length > 0);
+  const deckNames = {};
+  for (const d of DECKS) deckNames[d.id] = d.name;
+
+  el.innerHTML = `
+    <div class="cards-header">
+      <div class="cards-header-title">Card Browser</div>
+      <select class="cards-deck-select" id="cards-deck-sel">
+        ${deckIds.map(id => `<option value="${id}">${deckNames[id] || id}</option>`).join('')}
+      </select>
+      <span id="cards-note" class="cards-note" style="display:none"></span>
+      <span class="cards-count" id="cards-count"></span>
+    </div>
+    <div class="cards-filter-row">
+      <input class="cards-search" id="cards-search" type="search" placeholder="Filter cards\u2026">
+      <select class="cards-suit-select" id="cards-suit-sel">
+        <option value="">All suits</option>
+        <option value="major">Major Arcana</option>
+        <option value="wands">Wands</option>
+        <option value="cups">Cups</option>
+        <option value="swords">Swords</option>
+        <option value="pents">Pentacles</option>
+      </select>
+    </div>
+    <div class="cards-grid" id="cards-grid"></div>`;
+
+  const sel = document.getElementById('cards-deck-sel');
+  if (jumpToDeck && deckIds.includes(jumpToDeck)) sel.value = jumpToDeck;
+
+  function renderGrid() {
+    const deckId = sel.value;
+    const q = document.getElementById('cards-search').value.toLowerCase();
+    const suit = document.getElementById('cards-suit-sel').value;
+    const imgs = MANIFEST[deckId] || {};
+    let entries = Object.entries(imgs);
+    if (suit) entries = entries.filter(([id]) => id.startsWith(suit));
+    if (q)    entries = entries.filter(([id]) => id.includes(q) || cardName(id).toLowerCase().includes(q));
+
+    const note = DECK_NOTES[deckId];
+    const noteEl = document.getElementById('cards-note');
+    if (note) { noteEl.textContent = note; noteEl.style.display = ''; }
+    else noteEl.style.display = 'none';
+
+    document.getElementById('cards-count').textContent = entries.length + ' cards';
+    document.getElementById('cards-grid').innerHTML = entries.map(([cardId, src]) =>
+      `<img class="cards-grid-img" src="${src}" alt="${cardName(cardId)}" title="${cardName(cardId)}"
+        loading="lazy" onerror="this.style.opacity='0.2'"
+        data-id="${cardId}" data-src="${src}">`
+    ).join('');
+    document.querySelectorAll('.cards-grid-img').forEach(img => {
+      img.addEventListener('click', () => openLightbox(img.dataset.src, img.dataset.id));
+    });
+  }
+
+  renderGrid();
+  sel.addEventListener('change', renderGrid);
+  document.getElementById('cards-search').addEventListener('input', renderGrid);
+  document.getElementById('cards-suit-sel').addEventListener('change', renderGrid);
+}
+
+function openLightbox(src, cardId) {
+  document.getElementById('card-lb-img').src = src;
+  document.getElementById('card-lb-name').textContent = cardName(cardId);
+  document.getElementById('card-lb-id').textContent = cardId;
+  const lbtn = document.getElementById('card-lb-lineage');
+  if (lbtn) {
+    // Only offer lineage jump for canonical card ids (major-NN / suit-NN), not sequential card-NNN scans
+    const jumpable = /^(major|wands|cups|swords|pents|pentacles)-\d{2}$/.test(cardId);
+    lbtn.style.display = jumpable ? '' : 'none';
+    lbtn.onclick = () => {
+      document.getElementById('card-lightbox').classList.remove('open');
+      switchToTab('lineage');
+      setTimeout(() => { window.__lineageJump = cardId; renderLineage(cardId); }, 50);
+    };
+  }
+  document.getElementById('card-lightbox').classList.add('open');
+}
+
+document.addEventListener('click', (e) => {
+  const lb = document.getElementById('card-lightbox');
+  if (!lb) return;
+  if (e.target === lb || e.target.id === 'card-lb-close') {
+    lb.classList.remove('open');
+  }
+});
+
+const DECK_NOTES = {
+  'oswald-wirth-1889': 'Majors only',
+  'marseille-conver-1761': 'Majors + partial minors',
+};
+
+function switchToCards(deckId) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelector('[data-tab="cards"]').classList.add('active');
+  document.getElementById('tab-cards').classList.add('active');
+  cardsRendered = true;
+  renderCards(deckId);
+}
+
+/* ─── lineage ─────────────────────────────── */
+let lineageRendered = false;
+function renderLineageOnce() {
+  if (lineageRendered) return;
+  lineageRendered = true;
+  renderLineage(window.__lineageJump || 'major-13'); // Death — crowd favorite
+}
+
+function eraOf(year) {
+  if (!year) return 'Undated';
+  if (year < 1500) return 'Origins (pre-1500)';
+  if (year < 1650) return 'Renaissance (1500–1649)';
+  if (year < 1780) return 'Marseille era (1650–1779)';
+  if (year < 1880) return 'Occult revival (1780–1879)';
+  if (year < 1920) return 'Golden Dawn & RWS (1880–1919)';
+  return 'Modern (1920+)';
+}
+
+function formatDeckDate(d) {
+  if (!d.date_earliest) return '?';
+  if (d.date_latest && d.date_latest !== d.date_earliest) return `${d.date_earliest}–${d.date_latest}`;
+  return String(d.date_earliest);
+}
+
+function renderLineage(cardId) {
+  const el = document.getElementById('tab-lineage');
+
+  // Which card IDs actually have at least 2 images across decks?
+  const cardHits = {}; // cid → [deckId, ...]
+  for (const [deckId, cards] of Object.entries(MANIFEST)) {
+    for (const cid of Object.keys(cards)) {
+      (cardHits[cid] ||= []).push(deckId);
+    }
+  }
+
+  // Canonical cards only, sorted by rank
+  const rank = (cid) => {
+    const [suit, num] = cid.split('-');
+    const order = { major: 0, wands: 1, cups: 2, swords: 3, pents: 4, pentacles: 4 };
+    return (order[suit] ?? 9) * 100 + parseInt(num || '0', 10);
+  };
+  const optionIds = Object.keys(cardHits)
+    .filter(cid => /^(major|wands|cups|swords|pents|pentacles)-\d{2}$/.test(cid))
+    .sort((a, b) => rank(a) - rank(b));
+
+  const currentId = optionIds.includes(cardId) ? cardId : (optionIds[0] || 'major-13');
+
+  el.innerHTML = `
+    <div class="lineage-header">
+      <div class="lineage-header-title">Lineage</div>
+      <select class="lineage-card-select" id="lineage-card-sel">
+        ${optionIds.map(cid => {
+          const n = cardHits[cid].length;
+          return `<option value="${cid}" ${cid === currentId ? 'selected' : ''}>${cardName(cid)} — ${n} deck${n > 1 ? 's' : ''}</option>`;
+        }).join('')}
+      </select>
+      <span class="lineage-count" id="lineage-count"></span>
+    </div>
+    <div class="lineage-intro">
+      The same card, rendered by different hands across eight centuries. Each tile is a surviving
+      artifact from one deck, arranged chronologically so you can trace iconographic descent.
+    </div>
+    <div class="lineage-strip" id="lineage-strip"></div>`;
+
+  const sel = document.getElementById('lineage-card-sel');
+  sel.addEventListener('change', () => renderLineageStrip(sel.value));
+  renderLineageStrip(currentId);
+}
+
+function renderLineageStrip(cardId) {
+  const strip = document.getElementById('lineage-strip');
+  const countEl = document.getElementById('lineage-count');
+  if (!strip) return;
+
+  // Gather decks that have this card, in chronological order
+  const rows = [];
+  for (const d of DECKS) {
+    const src = MANIFEST[d.id] && MANIFEST[d.id][cardId];
+    if (src) rows.push({ deck: d, src });
+  }
+
+  countEl.textContent = `${rows.length} witness${rows.length === 1 ? '' : 'es'}`;
+
+  if (!rows.length) {
+    strip.innerHTML = `<div class="lineage-empty">No surviving images of ${cardName(cardId)} in the current corpus.</div>`;
+    return;
+  }
+
+  // Group by era, inject dividers
+  let lastEra = null;
+  const chunks = [];
+  for (const r of rows) {
+    const era = eraOf(r.deck.date_earliest);
+    if (era !== lastEra) {
+      chunks.push(`<div class="lineage-era-divider">${era}</div>`);
+      lastEra = era;
+    }
+    const origin = (r.deck.origin_city || r.deck.origin_region || r.deck.origin_country || '').trim();
+    chunks.push(`
+      <div class="lineage-tile" data-src="${r.src}" data-cid="${cardId}">
+        <div class="lineage-tile-img-wrap">
+          <img class="lineage-tile-img" src="${r.src}" alt="${cardName(cardId)} — ${r.deck.name}" loading="lazy" onerror="this.style.opacity='0.15'">
+        </div>
+        <div class="lineage-tile-meta">
+          <div class="lineage-tile-date">${formatDeckDate(r.deck)}</div>
+          <div class="lineage-tile-name">${r.deck.name}</div>
+          ${origin ? `<div class="lineage-tile-origin">${origin}</div>` : ''}
+        </div>
+      </div>`);
+  }
+  strip.innerHTML = chunks.join('');
+  strip.querySelectorAll('.lineage-tile').forEach(t => {
+    t.addEventListener('click', () => openLightbox(t.dataset.src, t.dataset.cid));
+  });
+}
+
+/* ─── boot ─────────────────────────────────── */
+// Theme (shared with reader via localStorage key 'tarocchi-theme')
+function setTheme(theme, persist = true) {
+  const root = document.documentElement;
+  if (theme === 'light') root.setAttribute('data-theme', 'light');
+  else root.removeAttribute('data-theme');
+  const icon = document.getElementById('theme-icon');
+  if (icon) icon.textContent = theme === 'light' ? '☾' : '☀';
+  if (persist) { try { localStorage.setItem('tarocchi-theme', theme); } catch(e){} }
+}
+function toggleTheme() {
+  const cur = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+  setTheme(cur === 'light' ? 'dark' : 'light');
+}
+(function applyStoredTheme() {
+  let t = 'dark';
+  try { t = localStorage.getItem('tarocchi-theme') || 'dark'; } catch(e){}
+  setTheme(t, false);
+})();
+
+init().catch(err => {
+  document.getElementById('tab-timeline').innerHTML =
+    `<div style="padding:40px;color:var(--muted);font-family:var(--font-mono);font-size:12px">
+    Error loading data: ${err.message}<br><br>
+    Make sure you're serving this page from an HTTP server (not file://).
+    </div>`;
+});
+</script>
+</body>
+</html>

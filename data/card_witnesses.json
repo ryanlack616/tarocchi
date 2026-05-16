@@ -1,0 +1,1714 @@
+{
+  "schema_version": "1.0",
+  "notes": "Sparse witness table. Records the presence, absence, or cross-deck borrowing of specific cards. Absent entries = unknown/unrecorded. card_id uses cards.json IDs (pentacles = historical coins). confidence: confirmed|probable|possible|disputed.",
+  "witnesses": [
+    {
+      "_comment": "═══ Visconti di Modrone — identified missing cards ═══"
+    },
+    {
+      "deck_id": "visconti-di-modrone",
+      "card_id": "major-15",
+      "present": false,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The Devil definitively absent. Possibly never painted; possibly lost; possibly censored. Absence in multiple early decks suggests potential non-inclusion rather than loss."
+    },
+    {
+      "deck_id": "visconti-di-modrone",
+      "card_id": "major-16",
+      "present": false,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The Tower definitively absent. Like The Devil, its absence in multiple early Visconti decks is noteworthy — these are the two most explicitly 'dark' trumps."
+    },
+    {
+      "deck_id": "visconti-di-modrone",
+      "card_id": "major-17",
+      "present": false,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The Star absent from Visconti di Modrone."
+    },
+    {
+      "deck_id": "visconti-di-modrone",
+      "card_id": "major-18",
+      "present": false,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The Moon absent from Visconti di Modrone."
+    },
+    {
+      "deck_id": "visconti-di-modrone",
+      "card_id": "major-19",
+      "present": false,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The Sun absent from Visconti di Modrone."
+    },
+    {
+      "deck_id": "visconti-di-modrone",
+      "card_id": "major-21",
+      "present": false,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The World absent from Visconti di Modrone."
+    },
+    {
+      "deck_id": "visconti-di-modrone",
+      "card_id": "pentacles-12",
+      "present": false,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "Knight of Coins (pentacles-12) absent. Historically 'coins' suit = pentacles in cards.json."
+    },
+    {
+      "_comment": "═══ Visconti-Sforza — identified missing cards ═══"
+    },
+    {
+      "deck_id": "visconti-sforza",
+      "card_id": "major-15",
+      "present": false,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The Devil absent from the Visconti-Sforza. With The Tower also missing, this is a consistent pattern across the two major Visconti commissions — possibly intentional exclusion, not accidental loss."
+    },
+    {
+      "deck_id": "visconti-sforza",
+      "card_id": "major-16",
+      "present": false,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The Tower absent from the Visconti-Sforza. See Devil note above. No The Devil + no The Tower across both the VdM and VS is the strongest evidence for deliberate aristocratic censorship of the darkest trumps."
+    },
+    {
+      "_comment": "═══ Sola-Busca → Rider-Waite-Smith: documented iconographic borrowings ═══"
+    },
+    {
+      "deck_id": "rider-waite-smith",
+      "card_id": "wands-10",
+      "present": true,
+      "borrowing_source": "sola-busca",
+      "confidence": "confirmed",
+      "notes": "Pamela Colman Smith's Ten of Wands (figure carrying bundle of heavy wands) directly mirrors the Sola-Busca depiction of Nembrot carrying poles. The posture, burden, and walking figure are virtually identical. One of the most clearly documented RWS←SB borrowings."
+    },
+    {
+      "deck_id": "rider-waite-smith",
+      "card_id": "cups-11",
+      "present": true,
+      "borrowing_source": "sola-busca",
+      "confidence": "confirmed",
+      "notes": "The Page of Cups — fish leaping from a cup the figure holds — directly echoes the Sola-Busca figure holding a vessel from which a fish-like creature emerges. Smith viewed photographs of the Sola-Busca at the British Museum c. 1909, the same year she produced the RWS."
+    },
+    {
+      "deck_id": "rider-waite-smith",
+      "card_id": "wands-09",
+      "present": true,
+      "borrowing_source": "sola-busca",
+      "confidence": "probable",
+      "notes": "Nine of Wands — a bandaged, wary figure gripping a staff — parallels the Sola-Busca nine of batons showing a wounded or battle-weary warrior. The defensive posture and wrapped head appear in both."
+    },
+    {
+      "deck_id": "rider-waite-smith",
+      "card_id": "swords-08",
+      "present": true,
+      "borrowing_source": "sola-busca",
+      "confidence": "probable",
+      "notes": "Eight of Swords — a bound, blindfolded figure surrounded by upright swords — echoes the Sola-Busca eight of swords showing a constrained figure amidst blades. The encirclement motif is common to both."
+    },
+    {
+      "deck_id": "rider-waite-smith",
+      "card_id": "cups-07",
+      "present": true,
+      "borrowing_source": "sola-busca",
+      "confidence": "probable",
+      "notes": "Seven of Cups — a figure contemplating seven vision-filled cups floating in clouds — parallels the Sola-Busca seven of cups showing a dreaming or visionary figure. The floating vessels and upward gaze are shared."
+    },
+    {
+      "deck_id": "rider-waite-smith",
+      "card_id": "swords-03",
+      "present": true,
+      "borrowing_source": "sola-busca",
+      "confidence": "probable",
+      "notes": "Three of Swords — three swords piercing a heart or central form — appears in both decks. The geometric directness of three swords meeting at a central point is shared iconography."
+    },
+    {
+      "deck_id": "rider-waite-smith",
+      "card_id": "cups-02",
+      "present": true,
+      "borrowing_source": "sola-busca",
+      "confidence": "possible",
+      "notes": "Two of Cups — two figures facing each other with a caduceus-like figure between them — may derive from a Sola-Busca two of cups showing paired figures. Less directly documented than the Ten of Wands or Page of Cups borrowings."
+    },
+    {
+      "deck_id": "rider-waite-smith",
+      "card_id": "wands-02",
+      "present": true,
+      "borrowing_source": "sola-busca",
+      "confidence": "possible",
+      "notes": "Two of Wands — a figure holding a globe, looking out from a parapet — may echo a Sola-Busca figure in a similar commanding posture. Possible borrowing; not as thoroughly documented as the Ten of Wands."
+    },
+    {
+      "_comment": "═══ Sola-Busca: fully illustrated minor arcana (the innovation) ═══"
+    },
+    {
+      "deck_id": "sola-busca",
+      "card_id": "wands-01",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "Sola-Busca Ace of Batons — fully illustrated with a narrative figure, unprecedented in any prior tarot. This pip-illustration approach was the specific innovation Pamela Colman Smith adopted for RWS, 400 years later."
+    },
+    {
+      "deck_id": "sola-busca",
+      "card_id": "cups-01",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "Sola-Busca Ace of Cups — narrative figure illustration. All 56 Sola-Busca minor arcana have full scenes rather than simple pip arrangements."
+    },
+    {
+      "_comment": "═══ Tarot de Marseille → RWS: structural departures (reaction_against) ═══"
+    },
+    {
+      "deck_id": "rider-waite-smith",
+      "card_id": "major-08",
+      "present": true,
+      "borrowing_source": "tarot-de-marseille-dodal",
+      "confidence": "confirmed",
+      "notes": "In the Marseille tradition, card VIII is Justice (woman with scales/sword). Waite deliberately swapped VIII and XI — Strength becomes VIII in RWS. This is Waite's most visible structural departure from Marseille and his Golden Dawn attribution (Leo = Strength at VIII)."
+    },
+    {
+      "deck_id": "rider-waite-smith",
+      "card_id": "major-11",
+      "present": true,
+      "borrowing_source": "tarot-de-marseille-dodal",
+      "confidence": "confirmed",
+      "notes": "In the Marseille tradition, card XI is Strength (woman with lion). Waite moved it to XI to make Justice XI — reversing the Marseille order. Crowley's Thoth deck restores the Marseille order (Strength/Lust at XI, Justice/Adjustment at VIII)."
+    },
+    {
+      "_comment": "═══ Golden Dawn corpus → RWS/Thoth: specific attributions implemented ═══"
+    },
+    {
+      "deck_id": "rider-waite-smith",
+      "card_id": "major-00",
+      "present": true,
+      "borrowing_source": "golden-dawn-corpus",
+      "confidence": "confirmed",
+      "notes": "The Fool's attribution to Aleph (first Hebrew letter, value 0) and to Air comes directly from the Golden Dawn 'Book T.' Waite assigned The Fool to position 0 — before all other cards — implementing the GD attribution that The Fool precedes the numbered sequence."
+    },
+    {
+      "deck_id": "thoth-tarot",
+      "card_id": "major-00",
+      "present": true,
+      "borrowing_source": "golden-dawn-corpus",
+      "confidence": "confirmed",
+      "notes": "Crowley's Fool (renamed 'The Fool' but also 'The Spirit of Aethyr') implements the same GD Hebrew-letter attribution (Aleph = Air) as RWS. The visual treatment differs radically — Crowley's Fool is a radiant cosmic figure, not a cliff-edge youth."
+    },
+    {
+      "_comment": "═══ Tarot de Besancon — Juno/Jupiter substitutions ═══"
+    },
+    {
+      "deck_id": "tarot-de-besancon",
+      "card_id": "major-02",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "Trump II in the Besancon tradition depicts Juno (with peacock, scepter) rather than La Papesse (The High Priestess / Popess). Identical position in sequence; entirely different iconography. The substitution was made to avoid Catholic clergy imagery for Protestant Swiss and German markets."
+    },
+    {
+      "deck_id": "tarot-de-besancon",
+      "card_id": "major-05",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "Trump V in the Besancon tradition depicts Jupiter (with thunderbolt, eagle) rather than Le Pape (The Pope / Hierophant). The two substitutions together — Juno for Papesse, Jupiter for Pope — form a consistent classical-mythology replacement of Catholic hierarchy."
+    },
+    {
+      "_comment": "═══ Marseille Conver 1761 — structural ordering ═══"
+    },
+    {
+      "deck_id": "marseille-conver-1761",
+      "card_id": "major-08",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "In the Marseille tradition (including Conver 1761), trump VIII is Justice (La Justice — woman with scales and sword). This is the pre-RWS ordering. Waite swapped Justice and Strength, making Strength = VIII in RWS. The Conver placement is 'correct' in the Marseille system."
+    },
+    {
+      "deck_id": "marseille-conver-1761",
+      "card_id": "major-11",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "In the Conver 1761 (and Marseille tradition generally), trump XI is Strength (La Force — woman taming a lion). Waite moved Strength to VIII, making Justice XI. The Conver serves as the clear reference for the pre-Waite ordering."
+    },
+    {
+      "_comment": "═══ Oswald Wirth 1889 — esoteric integrations ═══"
+    },
+    {
+      "deck_id": "oswald-wirth-1889",
+      "card_id": "major-00",
+      "present": true,
+      "borrowing_source": "tarot-de-marseille-dodal",
+      "confidence": "confirmed",
+      "notes": "The Fool in Wirth's 1889 deck is explicitly card 0 — positioned before card I (The Magician). Wirth adopted Levi's attribution of the Fool to Aleph (first Hebrew letter, value 0) and to Air. The Fool's zero-position was the specific innovation Wirth took from French occultism and passed to Waite."
+    },
+    {
+      "deck_id": "oswald-wirth-1889",
+      "card_id": "major-01",
+      "present": true,
+      "borrowing_source": "tarot-de-marseille-dodal",
+      "confidence": "confirmed",
+      "notes": "The Magician (Le Bateleur) retains the Marseille composition but has the lemniscate (infinity symbol) added above his head — the first appearance of this detail, later prominent in the RWS Magician. This specific addition may have traveled via Wirth's influence."
+    },
+    {
+      "deck_id": "oswald-wirth-1889",
+      "card_id": "major-11",
+      "present": true,
+      "borrowing_source": "tarot-de-marseille-dodal",
+      "confidence": "confirmed",
+      "notes": "Wirth retains the Marseille ordering: Strength at XI, Justice at VIII. This aligns with Levi's system (Leo = Strength at position XI). The Wirth deck thus contradicts the later GD/Waite VIII-XI swap — Wirth was closer to Marseille on this point."
+    },
+    {
+      "_comment": "Jacques Viéville c. 1643–1664 — iconographic anomalies vs Marseille standard"
+    },
+    {
+      "deck_id": "jacques-vieville-c1650",
+      "card_id": "major-18",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "La Lune in the Viéville shows a pastoral haymaker harvesting grain — no crayfish, no towers, no dogs/wolves. The lunar crescent and stars appear above the landscape but the entire lower composition is replaced with a rural harvest scene. The most anomalous trump image in any pre-esoteric woodblock tarot; the reason for this iconographic substitution has not been satisfactorily explained."
+    },
+    {
+      "deck_id": "jacques-vieville-c1650",
+      "card_id": "major-07",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "Le Chariot in the Viéville is pulled by two right-facing naturalistic horses. Standard Marseille chariots face left and use sphinxes (Dodal, Conver) or stylized animals. The right-facing orientation with naturalistic horses suggests a different Italian or Flemish graphic source than the Lyon/Marseille cardmakers used."
+    },
+    {
+      "deck_id": "jacques-vieville-c1650",
+      "card_id": "major-00",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "Le Mat in the Viéville is a bells-and-motley court jester type, consistent with a French theatrical/carnival tradition. The Noblet Fool plays a hurdy-gurdy; the Marseille Fool is bitten by a dog or animal. The Viéville Fool's jester costume is distinctive."
+    },
+    {
+      "_comment": "Jean Noblet c. 1650 — Paris-tradition iconographic variants"
+    },
+    {
+      "deck_id": "tarot-de-marseille-noblet",
+      "card_id": "major-21",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "Le Monde in the Noblet shows a nude androgynous dancer inside a mandorla-shaped wreath, closer to the Italian Renaissance tradition than later Marseille versions where the figure is clothed or semi-clothed. The mandorla form (almond-shaped aureole) connects to religious iconography absent from the Lyon/Marseille program."
+    },
+    {
+      "deck_id": "tarot-de-marseille-noblet",
+      "card_id": "major-00",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "Le Mat in the Noblet plays a hurdy-gurdy (or rebec) and faces right. The Marseille Fool (Dodal, Conver) typically faces left and carries a staff with a bundle. The hurdy-gurdy detail may reflect a specific French popular iconographic tradition for the fool-musician."
+    },
+    {
+      "deck_id": "tarot-de-marseille-noblet",
+      "card_id": "major-17",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "L'Étoile in the Noblet shows three nude figures rather than the single figure of Marseille standard. The additional figures may represent a different Italian allegorical source or a Paris-tradition expansion of the astral imagery."
+    },
+    {
+      "_comment": "Court de Gébelin 1781 — first published interpretations of specific cards"
+    },
+    {
+      "deck_id": "court-de-gebelin-1781",
+      "card_id": "major-00",
+      "present": false,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "De Gébelin identified the unnumbered Fool as a figure standing outside the main sequence — the first published argument for the Fool's special status. The Comte de Mellet's companion essay connected the Fool to 0 and to the Hebrew letter Shin. This is the intellectual origin of the 'Fool as zero' tradition adopted by all esoteric tarot."
+    },
+    {
+      "deck_id": "court-de-gebelin-1781",
+      "card_id": "major-01",
+      "present": false,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "De Gébelin identified the Magician (Le Bateleur) as a figure of wisdom and first-principles — contra the vernacular reading as a conjurer or mountebank. This reinterpretation elevated the Magician from a folk-humor image to a position of esoteric dignity, which Wirth and Waite both subsequently built on."
+    },
+    {
+      "_comment": "Etteilla II Lismon c. 1826-1843 — inheritance of Alliette's innovations"
+    },
+    {
+      "deck_id": "etteilla-ii-lismon-c1826",
+      "card_id": "major-00",
+      "present": true,
+      "borrowing_source": "etteilla-grand-etteilla-1789",
+      "confidence": "confirmed",
+      "notes": "Card 1 (the Querent, called 'Etteilla') retains Alliette's innovation of making the first card represent the seeker rather than a trump archetype. The Lismon preserves this wholesale. On-card keywords printed in both upright and reversed orientations continue Alliette's practice."
+    },
+    {
+      "deck_id": "etteilla-ii-lismon-c1826",
+      "card_id": "major-02",
+      "present": true,
+      "borrowing_source": "etteilla-grand-etteilla-1789",
+      "confidence": "confirmed",
+      "notes": "The pseudo-Egyptian imagery on the trump cards (pyramids, ibis, ankh-derived forms) is inherited from Alliette and retained in the Lismon with modest simplification of the engraving. The Lismon thus documents the commercial transmission of the Etteilla Egyptian vocabulary, confirming it was the selling point of the system."
+    },
+    {
+      "_comment": "═══ Cary Sheet c. 1500 — earliest surviving Marseille Type II evidence ═══"
+    },
+    {
+      "deck_id": "cary-sheet-c1500",
+      "card_id": "major-18",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "La Lune on the Cary Sheet shows the earliest surviving Marseille Type II composition: a crescent moon with two human figures (astronomers/astrologers) measuring or charting the sky below. This composition pre-dates the canonical Marseille decks (Dodal, Conver) by nearly 200 years — confirming that Marseille iconography existed as a printed tradition well before the surviving printed decks."
+    },
+    {
+      "deck_id": "cary-sheet-c1500",
+      "card_id": "major-17",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "L'Étoile on the Cary Sheet shows a standing female figure beneath stars — a clear prototype of the Marseille L'Étoile composition (nude figure kneeling by water, pouring, stars above). The Cary Sheet version is closer in posture to the Noblet variant, suggesting the Paris and Lyon traditions branched from a shared early-print source."
+    },
+    {
+      "deck_id": "cary-sheet-c1500",
+      "card_id": "major-21",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "probable",
+      "notes": "The World / Le Monde on the Cary Sheet shows a central figure within a mandorla-like wreath — consistent with the Noblet Le Monde composition (nude dancer in almond-shaped aureole) rather than the later clothed Marseille variants. Evidence that the mandorla form is older than Noblet, descending from the early Italian print tradition."
+    },
+    {
+      "_comment": "═══ Tarocchino Mitelli 1664 — Bolognese structural distinctions ═══"
+    },
+    {
+      "deck_id": "tarocchino-mitelli-1664",
+      "card_id": "wands-02",
+      "present": false,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The 2 of Batons is absent from the Mitelli tarocchino — not lost, but structurally removed. The Bolognese tarocchino omits the 2–5 pips of all four suits as its defining structural feature, reducing the 78-card standard deck to 62 cards. This is a game-design choice, not a preservation issue."
+    },
+    {
+      "deck_id": "tarocchino-mitelli-1664",
+      "card_id": "cups-03",
+      "present": false,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "Three of Cups absent by structural removal (tarocchino omits 2–5 pips of all four suits). Along with 15 other low-pip cards, this card was never included in the tarocchino game. The removal reduces the deck to 62 cards and allows the distinctive tarocchino trick-taking gameplay."
+    },
+    {
+      "deck_id": "tarocchino-mitelli-1664",
+      "card_id": "swords-04",
+      "present": false,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "Four of Swords absent by structural removal. Along with 15 other low-pip cards (2s, 3s, 4s, 5s of all four suits), this card is not part of the Bolognese tarocchino game. See cups-03 and wands-02 notes on the systematic pip omission that defines the tarocchino."
+    },
+    {
+      "deck_id": "tarocchino-mitelli-1664",
+      "card_id": "major-05",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The Pope (Il Papa) is present on the Mitelli 1664 edition — the engraved plates pre-date the 1725 Bolognese Church censorship that replaced the Pope, Popess, Emperor, and Empress with four generic 'Moors' (Mori). The Mitelli edition thus preserves the full religious/imperial trump set."
+    },
+    {
+      "deck_id": "tarocchino-mitelli-1664",
+      "card_id": "major-02",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The Popess (La Papessa) is present on the Mitelli 1664 edition — also lost to the 1725 Bolognese censorship. The Mitelli plates are the most artistically ambitious surviving record of the pre-censorship Bolognese tarocchino iconography."
+    },
+    {
+      "_comment": "═══ Lévi 1855 — textual descriptions that became iconographic standards ═══"
+    },
+    {
+      "deck_id": "eliphas-levi-1855",
+      "card_id": "major-15",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "Lévi's Baphomet illustration — seated goat-headed figure with human torso, torch between the horns, inscribed forearms reading SOLVE and COAGULA, arms gesturing up and down — is the template for virtually every post-1875 esoteric depiction of The Devil. The image is not drawn from any prior tarot; Lévi synthesized it from medieval Templar mythology and Hermetic sources. Rider-Waite-Smith and Thoth both descend from this figure."
+    },
+    {
+      "deck_id": "eliphas-levi-1855",
+      "card_id": "major-07",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "Lévi's textual description and woodcut of The Chariot (Le Chariot) specify two sphinxes drawing a cubic chariot driven by a crowned figure holding a scepter — differing from the Marseille composition (horses or winged figures) in ways that shaped Wirth 1889 and later esoteric decks. The sphinx-drawn chariot is Lévi's innovation, not a Marseille element."
+    },
+    {
+      "deck_id": "eliphas-levi-1855",
+      "card_id": "major-01",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "Lévi described The Magician (Le Bateleur) as holding a wand pointed upward and gesturing down with the other hand — the 'as above, so below' posture — and connected to Aleph (first Hebrew letter). This reading shaped Wirth's 1889 Magician and Waite's 1909 RWS Magician, both of which retain the upright wand + downward gesture + lemniscate-above-head composition as stabilized by Lévi's framework."
+    },
+    {
+      "_comment": "═══ Paul Christian 1863 — terminology and initiation-frame ═══"
+    },
+    {
+      "deck_id": "paul-christian-1863",
+      "card_id": "major-00",
+      "present": false,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "Christian's Histoire de la Magie is the first text to use the French terms 'arcanes majeurs' and 'arcanes mineurs' — the direct origin of the English 'Major Arcana' and 'Minor Arcana' used in every subsequent tarot tradition. His framing of the 22 trumps as an initiation sequence made this terminology load-bearing for the Golden Dawn and all later esoteric usage."
+    },
+    {
+      "deck_id": "paul-christian-1863",
+      "card_id": "major-21",
+      "present": false,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "Christian described The World (Le Monde) as the 22nd station of the Egyptian initiation temple — the culmination and reintegration point. This reading of the final trump as 'arrival' or 'cosmic completion' became the standard esoteric interpretation; Papus, Waite, and Crowley all inherit it from Christian rather than directly from Lévi."
+    },
+    {
+      "_comment": "═══ 1JJ Swiss c. 1831 — continuation of Besançon substitutions ═══"
+    },
+    {
+      "deck_id": "1jj-swiss-c1831",
+      "card_id": "major-02",
+      "present": true,
+      "borrowing_source": "tarot-de-besancon",
+      "confidence": "confirmed",
+      "notes": "Trump II in the 1JJ Swiss depicts JUNON (Juno) with peacock and scepter, titled in French on the card itself — a direct continuation of the Besançon tradition's substitution of Juno for La Papesse. The '1JJ' name derives from this Juno (and Jupiter at V). Still printed in this form by AGMüller today."
+    },
+    {
+      "deck_id": "1jj-swiss-c1831",
+      "card_id": "major-05",
+      "present": true,
+      "borrowing_source": "tarot-de-besancon",
+      "confidence": "confirmed",
+      "notes": "Trump V in the 1JJ Swiss depicts JUPITER with eagle and thunderbolt — continuing the Besançon substitution of Jupiter for Le Pape. The explicit labeling of the card as JUPITER (not Le Pape or anything equivalent) codifies the Protestant substitution as permanent market differentiation rather than a temporary religious workaround."
+    },
+    {
+      "deck_id": "1jj-swiss-c1831",
+      "card_id": "major-08",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The 1JJ preserves the Marseille ordering: La Justice at VIII and La Force at XI. The Besançon/Swiss Protestant line never adopted the Waite VIII-XI swap; as a gaming deck first and a divination deck second, it remained tied to the Marseille trump sequence."
+    },
+    {
+      "_comment": "═══ B.O.T.A. Tarot 1929 — Qabalistic modifications to RWS ═══"
+    },
+    {
+      "deck_id": "bota-tarot-1929",
+      "card_id": "major-04",
+      "present": true,
+      "borrowing_source": "rider-waite-smith",
+      "confidence": "confirmed",
+      "notes": "The Emperor in the B.O.T.A. system is reassigned the Hebrew letter Heh (instead of Waite's Tzaddi). Case followed a proposed Crowley-era swap of The Emperor and The Star Hebrew letters based on a reading of the Cipher Manuscripts. This single change ripples through all Qabalistic correspondences in the B.O.T.A. curriculum."
+    },
+    {
+      "deck_id": "bota-tarot-1929",
+      "card_id": "major-17",
+      "present": true,
+      "borrowing_source": "rider-waite-smith",
+      "confidence": "confirmed",
+      "notes": "The Star in the B.O.T.A. system is reassigned the Hebrew letter Tzaddi (paired with the Emperor reassignment to Heh). Visually the card remains close to the RWS composition — a kneeling nude figure by water beneath stars — but its letter attribution, and therefore its astrological correspondence, diverges from Waite's."
+    },
+    {
+      "deck_id": "bota-tarot-1929",
+      "card_id": "major-08",
+      "present": true,
+      "borrowing_source": "rider-waite-smith",
+      "confidence": "confirmed",
+      "notes": "Strength at VIII (following the Waite / Golden Dawn order, not the Marseille / Crowley order) — the B.O.T.A. deck preserves Waite's trump sequencing while modifying the Hebrew-letter attributions. Case agreed with Waite on the trump order but disagreed on specific letter assignments."
+    },
+    {
+      "deck_id": "bota-tarot-1929",
+      "card_id": "major-01",
+      "present": true,
+      "borrowing_source": "rider-waite-smith",
+      "confidence": "confirmed",
+      "notes": "The Magician in B.O.T.A. preserves the RWS composition (lemniscate above, wand upward, table with four suit tools) as uncolored line art. The pedagogical innovation is that students are instructed to color the cards themselves according to a specific Qabalistic color scale — making the act of coloring itself a meditative/learning exercise, not merely a preparation step."
+    },
+    {
+      "_comment": "═══ Rosenwald Sheet ═══"
+    },
+    {
+      "deck_id": "rosenwald-sheet-c1500",
+      "card_id": "major-21",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The World on the Rosenwald trump sheet shows the characteristic mandorla composition with the dancing figure inside, corroborating the iconographic stabilization of this trump by c.1500."
+    },
+    {
+      "deck_id": "rosenwald-sheet-c1500",
+      "card_id": "major-13",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "Death card present on Rosenwald sheet with the skeleton-with-scythe iconography that persists through the Marseille tradition."
+    },
+    {
+      "deck_id": "rosenwald-sheet-c1500",
+      "card_id": "major-00",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "high",
+      "notes": "Fool figure present; with the Rosenwald Fool we can see the un-numbered wanderer form stabilized as early as c.1500 in mass-produced Italian tarot."
+    },
+    {
+      "_comment": "═══ Steele Sermon (document, not images) ═══"
+    },
+    {
+      "deck_id": "steele-sermon-c1495",
+      "card_id": "major-01",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "Steele lists 'Bagatella' (the Magician/Juggler) as the first trump, establishing the canonical position of card I in the pre-Marseille Milanese order."
+    },
+    {
+      "deck_id": "steele-sermon-c1495",
+      "card_id": "major-00",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "Steele's sermon lists 'el matto' (the Fool) at the end of the trump sequence, establishing the canonical Fool-outside-the-sequence status by c.1495."
+    },
+    {
+      "deck_id": "steele-sermon-c1495",
+      "card_id": "major-21",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "Steele lists 'el mondo' (the World) second-to-last before the Fool, establishing the canonical World-as-culmination position that persists through RWS."
+    },
+    {
+      "_comment": "═══ Pierpont-Morgan Bergamo (PMB) ═══"
+    },
+    {
+      "deck_id": "pierpont-morgan-bergamo-c1500",
+      "card_id": "major-15",
+      "present": false,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The Devil is definitively absent from the surviving PMB set; the card now in some reconstructions is a later 17th c. replacement, not original Bembo-circle work."
+    },
+    {
+      "deck_id": "pierpont-morgan-bergamo-c1500",
+      "card_id": "major-16",
+      "present": false,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The Tower also missing from original PMB holdings; a 17th c. replacement exists in the deck's reconstruction but is not original to the Bembo-circle commission."
+    },
+    {
+      "deck_id": "pierpont-morgan-bergamo-c1500",
+      "card_id": "major-02",
+      "present": true,
+      "borrowing_source": "visconti-sforza",
+      "confidence": "high",
+      "notes": "Popess (Papesse) present and iconographically continuous with Visconti-Sforza, consistent with Bembo-circle stylistic inheritance."
+    },
+    {
+      "_comment": "═══ Ferrara / Este Tarocchi ═══"
+    },
+    {
+      "deck_id": "ferrara-este-c1470",
+      "card_id": "major-07",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "high",
+      "notes": "Chariot fragment attributed to Ferrara Este commission shows the Ferrarese court-workshop style with Este heraldic references, distinct from Milanese Chariot iconography."
+    },
+    {
+      "deck_id": "ferrara-este-c1470",
+      "card_id": "major-10",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "medium",
+      "notes": "Wheel of Fortune fragment preserved in the Yale Cary collection Ferrara attribution, showing the early Ferrarese treatment of the wheel motif."
+    },
+    {
+      "_comment": "═══ Madenié 1709 ═══"
+    },
+    {
+      "deck_id": "madenie-1709",
+      "card_id": "major-18",
+      "present": true,
+      "borrowing_source": "tarot-de-marseille-noblet",
+      "confidence": "confirmed",
+      "notes": "The Moon on Madenié 1709 shows the canonical Marseille Type II iconography (two dogs, crayfish, two towers) in its earliest dated form, anchoring the tradition Conver 1761 later propagates."
+    },
+    {
+      "deck_id": "madenie-1709",
+      "card_id": "major-12",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The Hanged Man on Madenié shows the distinctive double-cord binding and T-frame gallows that become the Type II Marseille standard."
+    },
+    {
+      "deck_id": "madenie-1709",
+      "card_id": "major-08",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "Justice at position VIII (not XI as in RWS) and Strength at XI confirms the Marseille Type II ordering was stable by 1709 — the canonical pre-Golden-Dawn Marseille sequence."
+    },
+    {
+      "_comment": "═══ Grimaud-Marteau 1930 ═══"
+    },
+    {
+      "deck_id": "grimaud-marteau-1930",
+      "card_id": "major-02",
+      "present": true,
+      "borrowing_source": "marseille-conver-1761",
+      "confidence": "confirmed",
+      "notes": "The Papesse is preserved in the Grimaud tradition (unlike the Besançon/1JJ Swiss tradition which replaced her with Juno), following the Conver-lineage Marseille canon directly."
+    },
+    {
+      "deck_id": "grimaud-marteau-1930",
+      "card_id": "major-13",
+      "present": true,
+      "borrowing_source": "marseille-conver-1761",
+      "confidence": "confirmed",
+      "notes": "Death is unnumbered on the Grimaud-Marteau (as on Conver), preserving the traditional unnumbered Arcanum XIII convention of the Marseille Type II tradition."
+    },
+    {
+      "_comment": "═══ Aquarian (Palladini) 1970 ═══"
+    },
+    {
+      "deck_id": "aquarian-palladini-1970",
+      "card_id": "major-01",
+      "present": true,
+      "borrowing_source": "rider-waite-smith",
+      "confidence": "confirmed",
+      "notes": "The Magician on Palladini preserves the RWS altar-and-tools composition (wand, cup, sword, pentacle on table) but stylizes the figure in Art Nouveau linework — the template for post-RWS 'art deck' composition."
+    },
+    {
+      "deck_id": "aquarian-palladini-1970",
+      "card_id": "cups-03",
+      "present": true,
+      "borrowing_source": "rider-waite-smith",
+      "confidence": "confirmed",
+      "notes": "Three of Cups preserves Smith's three-figures-toasting composition in Palladini's Deco idiom, typical of the Aquarian's faithful-to-Smith Minor Arcana treatment."
+    },
+    {
+      "_comment": "═══ Hermetic (Dowson) 1979 ═══"
+    },
+    {
+      "deck_id": "hermetic-dowson-1979",
+      "card_id": "major-00",
+      "present": true,
+      "borrowing_source": "golden-dawn-corpus",
+      "confidence": "confirmed",
+      "notes": "The Fool on Dowson's Hermetic bears the Hebrew letter Aleph prominently and the Golden Dawn ritual attributions — an informationally maximal card reflecting the deck's function as a ritual document."
+    },
+    {
+      "deck_id": "hermetic-dowson-1979",
+      "card_id": "major-15",
+      "present": true,
+      "borrowing_source": "thoth-tarot",
+      "confidence": "high",
+      "notes": "The Devil (Ayin / Capricorn) shows clear continuity with Harris-Crowley Thoth symbolism in its densely allegorical treatment, confirming the Thoth as intermediary between original GD papers and Dowson."
+    },
+    {
+      "_comment": "═══ Motherpeace 1981 ═══"
+    },
+    {
+      "deck_id": "motherpeace-1981",
+      "card_id": "major-02",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The Priestess on Motherpeace is reimagined as a pre-patriarchal Mediterranean goddess-figure (Minoan snake-goddess lineage), the defining Motherpeace move of keeping the structural position while replacing the Western-Christian-patriarchal content."
+    },
+    {
+      "deck_id": "motherpeace-1981",
+      "card_id": "major-03",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The Empress is recast as an earth-mother / goddess-of-abundance figure drawing on reconstructed Paleolithic Venus iconography, showing Motherpeace's use of archaeological goddess-civilization research as source material."
+    },
+    {
+      "deck_id": "motherpeace-1981",
+      "card_id": "court-page-of-pentacles",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "Court rank is 'Daughter of Discs' rather than 'Page of Pentacles', one of the Motherpeace structural renames (Daughter/Son/Priestess/Shaman) that reframe the hierarchical RWS court-card system."
+    },
+    {
+      "_comment": "═══ Tang Dynasty Leaf Game — proto-card playing tradition ═══"
+    },
+    {
+      "deck_id": "tang-dynasty-c868",
+      "card_id": "major-00",
+      "present": false,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "No trumps existed in the Chinese leaf game (yezi ge). Trumps are a 15th-century Italian invention. The Tang/Song-era 'money cards' used four denominations (coins, strings of coins, myriads of strings, tens of myriads). Listed here as absent purely to mark the structural fact: tarot's Major Arcana has no Asian ancestor."
+    },
+    {
+      "deck_id": "tang-dynasty-c868",
+      "card_id": "pentacles-01",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "probable",
+      "notes": "The 'coin' suit of the Chinese money-card tradition is the iconographic ancestor of the Mamluk 'darāhim' suit and ultimately the Italian/Spanish denari/oros, which became tarot's coins/pentacles. The single-coin denomination is structurally analogous to an Ace."
+    },
+    {
+      "deck_id": "tang-dynasty-c868",
+      "card_id": "pentacles-13",
+      "present": false,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "Court cards (king/queen/knight/page hierarchy) are absent from the Chinese leaf game. The Western 'court' is a Mamluk-Egyptian addition (king + two viceroys), reshaped again in Italy with the addition of the Queen. Listed to mark a structural absence."
+    },
+    {
+      "_comment": "═══ Mamluk Playing Cards — direct Western ancestor (Topkapı Sarayı) ═══"
+    },
+    {
+      "deck_id": "mamluk-c1375",
+      "card_id": "wands-01",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The Mamluk polo-stick suit (jawkān) is the direct iconographic ancestor of the Italian bastoni (wands/staves). The non-figural ace-style cards survive in the Topkapı Sarayı fragment. Polo as a court sport produced the suit symbol; in Spain/Italy it was reinterpreted as a baton/cudgel because polo was unfamiliar."
+    },
+    {
+      "deck_id": "mamluk-c1375",
+      "card_id": "cups-01",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The Mamluk 'tūmān' (cups) suit is the direct ancestor of Italian coppe and Spanish copas. The cup symbol survives unchanged into the earliest European decks."
+    },
+    {
+      "deck_id": "mamluk-c1375",
+      "card_id": "swords-01",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The Mamluk 'suyūf' (swords) suit becomes Italian spade and Spanish espadas. Mamluk swords are curved scimitars; Italian sword cards depict straight European swords from the start."
+    },
+    {
+      "deck_id": "mamluk-c1375",
+      "card_id": "swords-13",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "Mamluk court structure: malik (king), nā'ib malik (viceroy / 'deputy king'), thānī nā'ib (second deputy). The 'naib' term passes into Spanish ('naipes' = playing cards) and Italian ('naibi'). King is present; the two deputy ranks become the European knight + page (or knight + jack)."
+    },
+    {
+      "deck_id": "mamluk-c1375",
+      "card_id": "swords-12",
+      "present": false,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The Queen rank does not exist in Mamluk decks — Islamic figural conventions ruled out a female royal court figure. The Queen is a European addition first appearing in Italian tarocchi (Visconti court decks add Queens as the fourth court rank, supplementing King/Knight/Page)."
+    },
+    {
+      "_comment": "═══ Spanish Naipes (1371 documentation) ═══"
+    },
+    {
+      "deck_id": "spanish-naipes-c1371",
+      "card_id": "major-00",
+      "present": false,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "No trumps. The 1371 Catalan reference (the will of inventory of Nicholas Sarmona) and the 1377 ban in Florence confirm a 4-suit, 48- or 52-card deck without an Arcana. Trumps are a 15th-century Italian addition."
+    },
+    {
+      "deck_id": "spanish-naipes-c1371",
+      "card_id": "swords-13",
+      "present": true,
+      "borrowing_source": "mamluk-c1375",
+      "confidence": "confirmed",
+      "notes": "The Spanish/Catalan deck inherits the King-Knight-Page court structure directly from the Mamluk model arriving via Iberian Mediterranean trade. The word 'naipes' itself derives from the Mamluk 'nā'ib' (viceroy)."
+    },
+    {
+      "deck_id": "spanish-naipes-c1371",
+      "card_id": "swords-12",
+      "present": false,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The Queen is absent from the Spanish-pattern deck — it retains the 3-court Mamluk structure (king/knight/page). The Queen rank is added later in the Italian-pattern decks. The 4x12 = 48-card Spanish deck persists to this day in Latin Europe."
+    },
+    {
+      "_comment": "═══ Charles VI Tarot — 17 surviving cards at BnF ═══"
+    },
+    {
+      "deck_id": "charles-vi",
+      "card_id": "major-01",
+      "present": false,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The Magician (Bagatto) does not survive among the 17 extant Charles VI cards at the BnF. May have existed and been lost, or may not have been included. Cannot be reconstructed from the surviving set."
+    },
+    {
+      "deck_id": "charles-vi",
+      "card_id": "major-02",
+      "present": false,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The Popess (High Priestess) is absent from the surviving 17. Whether ever included is unknown — early Italian tarocchi varied widely in whether they included a Popess figure (the Visconti family did, the Bolognese tradition substituted)."
+    },
+    {
+      "deck_id": "charles-vi",
+      "card_id": "major-03",
+      "present": false,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The Empress is absent from the surviving 17 Charles VI cards."
+    },
+    {
+      "deck_id": "charles-vi",
+      "card_id": "major-15",
+      "present": false,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The Devil is absent from the surviving Charles VI set, mirroring the Visconti family pattern of missing 'dark' trumps. Whether by loss, censorship, or non-inclusion is unresolved."
+    },
+    {
+      "deck_id": "charles-vi",
+      "card_id": "major-04",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The Emperor survives — enthroned, crowned, holding scepter and orb. Stylistically the Charles VI Emperor is closer to the later Marseille pattern than to the Visconti Emperor, suggesting independent French-Italian transmission."
+    },
+    {
+      "deck_id": "charles-vi",
+      "card_id": "major-05",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The Pope survives. Note: the deck's misnomer ('Charles VI Tarot') is a 19th-century French-patriotic mis-attribution; the deck is now firmly dated to late 15th-century Ferrara, not the court of Charles VI of France (d. 1422)."
+    },
+    {
+      "deck_id": "charles-vi",
+      "card_id": "major-12",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The Hanged Man survives, depicted in the standard inverted posture with hands behind back and money pouches falling from his belt — the 'shaming' iconography (pittura infamante) used in 15th-century Italy to depict traitors and debtors."
+    },
+    {
+      "deck_id": "charles-vi",
+      "card_id": "major-16",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The Tower (here 'La Maison Dieu') survives — one of the few early Italian Tower images with figures falling, establishing the iconographic continuity to the Marseille tradition. Notable because the Tower is absent from most surviving Visconti decks."
+    },
+    {
+      "deck_id": "charles-vi",
+      "card_id": "major-21",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The World survives, depicted as a city/cosmos within a mandorla held by a winged genius — a different iconography than the dancing-figure Marseille World. Closer to the Visconti-Sforza 'angel-holding-globe' pattern."
+    },
+    {
+      "deck_id": "charles-vi",
+      "card_id": "major-00",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The Fool survives, depicted as a bearded figure with disordered clothing being pulled at by children — the 'town fool' / pittura infamante iconography that persists in the Marseille Mat."
+    },
+    {
+      "_comment": "═══ Sforza-Brambilla Tarocchi (Brera, Milan) ═══"
+    },
+    {
+      "deck_id": "sforza-brambilla-c1491",
+      "card_id": "major-04",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "Emperor is one of only two surviving trumps from the Brera-Brambilla deck (the other being Wheel of Fortune). 48 of the original 78 cards survive at the Pinacoteca di Brera, Milan; 19 trumps are lost."
+    },
+    {
+      "deck_id": "sforza-brambilla-c1491",
+      "card_id": "major-10",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "Wheel of Fortune is the second of only two surviving trumps. Iconographically continuous with the Visconti-Sforza Wheel — blindfolded Fortune turning the wheel, four figures (rex/regnabo/regnavi/sum sine regno) clinging to it."
+    },
+    {
+      "deck_id": "sforza-brambilla-c1491",
+      "card_id": "major-15",
+      "present": false,
+      "borrowing_source": null,
+      "confidence": "possible",
+      "notes": "Devil is among the 19 lost trumps. Whether it was ever painted is unknown — the Visconti family-commissioned decks of the same period (Modrone, Sforza) have no surviving Devil and may never have included one."
+    },
+    {
+      "deck_id": "sforza-brambilla-c1491",
+      "card_id": "swords-12",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "Queens are present in all four suits — Brera-Brambilla retains the Italian 4-court structure (king/queen/knight/page) that distinguishes the Italian tarocchi line from the 3-court Spanish naipes line."
+    },
+    {
+      "_comment": "═══ Minchiate Fiorentine — 97-card Florentine expansion ═══"
+    },
+    {
+      "deck_id": "minchiate-fiorentine",
+      "card_id": "major-02",
+      "present": false,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The Popess (High Priestess) is removed in the Minchiate redesign — replaced by the 'Grand Duke' (Granduca), reflecting Medici Florentine politics: no female papal figure could appear in a deck circulating at the Tuscan court."
+    },
+    {
+      "deck_id": "minchiate-fiorentine",
+      "card_id": "major-04",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The Emperor is split into two figures in Minchiate: 'Imperatore d'Occidente' (Western Emperor) and 'Imperatore d'Oriente' (Eastern Emperor), reflecting the political/historical doubling of the imperial office (HRE vs Byzantine)."
+    },
+    {
+      "deck_id": "minchiate-fiorentine",
+      "card_id": "major-05",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The Pope is retained (unlike the Popess), and is positioned alongside the new Grand Duke trump — Minchiate keeps male religious authority but removes female religious authority."
+    },
+    {
+      "deck_id": "minchiate-fiorentine",
+      "card_id": "major-15",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The Devil is retained in Minchiate, contradicting the early-Visconti pattern of omission. By 1500 Florentine usage the Devil is normalized."
+    },
+    {
+      "deck_id": "minchiate-fiorentine",
+      "card_id": "major-16",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The Tower (House of the Devil / Casa del Diavolo in Minchiate) is retained."
+    },
+    {
+      "deck_id": "minchiate-fiorentine",
+      "card_id": "major-19",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The 22 standard trumps are followed by 19 additional 'minchiate' trumps: 12 zodiac signs (Aries through Pisces, numbered 23-34), 4 elements (Water, Earth, Fire, Air, numbered 19-22 in some orderings, 35-38 in others), and 3 theological virtues (Hope, Prudence, Faith, Charity — replacing/supplementing the cardinal virtues already present). Total: 41 trumps + 56 minor cards = 97 cards. Minchiate is the largest tarot expansion in the historical record."
+    },
+    {
+      "deck_id": "minchiate-fiorentine",
+      "card_id": "swords-12",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "Court structure: King + Queen + Knight + Page (4 courts × 4 suits = 16 court cards), but Knights in Minchiate are centaurs (half-human, half-horse) — a distinctive Florentine iconographic choice."
+    },
+    {
+      "deck_id": "minchiate-fiorentine",
+      "card_id": "wands-12",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "Knights of the 'female' suits (Cups, Coins) are female centauresses; Knights of the 'male' suits (Wands, Swords) are male centaurs. This gendering of suits is unique to Minchiate and not found in other Italian regional patterns."
+    },
+    {
+      "_comment": "═══ Catelin Geoffroy 1557 (Lyon) — earliest dated Marseille pattern ═══"
+    },
+    {
+      "deck_id": "catelin-geoffroy-1557",
+      "card_id": "major-01",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The Geoffroy deck (Museum für Kunst und Gewerbe, Hamburg) is the earliest dated and signed survival of the Marseille trump iconography — 38 of 78 cards survive, including the Magician with the canonical four-tool (cup/wand/coin/knife) tabletop arrangement that becomes standard."
+    },
+    {
+      "deck_id": "catelin-geoffroy-1557",
+      "card_id": "major-13",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "Death is depicted as the now-canonical scything skeleton walking through a ground of body parts and severed crowned heads — the iconographic source for the same image in Noblet (c.1650) and Conver (1761)."
+    },
+    {
+      "deck_id": "catelin-geoffroy-1557",
+      "card_id": "major-21",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The World is depicted as the dancing nude figure within a wreath, with the four evangelist symbols in the corners — establishing the Marseille World iconography that persists for the next 400 years."
+    },
+    {
+      "deck_id": "catelin-geoffroy-1557",
+      "card_id": "swords-12",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "high",
+      "notes": "Court structure follows Italian 4-court pattern (king/queen/knight/page). The Geoffroy deck establishes that by 1557 the Marseille Type I pattern is essentially fixed in its trump iconography."
+    },
+    {
+      "_comment": "═══ Tarot de Paris (BnF, anomalous c.1600) ═══"
+    },
+    {
+      "deck_id": "tarot-de-paris-c1600",
+      "card_id": "major-15",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The Devil is depicted in a uniquely Italianate manner — a two-headed satyr-like figure with multiple faces — diverging from both the Italian and the contemporary Marseille pattern. The Tarot de Paris is iconographically anomalous, suggesting an independent French workshop tradition that did not survive."
+    },
+    {
+      "deck_id": "tarot-de-paris-c1600",
+      "card_id": "major-06",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The Lovers shows a Bacchic banquet scene rather than the Marseille three-figures-and-Cupid arrangement — three couples drinking around a table, with no Cupid figure above. Among the most iconographically idiosyncratic Lovers cards in the historical record."
+    },
+    {
+      "deck_id": "tarot-de-paris-c1600",
+      "card_id": "major-16",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The Tower is depicted as a tall fortress being struck and burning, with figures falling — closer to the Italian than the Marseille treatment. Demonstrates that French workshops were drawing on multiple iconographic traditions in the early 17th century before Marseille standardization."
+    },
+    {
+      "deck_id": "tarot-de-paris-c1600",
+      "card_id": "major-21",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The World shows a seated female figure holding a scepter and orb — closer to an enthroned-empress iconography than to the Marseille dancing-nude pattern. Suggests transmission from a different (Italian-courtly?) source."
+    },
+    {
+      "deck_id": "tarot-de-paris-c1600",
+      "card_id": "swords-12",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "Complete 78-card deck survives at the BnF. All four courts (king/queen/knight/page) present in all four suits."
+    },
+    {
+      "_comment": "═══ Tarot de Marseille (Dodal) — Lyon c.1701 ═══"
+    },
+    {
+      "deck_id": "tarot-de-marseille-dodal",
+      "card_id": "major-13",
+      "present": true,
+      "borrowing_source": "catelin-geoffroy-1557",
+      "confidence": "high",
+      "notes": "Death follows the canonical Marseille iconography established by Geoffroy and reinforced by Noblet — scything skeleton walking through a field of body parts. Dodal's woodblocks are direct descendants of the Lyon-Marseille pattern."
+    },
+    {
+      "deck_id": "tarot-de-marseille-dodal",
+      "card_id": "major-08",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "Justice numbered VIII (eight); Strength (La Force) numbered XI. This is the original Marseille numbering — the Justice/Strength swap (Strength = VIII, Justice = XI) does not happen until Waite/Smith in 1909."
+    },
+    {
+      "deck_id": "tarot-de-marseille-dodal",
+      "card_id": "major-21",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "Dodal's World is the canonical Marseille Type II — dancing female figure within an oval wreath, the four evangelist symbols in the corners (eagle, angel, lion, bull). Establishes the type that Conver (1761) will fix as the definitive form."
+    },
+    {
+      "deck_id": "tarot-de-marseille-dodal",
+      "card_id": "swords-12",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "All 78 cards survive at the BnF (Dodal c.1701, Lyon). This is the earliest essentially-complete Marseille Type II survival."
+    },
+    {
+      "_comment": "═══ Etteilla Grand Etteilla 1789 — first explicitly cartomantic deck ═══"
+    },
+    {
+      "deck_id": "etteilla-grand-etteilla-1789",
+      "card_id": "major-19",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "Etteilla renumbers the entire deck. In the Grand Etteilla, card 1 is 'Etteilla' (a male querent figure) and card 2 is 'Le Soleil' (the Sun). This breaks the traditional 0-21 trump numbering entirely — the 'Sun' is functionally the second card by Etteilla's numerology, not the 19th."
+    },
+    {
+      "deck_id": "etteilla-grand-etteilla-1789",
+      "card_id": "major-18",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "'La Lune' (Moon) is Etteilla's card 3, immediately following the Sun. Etteilla's renumbering follows a Genesis-creation logic (light, sun, moon, stars, sky, earth...) rather than the traditional Italian narrative order."
+    },
+    {
+      "deck_id": "etteilla-grand-etteilla-1789",
+      "card_id": "major-17",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "'Les Étoiles' (Stars) is Etteilla's card 4. Etteilla also adds Hebrew letters to each card and prints divinatory keywords directly on the card face — the first deck to do so, and the direct precursor to Waite/Smith's illustrated minor arcana."
+    },
+    {
+      "deck_id": "etteilla-grand-etteilla-1789",
+      "card_id": "major-11",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "Etteilla is the first to identify Justice with Astrology specifically, and to assign explicit zodiac/elemental correspondences to trumps. His system was non-standard and was discarded by the later occult tradition (Lévi/Golden Dawn) in favor of the Hebrew-letter system, but his keyword-on-card innovation persists in every modern deck."
+    },
+    {
+      "deck_id": "etteilla-grand-etteilla-1789",
+      "card_id": "wands-01",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "Etteilla provides the first cartomantic interpretations of the minor arcana, with separate upright and reversed meanings printed on each card. Prior to Etteilla, minor arcana had no divinatory tradition — they were game cards. Every modern deck's 'pip' meanings descend from Etteilla."
+    },
+    {
+      "deck_id": "etteilla-grand-etteilla-1789",
+      "card_id": "swords-12",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "Court structure follows the Marseille 4-court pattern but with renamed/reordered correspondences. Etteilla's specific changes were largely undone by later occultists; but his establishment of cartomancy as a legitimate literary practice (his 1785 manual) created the entire modern industry."
+    },
+    {
+      "_comment": "═══ Golden Dawn corpus — Book T cipher manuscript attributions ═══"
+    },
+    {
+      "deck_id": "golden-dawn-corpus",
+      "card_id": "major-00",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "Golden Dawn (per Book T, Mathers c.1888) assigns The Fool to the Hebrew letter Aleph and the element Air. This becomes the dominant 20th-century occult correspondence and is followed by Waite, Crowley, Case, and most modern decks. (Note: 'golden-dawn-corpus' is not a published deck but a system of attribution that informed Waite, Case, and Crowley.)"
+    },
+    {
+      "deck_id": "golden-dawn-corpus",
+      "card_id": "major-08",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "Golden Dawn famously swaps Strength and Justice: Strength = VIII (Leo / Teth), Justice = XI (Libra / Lamed). This corrects the zodiacal sequence to follow the Hebrew letter order. Waite (1909) follows GD; Crowley (Thoth, 1944) keeps the swap; the BOTA deck (1929) follows GD. The Marseille tradition retains the original Justice = VIII / Strength = XI numbering."
+    },
+    {
+      "deck_id": "golden-dawn-corpus",
+      "card_id": "major-04",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "Golden Dawn assigns the Emperor to Aries and Hebrew letter Heh. Crowley's later 'Tzaddi-Heh swap' (Book of Thoth, 1944) reassigns Emperor to Tzaddi and Star to Heh; this swap is followed only by Crowley/Thoth-derivative decks and is rejected by most other GD-descended traditions."
+    },
+    {
+      "deck_id": "golden-dawn-corpus",
+      "card_id": "wands-01",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "Golden Dawn assigns the four Aces to the elements (Wands=Fire, Cups=Water, Swords=Air, Pentacles=Earth) and to Kether on the Tree of Life. The pip cards 2-10 receive decanate (Sephirothic + zodiac) attributions from Book T. This entire decanate system underlies the imagery of every minor card in the Waite-Smith deck."
+    },
+    {
+      "deck_id": "golden-dawn-corpus",
+      "card_id": "wands-05",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "Golden Dawn assigns the 5 of Wands to Saturn-in-Leo ('Lord of Strife'). The Book T name and astrological attribution become the source for the RWS imagery: five young men struggling with staves. Almost all modern minor-arcana imagery descends from Book T's named pip-card attributions."
+    },
+    {
+      "deck_id": "golden-dawn-corpus",
+      "card_id": "swords-12",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "Court cards in the GD system are renamed: King=Knight, Queen=Queen, Knight=Prince, Page=Princess. Crowley/Thoth follows this scheme. RWS keeps the traditional King/Queen/Knight/Page names but uses GD elemental attributions internally. This rename is the source of decades of confusion in pairing RWS-trained readers with Thoth-trained readers."
+    },
+    {
+      "_comment": "═══ Papus Tarot des Bohémiens 1889 — Wirth-illustrated ═══"
+    },
+    {
+      "deck_id": "papus-tarot-1889",
+      "card_id": "major-00",
+      "present": true,
+      "borrowing_source": "oswald-wirth-1889",
+      "confidence": "confirmed",
+      "notes": "Papus's 'Tarot des Bohémiens' (1889) reproduces Oswald Wirth's 22 trump designs as illustrations. Wirth designed the trumps for the book under the direction of Stanislas de Guaïta; they were then published separately as a deck the same year. The Papus and Wirth majors are the same images by the same artist."
+    },
+    {
+      "deck_id": "papus-tarot-1889",
+      "card_id": "wands-01",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "Papus designed the minor arcana himself (not by Wirth), drawing on Etteilla's numerology and his own Tarot of the Bohemians thesis that the minor arcana correspond to the four letters of the Tetragrammaton (YHVH). The Papus minors use simple pip imagery, not illustrated scenes."
+    },
+    {
+      "deck_id": "papus-tarot-1889",
+      "card_id": "major-11",
+      "present": true,
+      "borrowing_source": "eliphas-levi-1855",
+      "confidence": "confirmed",
+      "notes": "Papus follows Lévi's Hebrew-letter assignments (which precede the Golden Dawn swap): Strength = XI, Justice = VIII. Both Wirth and Papus are working in the French esoteric tradition (Lévi → Christian → Papus/Guaïta), independent of and parallel to the English Golden Dawn."
+    },
+    {
+      "deck_id": "papus-tarot-1889",
+      "card_id": "major-21",
+      "present": true,
+      "borrowing_source": "eliphas-levi-1855",
+      "confidence": "confirmed",
+      "notes": "Papus's trump correspondences (Hebrew letters, Sephiroth, divinatory meanings) are systematized from Lévi via Christian. The Wirth/Papus tradition is the 'French school' of occult tarot, distinguished from the Golden Dawn / Waite / Crowley 'English school' by retaining Lévi's letter assignments instead of adopting the GD swap."
+    },
+    {
+      "_comment": "═══ Visconti-Sforza expansion ═══"
+    },
+    {
+      "deck_id": "visconti-sforza",
+      "card_id": "major-02",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The Popess survives. The figure is widely identified as Sister Manfreda, the 13th-century Visconti-family relative who was elected pope by the heretical Guglielmite sect (and burned for it in 1300). The Visconti-Sforza Popess card is thus a family-portrait commemoration as much as an allegorical figure."
+    },
+    {
+      "deck_id": "visconti-sforza",
+      "card_id": "major-15",
+      "present": false,
+      "borrowing_source": null,
+      "confidence": "high",
+      "notes": "The Devil does not survive in the Pierpont Morgan / Bergamo Visconti-Sforza set, mirroring the absence in the Visconti di Modrone deck. The pattern of missing 'dark' trumps across Visconti family decks suggests the cards may never have been included — possibly out of decorum at a Catholic court."
+    },
+    {
+      "deck_id": "visconti-sforza",
+      "card_id": "major-16",
+      "present": false,
+      "borrowing_source": null,
+      "confidence": "high",
+      "notes": "The Tower also does not survive in Visconti-Sforza, matching the di Modrone pattern. Whether by loss or non-inclusion is unresolved; the consistency across multiple Visconti decks favors non-inclusion."
+    },
+    {
+      "deck_id": "visconti-sforza",
+      "card_id": "major-13",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "Death survives, depicted as a skeletal archer (not the scythe-bearer of Marseille). The bow-and-arrow Death is a distinctly early-Italian iconography that the Marseille tradition replaces with the scythe."
+    },
+    {
+      "deck_id": "visconti-sforza",
+      "card_id": "major-00",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The Fool survives, depicted as a wild bearded man with a club and seven feathers in his hair, wearing tattered hose with bare buttocks exposed — an image of social degradation and madness, not the gentle wandering Fool of the Marseille tradition. Six surviving trumps in the deck were repainted (likely by Antonio Cicognara, c.1480) to replace lost cards: Devotion/Faith (added), Charity (added), Fortitude (replacement), Sun, Moon, World, Star, Tower (replacements? — debated). These additions explain why the surviving deck has more than the standard 22 trumps."
+    },
+    {
+      "_comment": "═══ Cary Sheet — uncut sheet establishing Marseille type ═══"
+    },
+    {
+      "deck_id": "cary-sheet-c1500",
+      "card_id": "major-18",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The Moon iconography on the Cary Sheet (Beinecke, Yale) is the source of the canonical Marseille Moon: two towers, two dogs/wolves howling, crayfish in pool. This image is established by c.1500 in Milan and is reproduced in Geoffroy 1557, Noblet c.1650, and Conver 1761 essentially unchanged."
+    },
+    {
+      "deck_id": "cary-sheet-c1500",
+      "card_id": "major-06",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The Cary Sheet Lovers shows the canonical Marseille three-figures-with-Cupid composition: a man flanked by two women, with a winged Cupid above firing an arrow. This iconography is the direct source for Noblet, Dodal, and Conver."
+    },
+    {
+      "deck_id": "cary-sheet-c1500",
+      "card_id": "major-15",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The Cary Sheet Devil shows the canonical Marseille Devil: standing winged figure with two chained smaller figures at its feet. This is one of the earliest surviving Devil cards in any tradition, and the source for the entire Marseille Devil iconography."
+    },
+    {
+      "deck_id": "cary-sheet-c1500",
+      "card_id": "major-21",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The Cary Sheet World shows the dancing nude figure within an oval wreath, with the four evangelist symbols in the corners (eagle, angel, lion, bull). This is the iconographic source for the canonical Marseille World."
+    },
+    {
+      "deck_id": "cary-sheet-c1500",
+      "card_id": "major-13",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The Cary Sheet Death is a scything skeleton walking through a ground of severed body parts and crowned heads — establishing the Marseille Death iconography that persists for 400 years. The Visconti 'archer Death' is replaced by this 'reaper Death' in the Lyon-Marseille line."
+    },
+    {
+      "deck_id": "cary-sheet-c1500",
+      "card_id": "major-12",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The Cary Sheet Hanged Man retains the inverted-traitor iconography from the Italian pittura infamante tradition — money pouches falling from belt, hands tied behind back. The image carries forward into Marseille essentially unchanged."
+    },
+    {
+      "_comment": "═══ Occult lineage — direct image-borrowing chains ═══"
+    },
+    {
+      "deck_id": "bota-tarot-1929",
+      "card_id": "major-06",
+      "present": true,
+      "borrowing_source": "rider-waite-smith",
+      "confidence": "confirmed",
+      "notes": "Paul Foster Case redrew the RWS Lovers but explicitly removed all clothing from Adam and Eve (RWS shows them nude already, but Case standardized the 'Edenic' framing) and added Hebrew letters and color correspondences according to GD theory. The composition is RWS, the symbolism is intensified Golden Dawn."
+    },
+    {
+      "deck_id": "bota-tarot-1929",
+      "card_id": "major-08",
+      "present": true,
+      "borrowing_source": "rider-waite-smith",
+      "confidence": "confirmed",
+      "notes": "BOTA Strength follows RWS in numbering Strength = VIII (the Golden Dawn swap), and follows the woman-and-lion composition. The deck was designed to be hand-colored by students according to specific GD color rules — published as black-and-white outlines, not pre-colored."
+    },
+    {
+      "deck_id": "grimaud-marteau-1930",
+      "card_id": "major-21",
+      "present": true,
+      "borrowing_source": "marseille-conver-1761",
+      "confidence": "confirmed",
+      "notes": "Paul Marteau's 1930 'Ancien Tarot de Marseille' (Grimaud) is a recolored and slightly redrawn Conver. Marteau's editorial choices — particularly his color-system rationalizations — became the de facto standard for 20th-century French Marseille practice, though purists prefer Camoin/Jodorowsky's 'restored' Conver over Marteau's interpretation."
+    },
+    {
+      "deck_id": "grimaud-marteau-1930",
+      "card_id": "major-13",
+      "present": true,
+      "borrowing_source": "marseille-conver-1761",
+      "confidence": "confirmed",
+      "notes": "Death follows Conver iconography exactly. The Marteau/Grimaud Death is the version most French readers from 1930 to 2000 encountered — making Conver's 1761 design effectively the 'standard' Marseille image for the late 20th century via this republication."
+    },
+    {
+      "deck_id": "1jj-swiss-c1831",
+      "card_id": "major-02",
+      "present": false,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The Popess is replaced by 'Junon' (Juno, with peacock) — a Protestant-Swiss substitution that removes the Catholic female papal figure. Together with the Pope replaced by 'Jupiter' (with eagle), this 'JJ' substitution gives the deck its name: 'Tarot 1JJ' = Tarot mit Junon und Jupiter."
+    },
+    {
+      "deck_id": "1jj-swiss-c1831",
+      "card_id": "major-05",
+      "present": false,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The Pope is replaced by 'Jupiter' (with eagle and thunderbolts). The 1JJ substitution descends from the Tarot de Besançon tradition — Besançon was a Protestant principality that needed non-Catholic versions of the religious trumps for local use. The 1JJ Swiss carries this Besançon innovation forward into the 19th century."
+    },
+    {
+      "deck_id": "etteilla-ii-lismon-c1826",
+      "card_id": "major-19",
+      "present": true,
+      "borrowing_source": "etteilla-grand-etteilla-1789",
+      "confidence": "confirmed",
+      "notes": "The Lismon edition (c.1826) is a redrawing of the original Grand Etteilla — same numbering, same keywords, same cartomantic system, but with updated 19th-century engraving style. All Etteilla-derivative decks (Lismon, Julia Orsini, Grand Etteilla III) preserve the renumbered trump order and the keyword-on-card practice that Etteilla originated."
+    },
+    {
+      "deck_id": "thoth-tarot",
+      "card_id": "major-04",
+      "present": true,
+      "borrowing_source": "golden-dawn-corpus",
+      "confidence": "confirmed",
+      "notes": "Crowley's Thoth Tarot (painted by Lady Frieda Harris, 1938-1943, published 1944) is the most thoroughgoing application of the Golden Dawn system, but with Crowley's idiosyncratic 'Tzaddi is not the Star' swap: Emperor moves from Heh to Tzaddi, Star moves from Tzaddi to Heh. This swap is not adopted by any other major deck and is rejected even by most Thelemites in practice."
+    },
+    {
+      "_comment": "═══ Thoth Tarot — renamed, renumbered, and reimagined cards ═══"
+    },
+    {
+      "deck_id": "thoth-tarot",
+      "card_id": "major-08",
+      "present": true,
+      "thoth_name": "Lust",
+      "thoth_position": 11,
+      "rws_name": "Strength",
+      "rws_position": 8,
+      "borrowing_source": "golden-dawn-corpus",
+      "confidence": "confirmed",
+      "notes": "Crowley restored the Marseille ordering (Strength = XI, Justice = VIII) that Waite had swapped. Beyond renaming, the card is fully reimagined: the Rider-Waite image of a gentle woman closing a lion's mouth is replaced entirely by Babalon — the Scarlet Woman, Thelema's goddess of sacred sexuality — riding the ten-headed Beast of the Apocalypse (Revelation 17). She holds aloft a golden cup overflowing with blood and fire, symbolising the dissolution of the ego into divine ecstasy. The lion becomes a cosmic beast, not a tame animal. Crowley's 'Lust' is not brute force controlled by piety; it is the creative, generative energy of the universe — Shakti, Babalon, the Great Mother — as initiatory power. The projective geometry in Harris's painting makes the Beast's heads appear to spiral outward from a central vortex."
+    },
+    {
+      "deck_id": "thoth-tarot",
+      "card_id": "major-11",
+      "present": true,
+      "thoth_name": "Adjustment",
+      "thoth_position": 8,
+      "rws_name": "Justice",
+      "rws_position": 11,
+      "borrowing_source": "golden-dawn-corpus",
+      "confidence": "confirmed",
+      "notes": "Crowley restored Justice to Marseille position VIII, correcting Waite's swap. Beyond the positional correction, the card is reconceived. The robed seated figure with scales and sword of RWS becomes a perfectly balanced abstract figure — the goddess Maat — standing on the point of a sword, extending in all directions simultaneously. The scales are not instruments of legal judgment but extensions of the figure's own body: perfect equilibrium is the figure's nature, not a tool it holds. The diamond frame of the card and Harris's projective geometry make the figure appear to hover in a state of pure mathematical balance. 'Adjustment' is Crowley's correction of 'Justice': the universe does not judge; it adjusts. The card encodes the principle of Karma without the moral overlay."
+    },
+    {
+      "deck_id": "thoth-tarot",
+      "card_id": "major-20",
+      "present": true,
+      "thoth_name": "The Aeon",
+      "thoth_position": 20,
+      "rws_name": "Judgement",
+      "rws_position": 20,
+      "borrowing_source": "liber-al-legis-1909",
+      "confidence": "confirmed",
+      "notes": "The most radical departure in the Thoth system — not a renamed card but a theological replacement. Rider-Waite Judgement (XX) depicts Angel Gabriel blowing a trumpet over rising dead in Christian resurrection imagery. Crowley replaces this entirely with Thelemic cosmology. The Aeon shows the divine triad of the current cosmic age (the Aeon of Horus): Nuit (the night sky, the infinite, arching over the scene as a starry body), Hadit (the winged solar disc at the card's centre — the point of consciousness within infinity), and Ra-Hoor-Khuit (the hawk-headed child god in the lower portion — the active, martial aspect of Horus). The card announces that the Aeon of Osiris (characterised by the dying and resurrecting god, sacrifice, and the Last Judgement) has ended and the Aeon of Horus has begun — Crowley's central Thelemic doctrine, received in the Cairo Working of 1904 (Liber AL vel Legis). Harris's painting uses the six-pointed star of Da'ath (the invisible sephira of the Abyss) in the lower register. The Christian angel is absent. Judgement is absent. What remains is cosmological time — the turning of an aeon."
+    },
+    {
+      "deck_id": "thoth-tarot",
+      "card_id": "major-21",
+      "present": true,
+      "thoth_name": "The Universe",
+      "thoth_position": 21,
+      "rws_name": "The World",
+      "rws_position": 21,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "Renamed from 'The World' to 'The Universe' to signal a cosmological rather than terrestrial completion. The RWS image — a dancing figure within a laurel wreath, surrounded by the four Living Creatures — is retained in structural outline but radically transformed. Harris's figure is a naked dancing woman within an oval of light, but the 'wreath' becomes a serpent biting its own tail (ouroboros), enclosing the figure within cyclical time. The four Living Creatures of Ezekiel/Revelation appear at the corners as in RWS, but more abstract and geometrically rendered. At the card's centre is the Great Wheel — a complex astrological diagram encoding Saturn (the planet of the card in GD attributions). The figure carries a crook and flail (Osirian symbols), encoding the paradox of the final initiation: to complete the Great Work (cross the Abyss, unite with the All) is simultaneously to become the universe itself and to recognise that individuality was always illusion."
+    },
+    {
+      "deck_id": "thoth-tarot",
+      "card_id": "wands-14",
+      "present": true,
+      "thoth_name": "Knight of Wands",
+      "thoth_position": 14,
+      "rws_name": "King of Wands",
+      "rws_position": 14,
+      "borrowing_source": "golden-dawn-corpus",
+      "confidence": "confirmed",
+      "notes": "The court card hierarchy is restructured throughout the Thoth deck. What RWS calls 'King' (the seated sovereign) Crowley calls 'Knight' (the mounted, active warrior). What RWS calls 'Knight' (the mounted figure) Crowley calls 'Prince' (a figure in a chariot). What RWS calls 'Page' (the standing youth) Crowley calls 'Princess' (who stands on earth, the materialising force). The Queen remains Queen. This restructuring derives from the Golden Dawn's elemental grade system: Knight = Fire of the element (active, swift), Queen = Water of the element (receptive, sustaining), Prince = Air of the element (mental, mediated), Princess = Earth of the element (manifest, embodied). The King of Wands (wands-14) becomes the Knight of Wands — still the fiery, dynamic principle of Fire, but explicitly warrior-mounted rather than enthroned. Harris depicts him on a leaping black horse, holding a flaming club, surrounded by lions. The renaming is not cosmetic: it reframes the court hierarchy from feudal (King/Queen/Knight/Page) to elemental (Fire/Water/Air/Earth-of-the-element)."
+    },
+    {
+      "deck_id": "thoth-tarot",
+      "card_id": "major-01",
+      "present": true,
+      "thoth_name": "The Magus",
+      "thoth_position": 1,
+      "rws_name": "The Magician",
+      "rws_position": 1,
+      "borrowing_source": "golden-dawn-corpus",
+      "confidence": "confirmed",
+      "notes": "Renamed from 'The Magician' to 'The Magus' — a shift from practitioner to initiate. The RWS Magician is a confident showman at a table of implements (wand, cup, sword, pentacle), the lemniscate above his head. The Thoth Magus is a figure of pure Hermetic transmission. His central symbol is the caduceus (Mercury's wand — the card is attributed to Mercury). The three interlocked rings behind him encode the three stages of the Hermetic path (and the formula of Tetragrammaton). At the lower left, a Cynocephalus baboon (Thoth's sacred animal, the ape of Mercury) crouches — suggesting that magic without wisdom produces the ape who imitates rather than the god who creates. The four implements of the Magician appear on the Magus too but are subordinated, scattered around rather than arranged. Harris's projective geometry makes the figure appear to be in motion at multiple scales simultaneously. Crowley's attribution: Mercury, Bet (second Hebrew letter, value 2), the double power of duality-made-unity."
+    },
+    {
+      "deck_id": "thoth-tarot",
+      "card_id": "major-14",
+      "present": true,
+      "thoth_name": "Art",
+      "thoth_position": 14,
+      "rws_name": "Temperance",
+      "rws_position": 14,
+      "borrowing_source": "golden-dawn-corpus",
+      "confidence": "confirmed",
+      "notes": "Renamed from 'Temperance' to 'Art' — one of Crowley's most deliberate conceptual replacements. The RWS Temperance shows an archangel pouring liquid between two cups, the Christian virtue of moderation. Crowley rejected the Christian framing entirely: the card is attributed to Sagittarius (Fire, the arrow, the archer) and to the alchemical process of coniunctio — the chemical wedding, the union of opposites. Harris's image shows a crowned androgynous figure pouring fire and water simultaneously between two cups, but the cups are now directed back into the figure's own heart — the Great Work completes within the practitioner. The lion-eagle of alchemy (Leo + Scorpio, fixed fire + fixed water) appears below. The six-pointed Star of David behind the figure encodes the alchemical motto V.I.T.R.I.O.L. (Visita Interiora Terrae Rectificando Invenies Occultum Lapidem — Visit the interior of the earth, by rectification you will find the hidden stone). The renaming to 'Art' encodes Crowley's thesis that the Great Work is the highest art — the transformation of the self into the Philosopher's Stone."
+    },
+    {
+      "deck_id": "thoth-tarot",
+      "card_id": "major-17",
+      "present": true,
+      "thoth_name": "The Star",
+      "thoth_position": 17,
+      "rws_name": "The Star",
+      "rws_position": 17,
+      "borrowing_source": "liber-al-legis-1909",
+      "confidence": "confirmed",
+      "notes": "The name is unchanged, but the card is structurally reassigned. In every prior deck (Marseille, GD, RWS), The Star is attributed to Tzaddi (the Hebrew fishhook, value 90, Aquarius). Crowley broke this attribution on the authority of Liber AL vel Legis I:57: 'All these old letters of my Book are aright; but Tzaddi is not the Star.' He moved Tzaddi to The Emperor (major-04, previously attributed to Heh) and moved Heh (the Hebrew window, value 5, Aries) to The Star. This swap has no precedent in any tarot or GD document before Liber AL. It affects the entire Hebrew letter sequence of the Major Arcana. Harris's Star card retains the nude figure pouring water as in Marseille tradition, but adds: a butterfly (Psyche, the soul as observer — the Heh attribution means 'window,' sight, the gaze that sees without distorting). The seven-pointed star of Babalon appears behind the figure. The figure stands on land and water simultaneously, encoding the Aquarian/Arian duality of the new attribution. Most Thelemites and Thoth readers quietly ignore the Tzaddi swap in practice — the card still reads as 'The Star' in most spreads regardless of its Hebrew letter."
+    },
+    {
+      "deck_id": "sola-busca",
+      "card_id": "wands-10",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The Sola-Busca Ten of Wands shows a triumphant armored figure carrying ten staves or wands as a tight bundle — an image of military victory and the fruits of conquest. In the SB system, this card carries a positive valence: the warrior returns in triumph bearing his spoils. Smith adopted the visual motif almost directly for the RWS Ten of Wands but inverted the emotional meaning: her figure bends under the weight of the staves, making the card a symbol of burden, oppression, and overwork rather than triumph. The borrowing is confirmed: Smith viewed the British Museum's newly-acquired Sola-Busca photographs in 1909. The visual transposition (triumphant carrier → exhausted bearer) is one of the most striking examples of Smith reinterpreting rather than copying her source."
+    },
+    {
+      "deck_id": "sola-busca",
+      "card_id": "wands-09",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "probable",
+      "notes": "The Sola-Busca Nine of Wands shows a figure in armor leaning on a staff and looking over his shoulder — the posture of a soldier vigilant after battle, watching for a follow-on attack. The defensive watchfulness encoded in the body posture (leaning, back-turned gaze, grip on the staff) is transposed almost directly to Smith's RWS Nine of Wands, which shows a bandaged figure holding a staff and looking behind him with the same mixture of weariness and alertness. Smith added the bandaged head (the wound that explains the weariness) and a row of eight staves behind, transforming the solitary watchman into a figure defending against a future assault. Borrowing is probable: the posture and emotional register are close enough to be more than coincidence."
+    },
+    {
+      "deck_id": "sola-busca",
+      "card_id": "wands-02",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "probable",
+      "notes": "The Sola-Busca Two of Wands shows a figure on an elevated position — a terrace, parapet, or high place — with two wands, surveying the territory below. The 'lord of his domain looking outward from a height' motif is the iconographic core Smith transposed to the RWS Two of Wands: a cloaked figure stands on a castle battlement, holding a wand and a globe, looking out to the horizon. The globe Smith added is new — it encodes the aspiration to worldly dominion beyond what is visible — but the high vantage point and the surveying gaze are directly from SB. Borrowing is probable."
+    },
+    {
+      "deck_id": "sola-busca",
+      "card_id": "cups-11",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The Sola-Busca equivalent of the Page of Cups (numbered XI of Cups in some analyses, though SB doesn't use the court card naming of later decks) shows a youth in military costume with a fish — either carrying a fish or with a fish as his attribute. This fish-bearer motif is exactly what Smith transposed to the RWS Page of Cups: a youth in an ornate floral costume looking at a fish that has leaped out of his cup to address him. Smith transformed the fish from an attribute or object being carried into an active participant — the fish speaks to the Page, turning the card from a portrait into a moment of uncanny encounter. The fish-and-cups association in this position is distinctive enough to make the borrowing confirmed."
+    },
+    {
+      "deck_id": "sola-busca",
+      "card_id": "cups-07",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "probable",
+      "notes": "The Sola-Busca Seven of Cups contains visual elements distributed across seven cups — an arrangement of cups each containing or accompanied by a different figure or motif. This 'cups as vessels of different visions' format is the iconographic vocabulary Smith elaborated in the RWS Seven of Cups, which is among the most fantastical pip images in the deck: seven cups float in clouds, each containing a distinct vision (a castle, a serpent, a garland, a draped figure, a treasure chest, a jeweled tower, a skull). Smith greatly expanded the fantastical content, but the structural idea of multiple cups each holding a different apparition likely derives from the SB arrangement. Borrowing is probable."
+    },
+    {
+      "deck_id": "sola-busca",
+      "card_id": "cups-02",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "possible",
+      "notes": "The Sola-Busca Two of Cups shows two figures in a gesture of exchange or greeting with cups — the covenant-pledge motif in which two parties face each other holding their cups. Smith's RWS Two of Cups shows two figures pledging their cups to each other beneath a Hermetic caduceus and winged lion's head. The mutual offering posture and the two-figures-with-cups framing are shared. Smith added the Hermetic imagery above (the caduceus symbolising the merging of opposites into a unified force) which deepens the card's meaning from social exchange to alchemical union. Borrowing is possible; the motif of two-figures-with-cups is not unique to SB, but the timing (Smith's 1909 SB access) makes it likely."
+    },
+    {
+      "deck_id": "sola-busca",
+      "card_id": "swords-08",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "probable",
+      "notes": "The Sola-Busca Eight of Swords shows a figure constrained or surrounded by eight swords — the image of the prisoner hemmed in by weapons. Smith developed this into the RWS Eight of Swords: a blindfolded, loosely bound figure standing on wet ground surrounded by swords stuck upright around her. Smith's crucial addition is the blindfold and loose bonds — the figure could walk away if she could see or choose to move, making the card a study in self-imposed limitation and mental imprisonment rather than physical capture. The SB card encodes the predicament (surrounded by weapons, unable to escape); Smith encodes the psychology of the predicament (blindness and belief in one's bonds as the real prison). Borrowing is probable."
+    },
+    {
+      "deck_id": "sola-busca",
+      "card_id": "swords-03",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The Sola-Busca Three of Swords is the most direct and unambiguous visual borrowing in the entire Sola-Busca → Rider-Waite-Smith transfer. The SB card shows three swords piercing a heart — the same image, with the same three-sword arrangement, that Smith painted for the RWS Three of Swords. Smith added a stormy sky and rain (the environmental expression of grief that she routinely added to emotionally weighted cards), but the core image — three swords through a heart — is taken directly from SB. No other prior tarot has this specific image. The heart-pierced-by-swords iconography appears in Christian devotional art (the Seven Sorrows of the Virgin, the Immaculate Heart), and SB likely drew on that tradition; Smith then absorbed it via SB and stripped the explicitly devotional frame, making it a universal image of heartbreak and sorrow. Borrowing is confirmed."
+    },
+    {
+      "deck_id": "tarot-de-marseille-dodal",
+      "card_id": "major-00",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "Le Mat (The Fool) in the Dodal and canonical Marseille tradition is a ragged wanderer, usually shown mid-stride, carrying a stick with a bundle and being bitten at the leg or buttocks by a dog or cat. This image is a significant departure from the Visconti-lineage Fool, who is typically shown as a crowned or feathered-cap figure of ambiguous status — more court jester than outcast. The TdM Fool is specifically an outsider: his torn clothing, his wandering gait, and the animal tearing at him mark him as someone outside the social order. The animal bite is particularly distinctive — it appears in Noblet, Dodal, Madenié, and Conver, and becomes canonical. Smith retained the wandering figure and the animal companion (her dog watches the Fool approach the precipice rather than biting him — a softening) while making the precipice central. Crowley/Harris retained the Fool as the central card of unlimited potential (Aleph/Air/the Zero-point), but replaced the wanderer with a more cosmic, ecstatic figure. Both derive from the TdM Fool's essential premise: the Fool is outside-and-before all systems."
+    },
+    {
+      "deck_id": "tarot-de-marseille-dodal",
+      "card_id": "major-11",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "La Force (Strength) appears at position XI in the Dodal and the canonical Marseille ordering — not at VIII. In TdM, VIII is Justice (La Justice) and XI is Strength (La Force). This TdM ordering of VIII=Justice, XI=Strength is the original sequence that preceded the Golden Dawn's inversion (GD: VIII=Strength/Leo, XI=Justice/Libra). Dodal's La Force shows a woman opening — not striking or subduing — a lion's mouth: the image of spiritual force as charm rather than dominion. She is usually shown with a hat that forms an infinity symbol (the lemniscate, also present in TdM Le Bateleur). This specific iconography — woman and lion, charm rather than combat — survived unchanged through GD, Wirth, and RWS; Smith kept the woman-and-lion image but added the GD's reordering (Strength to position VIII). The Thoth card Lust (major-08) replaces the charming maiden with Babalon riding the Beast, but retains the woman-with-lion genetic inheritance."
+    },
+    {
+      "deck_id": "tarot-de-marseille-dodal",
+      "card_id": "major-12",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "Le Pendu (The Hanged Man) in the Dodal and canonical TdM tradition shows a man suspended by one foot from a horizontal beam supported by two living trees (or two posts hung with lopped branches). The free leg is crossed behind the suspended leg, forming a cross-and-T figure. The hands are clasped or tied behind the back. The figure's expression is typically calm or even serene — this is not a punishment image but a voluntary suspension. This is a radical departure from the Visconti tradition, where the Hanged Man (Il Traditore) was suspended by both feet in the 'pittura infamante' (defamation painting) style — an actual punishment in medieval Italy for traitors and debtors. TdM transforms the image: by suspending only one foot and crossing the free leg, the card suggests the figure could free himself but chooses not to. The reversal of perspective (the Hanged Man sees the world upside-down) becomes central to all later interpretations. Smith retained the one-foot suspension with crossed leg exactly, adding only a golden nimbus (halo) around the Hanged Man's calm face. Crowley/Harris kept the one-foot pose but added Thelemic symbolism (the figure forms the alchemical cross and triangle with his body)."
+    },
+    {
+      "deck_id": "tarot-de-marseille-dodal",
+      "card_id": "major-16",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "La Maison Dieu (The Tower, also called La Foudre or La Foudroyée) in the Dodal TdM shows a tower being struck by lightning from above, with a crown-like ball or crenellation blown off the top, and two human figures falling from the sides. The specific image of the crown or crown-like element being blown off by lightning is particularly associated with the TdM tradition. The Italian tarot tradition had called this card various names (Il Fuoco, La Sagitta) and sometimes showed the lightning as an arrow rather than a thunderbolt. TdM fixed the 'tower struck by lightning, crown knocked off, figures falling' interpretation that has been standard ever since. The card's French name, La Maison Dieu (House of God), introduced a spiritual rather than merely physical interpretation: it is not just a tower being destroyed but a false temple, a house built on wrong foundations, being struck by divine revelation. Smith retained the crown being blown off and the figures falling, set against a black sky with stylised lightning. The Thoth Tower (which Crowley kept unnamed, using the Hebrew letter Peh / the mouth) retains the lightning-and-ruin imagery but adds a serpentine lightning bolt and the eye of Horus."
+    },
+    {
+      "deck_id": "eliphas-levi-1855",
+      "card_id": "major-00",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "Lévi's treatment of The Fool is the site where his most consequential theoretical claim — the 22 Major Arcana correspond to the 22 Hebrew letters of the alphabet — meets its most difficult problem. In Dogme et Rituel de la Haute Magie (1854-1856), Lévi declares explicitly that the tarot's 22 Major Arcana are the 22 Hebrew letters made pictorial. He assigns Aleph to The Juggler (I), Bet to The High Priestess (II), and so on through Shin (XXI) and Taw (XXII). The Fool does not fit cleanly: it is unnumbered (or numbered 0), and the Hebrew alphabet has only 22 letters. Lévi variously treats the Fool as the wild card that precedes the sequence (the zero that generates the digits), as a card associated with the three 'mother letters' (Aleph, Mem, Shin — air, water, fire), and as the laughing alchemist who knows the secret of the Philosopher's Stone. This ambiguity was inherited by the Golden Dawn, which assigned the Fool to Aleph (Air), and by Crowley, who made the Fool the zero-point of the Thelemic cosmology. Lévi's 22-letter attribution doctrine is the foundational theoretical claim of modern Western esoteric tarot: every subsequent system (GD, RWS, Thoth, BOTA, Hermetic Tarot) either follows Lévi's mappings, corrects them, or argues against them — but all take his 22-Major/22-letter claim as the starting point of the debate."
+    },
+    {
+      "deck_id": "paul-christian-1863",
+      "card_id": "major-01",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "Paul Christian (pseudonym of Jean-Baptiste Pitois, 1811-1877) in Histoire de la Magie (1863) and L'Homme Rouge des Tuileries (1863/1870) describes all 22 Major Arcana as sequential stations in an Egyptian initiatory temple, each with an Egyptian pseudo-name and a corresponding symbolic lesson. His first arcanum — corresponding to the Magician — he calls 'Le Mage' (The Magus) or 'L'Arcane du Mage de la Force Divine'. This is significant: Crowley's later renaming of the RWS 'Magician' to 'The Magus' in the Thoth Tarot (1944) echoes Christian's terminology, though Crowley arrived at it through his own Hermetic and Thelemic framework rather than Christian's pseudo-Egyptian system. Christian also numbered all 22 Major Arcana explicitly from 1 to 22 — the first published text to do so, predating the GD manuscripts. His numbering matched Etteilla's cartomantic sequence in some respects and diverged in others. The GD absorbed Christian's numbered sequence (via Paul Christian → Mathers) and it became the template for the modern numbered Majors. Christian's Egyptian pseudo-names (The Magus, The Gate of the Sanctuary, The Queen of Heaven, The Cubic Stone of Initiation, etc.) circulated widely in French occultist circles and directly influenced Papus (Tarot des Bohémiens, 1889), who was Christian's intellectual successor."
+    },
+    {
+      "deck_id": "liber-al-legis-1909",
+      "card_id": "major-04",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "Chapter I, verse 57 of Liber AL vel Legis contains the cryptic line: 'All these old letters of my Book are aright; but Tzaddi is not the Star.' This single verse is Crowley's sole stated authority for his Hebrew letter reassignment in the Thoth Tarot. In every prior system — Marseille, Golden Dawn, Wirth, RWS — The Star is attributed to Tzaddi (the Hebrew fishhook, value 90, the sign Aquarius). Crowley's swap moved Tzaddi to The Emperor (major-04, previously attributed to Heh/Aries) and moved Heh (the Hebrew window, value 5, the sign Aries) to The Star (major-17). The Emperor is therefore the card that directly *receives* Tzaddi in Crowley's reassignment — making it the pivot of the swap. Crowley explains in The Book of Thoth (1944) that the letter Tzaddi means the 'hook' or 'fishhook' — the instrument of capture — and that the Emperor as the principle of ruling masculine force is the appropriate 'hook' that snares reality into order. The Star (major-17) then receives Heh, the window — observation, revelation, the gaze outward — which Crowley reads as more appropriate to the card's meaning of hope and cosmic vision. No tarot commentator before Crowley had proposed this swap; no text after him in the Thelemic tradition has disputed it."
+    },
+    {
+      "deck_id": "book-of-thoth-1944",
+      "card_id": "major-01",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The Book of Thoth (1944) is the first published text to provide a complete, systematic, cross-referenced attribution table for all 78 tarot cards: Hebrew letters, zodiacal signs, planets, elements, Kabbalistic paths on the Tree of Life, I Ching hexagrams, and magical formulae (the Tetragrammaton, AUMGN, etc.). The Magus (major-01) is the prototypical example of this system: Crowley attributes the card to Mercury (planet), Bet (Hebrew letter, value 2, meaning 'house'), Path 12 on the Tree of Life (connecting Kether to Binah — the path from the Crown to Understanding through the mind of Mercury). The astrological correlation is not merely symbolic: Mercury as the communicator, the trickster, the magician-of-words, is the *identity* of the Magus. Crowley's attribution table in The Book of Thoth became the reference standard for all subsequent Thoth-tradition tarot scholarship and influenced the Hermetic Tarot (Dowson, 1979) and many academic studies of the occult tarot. It is the most rigorous attribution system in tarot history, though contested by those who follow GD (Mathers/Waite) or Lévi's earlier assignments."
+    },
+    {
+      "deck_id": "book-of-thoth-1944",
+      "card_id": "wands-14",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The Book of Thoth devotes a chapter to the court cards and explains Crowley's restructuring of the court hierarchy. In standard tarot (TdM, RWS): King → Queen → Knight → Page. In Crowley's system: Knight (Fire) → Queen (Water) → Prince (Air) → Princess (Earth). The crucial change is that the King is demoted and renamed Knight: Crowley argues that the King/Knight confusion in prior decks (where the mounted figure was sometimes called King, sometimes Knight) was an error — the mounted figure *is* the Knight, the active Fire principle in each suit. The Queen remains (Water, the receptive but not passive force). The prior Knight (mounted, active) becomes the Prince (Air, the son of the King and Queen, the intellectual force). The Page becomes the Princess (Earth, the stable but potentially explosive feminine ground). Each title is elemental, not feudal: Knight=Fire, Queen=Water, Prince=Air, Princess=Earth — the four elements as four modes of each suit's energy. The Book of Thoth explains the rationale in detail in Part Three ('The Small Cards') and is the only text that makes the Thoth court card system fully comprehensible. Most modern practitioners who use Thoth-tradition decks learn the Knight/Queen/Prince/Princess system from this text."
+    },
+    {
+      "deck_id": "pictorial-key-1910",
+      "card_id": "major-02",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "Waite's treatment of The High Priestess in the Pictorial Key is the site of two of the text's most enduring contributions to English-language tarot. First: the two pillars. Waite identifies the columns behind the High Priestess as Boaz (black, ב, the pillar of Severity in Solomonic Temple tradition) and Jachin (white, י, the pillar of Mercy) — the two pillars of Solomon's Temple as described in I Kings 7:21. Smith painted them with these designations visible, and the B/J pillar framing became canonical for all RWS-derived High Priestess cards. Second: the TORA scroll. The scroll on the High Priestess's lap is partially visible, reading 'TORA' (the rest hidden by her veil). Waite knew this was the Torah — the Jewish law — but the anagram TARO (Tora → Taro, rotating the letters) was noted by later commentators and became an influential mnemonic. Paul Foster Case (BOTA, 1929) explicitly added 'TORA' to the scroll in his line-art deck and taught the TARO anagram as a key to the Major Arcana's inner structure. Waite's Key also famously misidentifies the High Priestess as 'Isis the Egyptian goddess' — a conflation of the Shekinah (the feminine divine presence of the Hebrew tradition) with the Egyptian goddess, which has shaped 100 years of Isis-in-tarot interpretation despite being textually unsupported by the card's own Kabbalistic symbolism."
+    },
+    {
+      "deck_id": "pictorial-key-1910",
+      "card_id": "major-10",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "Waite's Pictorial Key explanation of The Wheel of Fortune introduced two iconographic elements that Smith embedded in the RWS card and that have been canonical in all RWS-derived versions ever since. First: the four corner creatures. The four figures in the corners of Smith's Wheel of Fortune — a winged Man (Aquarius), an Eagle (Scorpio), a Lion (Leo), and a Bull (Taurus) — are the four Fixed Signs of the zodiac, equated by Waite with the four Evangelists of Christian tradition (Matthew, Mark, Luke, John) and with the four Living Creatures of Ezekiel's vision (Ezekiel 1:5-14) and the Revelation of John (4:7). The Key explains that these four figures represent the stability of the divine order within the turning of the Wheel — the fixed points around which Fortune revolves. Second: the sphinx atop the Wheel. Waite's Key identifies the sphinx as the 'enigma of Life' — the riddle that stands at the center of Fortune. In Egyptian tradition, the sphinx represents the synthesis of the four elements (lion/body=fire, bull/legs=earth, eagle/wings=air, human face=water or spirit). On the Wheel, the sphinx holds a sword — the instrument of discriminating wisdom that cuts through Fortune's illusions. Crowley's Thoth Wheel of Fortune retains the four fixed-sign creatures but replaces the sphinx with the Sphinx of Giza and adds the figures of Hermanubis (ascending), Typhon (descending), and the Sphinx (poised above) as the three modes of the Wheel's operation."
+    },
+    {
+      "deck_id": "motherpeace-1981",
+      "card_id": "major-00",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "The Motherpeace Fool is a dancing, ecstatic feminine figure — explicitly and deliberately regendered from the Waite-tradition Fool (consistently depicted as masculine). The Fool dances near the edge of a cliff with arms raised and face upturned, joyfully present to the moment of beginning. The dog companion remains but is depicted as a spirited animal dancing alongside rather than nipping at heels. This card is also the best site for documenting the Motherpeace deck's most radical physical innovation: the round card format. The 78 cards of Motherpeace are circular (approximately 4.5 inch diameter) rather than rectangular. This has structural consequences for interpretation: (1) there is no upright/reversed binary — instead, card orientation ranges from fully upright through degrees of tilt to fully inverted, with each degree indicating a different quality of the card's energy (fully upright = full expression; tilted = partial, emerging, or waning; fully inverted = blocked, internalized, or shadow). (2) The round format makes every card a mandala — a self-contained world — and encourages holistic rather than positional reading. (3) The format reflects Vogel and Noble's feminist cosmology: the circle as the ancient symbol of the feminine, the cyclical, the non-hierarchical, contrasted with the rectangle as a cultural signifier of the masculine, the linear, the framed and bounded. No subsequent major-market tarot deck has adopted the round format as a structural choice (though it has appeared in specialty and art decks), making Motherpeace's round format its most distinctive and unrepeated contribution."
+    },
+    {
+      "deck_id": "motherpeace-1981",
+      "card_id": "major-08",
+      "present": true,
+      "borrowing_source": null,
+      "confidence": "confirmed",
+      "notes": "In Motherpeace, Strength (following the GD/RWS position of VIII) shows a woman in a tender, fearless embrace with a large bear — not a lion. This substitution is both culturally deliberate and iconographically significant. The bear is the totem animal most associated with the pre-patriarchal goddess traditions that Vicki Noble and Karen Vogel drew on: the bear as the Great Goddess in her most primal, protecting form appears in Old European (Gimbutas) archaeological contexts and in Native American and Siberian shamanic traditions. By replacing the lion (the solar king, the masculine principle of tamed animal nature) with the bear (the lunar, chthonic, maternal power), Motherpeace recentres the card's meaning from 'the civilizing of nature by spiritual force' to 'the mutual recognition between human consciousness and wild, feminine earth power.' The woman does not charm or subdue the bear; she embraces it and is embraced in return — the strength is relational, not hierarchical. This is the card where Motherpeace's core theological argument — that strength is not dominion but communion — is most directly and economically expressed."
+    }
+  ]
+}

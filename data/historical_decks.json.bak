@@ -1,0 +1,890 @@
+{
+  "schema_version": "1.0",
+  "notes": "Historical card sets. Dates are ranges — never collapse to a single year. Survival: extant|fragmentary|documented|lost. Holdings are split by institution. Attributions carry roles and confidence. Genealogy is a typed edge list.",
+  "decks": [
+    {
+      "id": "mamluk-c1375",
+      "name": "Mamluk Playing Cards",
+      "name_local": null,
+      "region": "Egypt / Syria",
+      "culture": "Islamic Mamluk Sultanate",
+      "date_earliest": 1370,
+      "date_latest": 1400,
+      "date_display": "c. 1370–1400",
+      "date_basis": "Style analysis and paper evidence; 1375 is the conventional midpoint citation",
+      "date_confidence": "medium",
+      "survival_status": "fragmentary",
+      "cards_known": 15,
+      "cards_original": 52,
+      "structure": {
+        "total_cards": 52,
+        "suits": [
+          "polo_sticks",
+          "cups",
+          "swords",
+          "coins"
+        ],
+        "ranks_per_suit": 13,
+        "court_cards": [
+          "malik (king)",
+          "na'ib malik (viceroy)",
+          "thani na'ib (second viceroy)"
+        ],
+        "trump_cards": 0,
+        "notes": "No trump suit — this is a pure pip deck. Direct ancestor of European playing cards via Moorish transmission."
+      },
+      "material": [
+        "cardboard",
+        "paper"
+      ],
+      "technique": [
+        "hand_painted",
+        "stenciled"
+      ],
+      "language_on_cards": [
+        "Arabic"
+      ],
+      "holdings": [
+        {
+          "institution": "Topkapi Palace Museum",
+          "city": "Istanbul",
+          "country": "Turkey",
+          "cards_held": 15,
+          "accession": null,
+          "digitized": true,
+          "digitization_url": null
+        }
+      ],
+      "attributions": [
+        {
+          "role": "origin_culture",
+          "name": "Mamluk court workshops",
+          "confidence": "high",
+          "notes": null
+        }
+      ],
+      "patron": null,
+      "commissioned_for": null,
+      "purpose": [
+        "gaming"
+      ],
+      "transmission_path": "Entered Europe via Iberian peninsula and Italy c. 1370–1380; suits transformed into cups/coins/swords/clubs in Spain and Italy",
+      "iconography_notes": "No human figures by Islamic convention. Court cards use inscriptions naming the rank rather than depicting figures. Polo stick suit is direct ancestor of the wands/batons suit.",
+      "significance": "Earliest surviving multi-suit playing card set. The four-suit structure and 52-card count established the template for all European playing cards and eventually tarot.",
+      "sources": [
+        "Dummett, Michael. The Game of Tarot. Duckworth, 1980.",
+        "Kaplan, Stuart R. The Encyclopedia of Tarot. Vol. I. U.S. Games Systems, 1978."
+      ],
+      "tags": [
+        "islamic",
+        "no_trumps",
+        "ancestor_deck",
+        "court_cards_inscribed"
+      ]
+    },
+    {
+      "id": "visconti-di-modrone",
+      "name": "Visconti di Modrone Tarot",
+      "name_local": "Carte di Filippo Maria Visconti",
+      "region": "Milan, Lombardy",
+      "culture": "Italian Renaissance",
+      "date_earliest": 1441,
+      "date_latest": 1447,
+      "date_display": "c. 1441–1447",
+      "date_basis": "Heraldic evidence — Visconti–Savoy betrothal arms appear; Bianca Maria Visconti married Francesco Sforza in 1441; Filippo Maria died 1447",
+      "date_confidence": "high",
+      "survival_status": "fragmentary",
+      "cards_known": 67,
+      "cards_original": 78,
+      "structure": {
+        "total_cards": 78,
+        "suits": [
+          "wands",
+          "cups",
+          "swords",
+          "coins"
+        ],
+        "ranks_per_suit": 14,
+        "court_cards": [
+          "king",
+          "queen",
+          "knight",
+          "page"
+        ],
+        "trump_cards": 22,
+        "notes": "The earliest known tarot deck with 22 trump cards. Missing: The Devil, The Tower, The Star, The Moon, The Sun, The World, the Knight of Coins, and three pip cards."
+      },
+      "material": [
+        "vellum"
+      ],
+      "technique": [
+        "tempera",
+        "gold_leaf",
+        "silver_leaf",
+        "tooled_gold"
+      ],
+      "language_on_cards": [
+        "Latin",
+        "Italian"
+      ],
+      "holdings": [
+        {
+          "institution": "Brera Art Library (Biblioteca dell'Accademia di Brera)",
+          "city": "Milan",
+          "country": "Italy",
+          "cards_held": 6,
+          "accession": null,
+          "digitized": false,
+          "digitization_url": null
+        },
+        {
+          "institution": "Yale University's Cary Collection of Playing Cards",
+          "city": "New Haven",
+          "country": "USA",
+          "cards_held": 35,
+          "accession": "Cary Collection",
+          "digitized": true,
+          "digitization_url": "https://beinecke.library.yale.edu/collections/highlights/cary-collection-playing-cards"
+        },
+        {
+          "institution": "Colleoni Collection (private, Bergamo)",
+          "city": "Bergamo",
+          "country": "Italy",
+          "cards_held": 26,
+          "accession": null,
+          "digitized": false,
+          "digitization_url": null
+        }
+      ],
+      "attributions": [
+        {
+          "role": "patron",
+          "name": "Filippo Maria Visconti",
+          "confidence": "high",
+          "notes": "Duke of Milan; arms on card backs"
+        },
+        {
+          "role": "artist",
+          "name": "Bonifacio Bembo (attributed)",
+          "confidence": "medium",
+          "notes": "Attribution based on stylistic comparison with Bembo's documented paintings; not documented in primary sources"
+        }
+      ],
+      "patron": "Filippo Maria Visconti",
+      "commissioned_for": "Personal use, Visconti court",
+      "purpose": [
+        "gaming",
+        "aristocratic_display"
+      ],
+      "transmission_path": null,
+      "iconography_notes": "The earliest tarot trumps. God the Father (The World) shows a nude figure in a mandorla. The Chariot is drawn by horses, not sphinxes — pre-Marseille iconography. The Wheel of Fortune has blindfolded Fortune turning the wheel.",
+      "significance": "The earliest surviving tarot set. Establishes the 78-card structure that endures to the present. The luxury vellum and gold leaf indicate tarot began as aristocratic entertainment, not divination.",
+      "sources": [
+        "Dummett, Michael. The Game of Tarot. Duckworth, 1980.",
+        "Berti, Giordano, and Andrea Vitali. The Tarot of the Old Path. AGM, 2001."
+      ],
+      "tags": [
+        "tarot",
+        "22_trumps",
+        "lombardy",
+        "vellum",
+        "gold_leaf",
+        "court_commissioned",
+        "fragmentary"
+      ]
+    },
+    {
+      "id": "visconti-sforza",
+      "name": "Visconti-Sforza Tarot",
+      "name_local": "Tarocchi Visconti-Sforza",
+      "region": "Milan, Lombardy",
+      "culture": "Italian Renaissance",
+      "date_earliest": 1450,
+      "date_latest": 1480,
+      "date_display": "c. 1450–1480 (core: c. 1451–1453)",
+      "date_basis": "Heraldic arms date the core commission to shortly after Francesco Sforza took Milan in 1450. Bianca Maria's baton device and the Sforza serpent support c. 1451–1453 for the main hand. Some cards likely added by a second workshop c. 1470s.",
+      "date_confidence": "high",
+      "survival_status": "fragmentary",
+      "cards_known": 74,
+      "cards_original": 78,
+      "structure": {
+        "total_cards": 78,
+        "suits": [
+          "wands",
+          "cups",
+          "swords",
+          "coins"
+        ],
+        "ranks_per_suit": 14,
+        "court_cards": [
+          "king",
+          "queen",
+          "knight",
+          "page"
+        ],
+        "trump_cards": 22,
+        "notes": "Missing: The Devil, The Tower, and two minor suit cards. The World shows a female figure in a garland rather than a mandorla — iconographic evolution from Visconti di Modrone."
+      },
+      "material": [
+        "vellum",
+        "parchment"
+      ],
+      "technique": [
+        "tempera",
+        "gold_leaf",
+        "burnished_gold"
+      ],
+      "language_on_cards": [],
+      "holdings": [
+        {
+          "institution": "Morgan Library & Museum",
+          "city": "New York",
+          "country": "USA",
+          "cards_held": 35,
+          "accession": "MS M.630",
+          "digitized": true,
+          "digitization_url": "https://www.themorgan.org/collection/Visconti-Sforza-Tarocchi-Cards"
+        },
+        {
+          "institution": "Accademia Carrara",
+          "city": "Bergamo",
+          "country": "Italy",
+          "cards_held": 26,
+          "accession": null,
+          "digitized": true,
+          "digitization_url": null
+        },
+        {
+          "institution": "Casa Colleoni (private collection)",
+          "city": "Bergamo",
+          "country": "Italy",
+          "cards_held": 13,
+          "accession": null,
+          "digitized": false,
+          "digitization_url": null
+        }
+      ],
+      "attributions": [
+        {
+          "role": "patron",
+          "name": "Francesco Sforza",
+          "confidence": "high",
+          "notes": "Duke of Milan from 1450; Sforza arms on cards"
+        },
+        {
+          "role": "patron",
+          "name": "Bianca Maria Visconti",
+          "confidence": "high",
+          "notes": "Her personal device (baton) appears prominently"
+        },
+        {
+          "role": "artist_primary",
+          "name": "Bonifacio Bembo",
+          "confidence": "high",
+          "notes": "Documented association with the Sforza court; style consistent with his signed works"
+        },
+        {
+          "role": "artist_secondary",
+          "name": "Antonio Cicognara (attributed)",
+          "confidence": "low",
+          "notes": "Possible second hand on the six replacement cards made c. 1470s"
+        }
+      ],
+      "patron": "Francesco Sforza / Bianca Maria Visconti",
+      "commissioned_for": "Sforza court, Milan",
+      "purpose": [
+        "gaming",
+        "aristocratic_display"
+      ],
+      "transmission_path": null,
+      "iconography_notes": "The most reproduced historical tarot. The Strength card shows a woman with a lion (later standard). The Star shows a nude woman pouring water. The Wheel of Fortune shows a king crowning a rising figure. Heraldic imagery throughout reflects Sforza dynastic claims.",
+      "significance": "The most intact and widely reproduced pre-Marseille tarot. Standard reference point for Renaissance tarot iconography. The Morgan Library holding alone has been reproduced in dozens of facsimile editions.",
+      "sources": [
+        "Kaplan, Stuart R. The Encyclopedia of Tarot. Vol. I. U.S. Games Systems, 1978.",
+        "Moakley, Gertrude. The Tarot Cards Painted by Bonifacio Bembo. NYPL, 1966.",
+        "Dummett, Michael. The Game of Tarot. Duckworth, 1980."
+      ],
+      "tags": [
+        "tarot",
+        "22_trumps",
+        "lombardy",
+        "vellum",
+        "gold_leaf",
+        "most_reproduced",
+        "split_holdings"
+      ]
+    },
+    {
+      "id": "charles-vi",
+      "name": "Charles VI Tarot",
+      "name_local": "Tarot de Charles VI",
+      "region": "Northern Italy (probably Ferrara or Milan)",
+      "culture": "Italian Renaissance",
+      "date_earliest": 1392,
+      "date_latest": 1470,
+      "date_display": "c. 1440–1470 (misnamed 'Charles VI' — king died 1422)",
+      "date_basis": "Named after erroneous 19th-century attribution to Charles VI of France. Stylistic analysis places it in Northern Italian workshops c. 1440–1470. The 1392 Charles VI court payment for 'painted cards' refers to different cards entirely.",
+      "date_confidence": "medium",
+      "survival_status": "fragmentary",
+      "cards_known": 17,
+      "cards_original": 78,
+      "structure": {
+        "total_cards": 78,
+        "suits": [
+          "wands",
+          "cups",
+          "swords",
+          "coins"
+        ],
+        "ranks_per_suit": 14,
+        "court_cards": [
+          "king",
+          "queen",
+          "knight",
+          "page"
+        ],
+        "trump_cards": 22,
+        "notes": "Only 17 trump cards survive. Related stylistically to the Visconti-Sforza tradition but distinct workshop."
+      },
+      "material": [
+        "vellum"
+      ],
+      "technique": [
+        "tempera",
+        "gold_leaf"
+      ],
+      "language_on_cards": [],
+      "holdings": [
+        {
+          "institution": "Bibliothèque nationale de France",
+          "city": "Paris",
+          "country": "France",
+          "cards_held": 17,
+          "accession": "BnF Cartes à jouer",
+          "digitized": true,
+          "digitization_url": "https://gallica.bnf.fr"
+        }
+      ],
+      "attributions": [
+        {
+          "role": "origin_region",
+          "name": "Northern Italian workshop",
+          "confidence": "medium",
+          "notes": "Ferrara and Milan both proposed; unresolved"
+        }
+      ],
+      "patron": null,
+      "commissioned_for": "Unknown; entered French royal collections before 1800",
+      "purpose": [
+        "gaming"
+      ],
+      "transmission_path": "Entered French royal library; name Charles VI applied by mistake in 19th century",
+      "iconography_notes": "The Hanged Man is shown by the feet like the Visconti versions. The World shows a city inside a wreath. The Fool has a distinctive jester's motley. Related to but distinct from the Visconti-Sforza tradition.",
+      "significance": "Important witness to early Italian tarot iconography, independent of the Visconti commissions. The misattribution to Charles VI was repeated uncritically for over a century.",
+      "sources": [
+        "Dummett, Michael. The Game of Tarot. Duckworth, 1980.",
+        "Huson, Paul. Mystical Origins of the Tarot. Inner Traditions, 2004."
+      ],
+      "tags": [
+        "tarot",
+        "misnamed",
+        "french_collection",
+        "lombardy_workshop",
+        "fragmentary"
+      ]
+    },
+    {
+      "id": "tarot-de-marseille-dodal",
+      "name": "Tarot de Marseille (Dodal)",
+      "name_local": "Tarot de Marseille — Jean Dodal",
+      "region": "Lyon / Marseille, France",
+      "culture": "French popular print culture",
+      "date_earliest": 1700,
+      "date_latest": 1715,
+      "date_display": "c. 1701–1715",
+      "date_basis": "Jean Dodal registered as cardmaker in Lyon by 1701; surviving examples dated on stylistic and printing grounds to c. 1701–1715",
+      "date_confidence": "high",
+      "survival_status": "extant",
+      "cards_known": 78,
+      "cards_original": 78,
+      "structure": {
+        "total_cards": 78,
+        "suits": [
+          "wands",
+          "cups",
+          "swords",
+          "coins"
+        ],
+        "ranks_per_suit": 14,
+        "court_cards": [
+          "king",
+          "queen",
+          "knight",
+          "page"
+        ],
+        "trump_cards": 22,
+        "notes": "Complete 78-card Tarot de Marseille type I. The Dodal is now considered the most faithful surviving Type I Marseille deck. Restored from originals by Yoav Ben-Dov."
+      },
+      "material": [
+        "paper"
+      ],
+      "technique": [
+        "woodblock_print",
+        "hand_stenciled"
+      ],
+      "language_on_cards": [
+        "French"
+      ],
+      "holdings": [
+        {
+          "institution": "Various private and museum collections",
+          "city": "France",
+          "country": "France",
+          "cards_held": 78,
+          "accession": null,
+          "digitized": true,
+          "digitization_url": "https://www.cbdtarot.com"
+        }
+      ],
+      "attributions": [
+        {
+          "role": "maker",
+          "name": "Jean Dodal",
+          "confidence": "high",
+          "notes": "Name and city appear on several of the 22 trumps"
+        }
+      ],
+      "patron": null,
+      "commissioned_for": "Commercial sale",
+      "purpose": [
+        "gaming",
+        "cartomancy"
+      ],
+      "transmission_path": "Woodblock tradition from Milanese tarot via French cardmaking guilds; standardized Marseille iconography by c. 1650",
+      "iconography_notes": "Type I Marseille. The Papesse (High Priestess) wears a tiara. The Popess controversy suppressed in some later editions. The numbering places Strength at VIII and Justice at XI — opposite of Waite-Smith.",
+      "significance": "The most faithful surviving witness to the Tarot de Marseille Type I tradition. Basis for many modern Marseille reproductions. The Dodal restoration by Yoav Ben-Dov (CBD Tarot) is the most studied modern edition.",
+      "sources": [
+        "Ben-Dov, Yoav. Tarot: The Open Reading. CreateSpace, 2013.",
+        "Jodorowsky, Alejandro, and Marianne Costa. The Way of Tarot. Destiny Books, 2009."
+      ],
+      "tags": [
+        "marseille_type_i",
+        "woodblock",
+        "commercial",
+        "complete",
+        "gaming_deck",
+        "french"
+      ]
+    },
+    {
+      "id": "minchiate-fiorentine",
+      "name": "Minchiate Fiorentine",
+      "name_local": "Minchiate",
+      "region": "Florence, Tuscany",
+      "culture": "Italian Renaissance / Florentine",
+      "date_earliest": 1500,
+      "date_latest": 1530,
+      "date_display": "c. 1500–1530 (game established by c. 1466)",
+      "date_basis": "The word 'minchiate' appears in Florentine records c. 1466. The 97-card structure is documented in a 1530s manuscript. Surviving printed decks are 17th–18th century.",
+      "date_confidence": "medium",
+      "survival_status": "extant",
+      "cards_known": 97,
+      "cards_original": 97,
+      "structure": {
+        "total_cards": 97,
+        "suits": [
+          "wands",
+          "cups",
+          "swords",
+          "coins"
+        ],
+        "ranks_per_suit": 14,
+        "court_cards": [
+          "king",
+          "queen",
+          "knight",
+          "page"
+        ],
+        "trump_cards": 41,
+        "notes": "41 trumps vs. tarot's 22. Added trumps include the 12 zodiac signs, 4 elements (Fire, Water, Air, Earth), and expanded virtues. The Fool is unnumbered as usual. The Papessa and Empress are replaced with the Eastern Emperor and Western Emperor to avoid religious controversy."
+      },
+      "material": [
+        "paper"
+      ],
+      "technique": [
+        "engraving",
+        "hand_colored"
+      ],
+      "language_on_cards": [
+        "Italian"
+      ],
+      "holdings": [
+        {
+          "institution": "Various; printed editions survive in BnF and private collections",
+          "city": null,
+          "country": "France / Italy",
+          "cards_held": 97,
+          "accession": null,
+          "digitized": true,
+          "digitization_url": null
+        }
+      ],
+      "attributions": [
+        {
+          "role": "origin_city",
+          "name": "Florence",
+          "confidence": "high",
+          "notes": "Documented in Florentine tax and civic records from c. 1466 onward"
+        }
+      ],
+      "patron": null,
+      "commissioned_for": "Commercial gaming market",
+      "purpose": [
+        "gaming"
+      ],
+      "transmission_path": "Remained primarily a Florentine game; spread to Rome and Tuscany; declined after 1800",
+      "iconography_notes": "The Papessa and the Empress replaced to avoid controversy. Zodiac signs as trumps is unique to Minchiate. The game was played with 4 players using all 97 cards.",
+      "significance": "Largest trump structure in the tarot family. Demonstrates that the 22-trump count was not fixed — regional games expanded and contracted the trump set. The zodiac trumps influenced later esoteric tarot symbolism.",
+      "sources": [
+        "Dummett, Michael. The Game of Tarot. Duckworth, 1980.",
+        "Pratesi, Franco. 'Italian Cards: New Discoveries.' The Playing Card, Vol. 16–17."
+      ],
+      "tags": [
+        "minchiate",
+        "41_trumps",
+        "zodiac",
+        "florentine",
+        "expanded_structure"
+      ]
+    },
+    {
+      "id": "sola-busca",
+      "name": "Sola-Busca Tarot",
+      "name_local": "Tarocchi Sola-Busca",
+      "region": "Venice or Milan, Italy",
+      "culture": "Italian Renaissance / Hermetic",
+      "date_earliest": 1490,
+      "date_latest": 1500,
+      "date_display": "c. 1491–1500",
+      "date_basis": "Engraving style and costume details place it in the 1490s; Venice is most proposed location based on engraving tradition",
+      "date_confidence": "medium",
+      "survival_status": "extant",
+      "cards_known": 78,
+      "cards_original": 78,
+      "structure": {
+        "total_cards": 78,
+        "suits": [
+          "wands",
+          "cups",
+          "swords",
+          "coins"
+        ],
+        "ranks_per_suit": 14,
+        "court_cards": [
+          "king",
+          "queen",
+          "knight",
+          "page"
+        ],
+        "trump_cards": 22,
+        "notes": "Complete 78-card deck. Unique in depicting the pips (minor arcana) with narrative figures — a feature adopted 400 years later by Waite and Smith in the RWS. Major arcana use Roman military heroes (Nebuchadnezzar, Nimrod, etc.) rather than standard tarot archetypes."
+      },
+      "material": [
+        "paper"
+      ],
+      "technique": [
+        "engraving",
+        "later_hand_coloring"
+      ],
+      "language_on_cards": [],
+      "holdings": [
+        {
+          "institution": "Pinacoteca di Brera",
+          "city": "Milan",
+          "country": "Italy",
+          "cards_held": 78,
+          "accession": null,
+          "digitized": true,
+          "digitization_url": null
+        }
+      ],
+      "attributions": [
+        {
+          "role": "patron",
+          "name": "Sola-Busca family",
+          "confidence": "medium",
+          "notes": "Named after the Milanese family in whose collection it was held for centuries"
+        },
+        {
+          "role": "engraver",
+          "name": "Unknown Venetian engraver",
+          "confidence": "low",
+          "notes": "Style suggests Venetian workshop; no signature survives"
+        }
+      ],
+      "patron": "Sola-Busca family (attributed)",
+      "commissioned_for": "Unknown; possibly alchemical or hermetic society",
+      "purpose": [
+        "esoteric",
+        "gaming"
+      ],
+      "transmission_path": "Held by Sola-Busca family until late 19th century; Waite and Smith viewed photographs at the British Museum c. 1909",
+      "iconography_notes": "The first fully illustrated minor arcana. Pamela Colman Smith is documented to have viewed photographs of this deck at the British Museum around 1909, the same year she produced the Rider-Waite-Smith deck. Direct iconographic borrowings from the Sola-Busca minor arcana into the RWS are extensively documented.",
+      "significance": "The missing link between Renaissance engraving and modern tarot. Smith's borrowings from Sola-Busca minor arcana make this deck a hidden parent of the Rider-Waite-Smith — the most influential tarot ever printed.",
+      "sources": [
+        "Farley, Helen. A Cultural History of Tarot. I.B. Tauris, 2009.",
+        "Decker, Ronald, Thierry Depaulis, and Michael Dummett. A Wicked Pack of Cards. St. Martin's Press, 1996."
+      ],
+      "tags": [
+        "esoteric",
+        "narrative_pips",
+        "engraved",
+        "hermetic",
+        "rws_source",
+        "complete",
+        "venetian"
+      ]
+    },
+    {
+      "id": "rider-waite-smith",
+      "name": "Rider-Waite-Smith Tarot",
+      "name_local": "The Rider Tarot",
+      "region": "London, England",
+      "culture": "Edwardian / Golden Dawn",
+      "date_earliest": 1909,
+      "date_latest": 1909,
+      "date_display": "December 1909",
+      "date_basis": "Published by Rider & Company, London, December 1909. Copyright held by A.E. Waite; drawn by Pamela Colman Smith.",
+      "date_confidence": "exact",
+      "survival_status": "extant",
+      "cards_known": 78,
+      "cards_original": 78,
+      "structure": {
+        "total_cards": 78,
+        "suits": [
+          "wands",
+          "cups",
+          "swords",
+          "pentacles"
+        ],
+        "ranks_per_suit": 14,
+        "court_cards": [
+          "king",
+          "queen",
+          "knight",
+          "page"
+        ],
+        "trump_cards": 22,
+        "notes": "Coins suit renamed Pentacles. All 78 cards fully illustrated with narrative scenes — a direct departure from all prior pip-only minor arcana traditions. Strength at VIII, Justice at XI (reversed from Marseille). Fool assigned to 0."
+      },
+      "material": [
+        "paper"
+      ],
+      "technique": [
+        "pen_and_ink",
+        "commercial_printing"
+      ],
+      "language_on_cards": [
+        "English"
+      ],
+      "holdings": [
+        {
+          "institution": "Widely distributed; original plates at University of London archives",
+          "city": "London",
+          "country": "UK",
+          "cards_held": 78,
+          "accession": null,
+          "digitized": true,
+          "digitization_url": "https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_tarot"
+        }
+      ],
+      "attributions": [
+        {
+          "role": "artist",
+          "name": "Pamela Colman Smith",
+          "confidence": "high",
+          "notes": "Produced all 78 illustrations; paid a flat fee; name omitted from early editions — the 'forgotten artist' of the most famous tarot"
+        },
+        {
+          "role": "esoteric_designer",
+          "name": "Arthur Edward Waite",
+          "confidence": "high",
+          "notes": "Provided symbolic program and Golden Dawn correspondences; commissioned Smith under his direction"
+        },
+        {
+          "role": "publisher",
+          "name": "William Rider & Son",
+          "confidence": "high",
+          "notes": "Published December 1909"
+        }
+      ],
+      "patron": "A.E. Waite / Rider & Son",
+      "commissioned_for": "General esoteric market",
+      "purpose": [
+        "divination",
+        "esoteric",
+        "self_reflection"
+      ],
+      "transmission_path": "Became the standard tarot in the English-speaking world after 1970s occult revival; copyright expired; now the most reproduced tarot structure in history",
+      "iconography_notes": "All pip cards (Ace–10 in each suit) given full narrative scenes — unprecedented in tarot history. Draws directly from Sola-Busca (confirmed) and Marseille. The Page of Cups fish image is lifted almost directly from a Sola-Busca card.",
+      "significance": "The defining tarot of the 20th and 21st centuries. Every modern deck is either a derivative or a deliberate departure from RWS. Smith's contribution was uncredited for most of the deck's existence; the name 'Rider-Waite' erased the artist.",
+      "sources": [
+        "Farley, Helen. A Cultural History of Tarot. I.B. Tauris, 2009.",
+        "Greer, Mary K. Women of the Golden Dawn. Park Street Press, 1995.",
+        "Decker, Ronald, and Michael Dummett. A History of the Occult Tarot. Duckworth, 2002."
+      ],
+      "tags": [
+        "golden_dawn",
+        "fully_illustrated",
+        "english",
+        "esoteric",
+        "most_influential",
+        "complete",
+        "pip_narrative"
+      ]
+    },
+    {
+      "id": "thoth-tarot",
+      "name": "Thoth Tarot",
+      "name_local": "The Book of Thoth: A Short Essay on the Tarot of the Egyptians",
+      "region": "London / New York",
+      "culture": "Thelema / Crowleyan",
+      "date_earliest": 1938,
+      "date_latest": 1943,
+      "date_display": "1938–1943 (published 1969)",
+      "date_basis": "Work commenced 1938; Lady Frieda Harris produced paintings 1938–1943 under Crowley's direction. Deck not published in Crowley's lifetime; first published 1969 by Grady McMurtry / O.T.O.",
+      "date_confidence": "high",
+      "survival_status": "extant",
+      "cards_known": 78,
+      "cards_original": 78,
+      "structure": {
+        "total_cards": 78,
+        "suits": [
+          "wands",
+          "cups",
+          "swords",
+          "disks"
+        ],
+        "ranks_per_suit": 14,
+        "court_cards": [
+          "knight (=king)",
+          "queen",
+          "prince (=knight)",
+          "princess (=page)"
+        ],
+        "trump_cards": 22,
+        "notes": "Court card hierarchy restructured. Coins renamed Disks. Strength renamed Lust (XI), Justice renamed Adjustment (VIII). The Fool assigned to 0. Projective geometry (Frieda Harris's system) underlies the visual structure."
+      },
+      "material": [
+        "paper",
+        "gouache_originals"
+      ],
+      "technique": [
+        "gouache_on_board",
+        "commercial_printing"
+      ],
+      "language_on_cards": [
+        "English",
+        "Hebrew"
+      ],
+      "holdings": [
+        {
+          "institution": "Warburg Institute (originals)",
+          "city": "London",
+          "country": "UK",
+          "cards_held": 78,
+          "accession": null,
+          "digitized": false,
+          "digitization_url": null
+        }
+      ],
+      "attributions": [
+        {
+          "role": "artist",
+          "name": "Lady Frieda Harris",
+          "confidence": "high",
+          "notes": "Produced all 78 paintings; used projective geometry (inspired by Rudolf Steiner) as underlying visual system"
+        },
+        {
+          "role": "esoteric_designer",
+          "name": "Aleister Crowley",
+          "confidence": "high",
+          "notes": "Directed Harris according to his Thelemic and Kabbalah system; correspondence between them survives"
+        }
+      ],
+      "patron": "Aleister Crowley",
+      "commissioned_for": "Thelemic esoteric system; companion to The Book of Thoth text",
+      "purpose": [
+        "divination",
+        "esoteric",
+        "thelemic_system"
+      ],
+      "transmission_path": "Published posthumously 1969; standard deck for Thelemic practitioners and a major influence on occult revival decks",
+      "iconography_notes": "The visual language is projective geometry — forms that appear to move and fold into each other. The Lust card (XI) depicts Babalon riding the Beast. The Fool is the most complex Fool card in any deck — an empty, boundless figure. Hebrew and astrological attributions are visible on card faces.",
+      "significance": "The second major axis of modern tarot after RWS. Where RWS is narrative and accessible, Thoth is geometric and initiatory. The two traditions split essentially all modern tarot into camps.",
+      "sources": [
+        "Crowley, Aleister. The Book of Thoth. O.T.O., 1944.",
+        "DuQuette, Lon Milo. Understanding Aleister Crowley's Thoth Tarot. Weiser, 2003."
+      ],
+      "tags": [
+        "thelema",
+        "golden_dawn",
+        "projective_geometry",
+        "esoteric",
+        "complete",
+        "english",
+        "posthumous_publication"
+      ]
+    }
+  ],
+  "genealogy": [
+    {
+      "from": "mamluk-c1375",
+      "to": "visconti-di-modrone",
+      "relation": "ancestor",
+      "notes": "Mamluk four-suit structure transmitted via Iberian and Italian card-making tradition; tarot added the 22-trump layer on top of the inherited suit structure"
+    },
+    {
+      "from": "visconti-di-modrone",
+      "to": "visconti-sforza",
+      "relation": "same_workshop_tradition",
+      "notes": "Both Lombardy court commissions; shared iconographic conventions; Visconti-Sforza is more complete and better documented"
+    },
+    {
+      "from": "visconti-di-modrone",
+      "to": "charles-vi",
+      "relation": "parallel_workshop",
+      "notes": "Independent Northern Italian workshop working from same iconographic tradition"
+    },
+    {
+      "from": "visconti-sforza",
+      "to": "tarot-de-marseille-dodal",
+      "relation": "ancestor_via_woodblock_tradition",
+      "notes": "Marseille iconography descends from Lombardy tarot via Piedmontese cardmakers in the 15th–16th century. The woodblock standardization flattened and simplified the aristocratic originals."
+    },
+    {
+      "from": "tarot-de-marseille-dodal",
+      "to": "rider-waite-smith",
+      "relation": "reaction_against",
+      "notes": "Waite explicitly redesigned against the Marseille tradition, restoring what he believed were older esoteric correspondences. He kept the card order and structure while remaking the iconography entirely."
+    },
+    {
+      "from": "sola-busca",
+      "to": "rider-waite-smith",
+      "relation": "direct_iconographic_source",
+      "notes": "Pamela Colman Smith viewed photographs of the Sola-Busca at the British Museum c. 1909. The narrative pip card concept and specific compositions are demonstrably borrowed."
+    },
+    {
+      "from": "rider-waite-smith",
+      "to": "thoth-tarot",
+      "relation": "parallel_golden_dawn_tradition",
+      "notes": "Both descend from the Hermetic Order of the Golden Dawn's esoteric system. Waite and Crowley were rivals in the same tradition. Thoth is in explicit dialogue with (and departure from) RWS."
+    },
+    {
+      "from": "visconti-sforza",
+      "to": "minchiate-fiorentine",
+      "relation": "parallel_regional_variant",
+      "notes": "Both expand on the same Lombard-derived trump structure. Minchiate added trumps; tarot proper stayed at 22."
+    }
+  ]
+}
