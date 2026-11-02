@@ -1,11 +1,15 @@
-import ftplib, os
+import ftplib, ssl, os
 
 host = 'pixie-ss1-ftp.porkbun.com'
 user = 'tarocchi.help'
-pw   = 'HxJKsLbZrzKRamxh9Vyq^mCD'
+pw   = os.environ.get('TAROCCHI_FTP_PASS', '')
+if not pw:
+    raise SystemExit('TAROCCHI_FTP_PASS not set in environment')
 
-ftp = ftplib.FTP(host)
+ctx = ssl.create_default_context()
+ftp = ftplib.FTP_TLS(host, timeout=120, context=ctx)
 ftp.login(user, pw)
+ftp.prot_p()
 ftp.set_pasv(True)
 print('LOGIN OK')
 print('ROOT:', ftp.nlst())

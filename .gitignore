@@ -4,3 +4,8 @@ __pycache__/
 *.pyc
 *.log
 .venv/
+
+# secrets (added by DEV_SWEEP_2026-06 FIX)
+.env
+.env.*
+!.env.example

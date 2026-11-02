@@ -1,6 +1,9 @@
-import ftplib
+import ftplib, os
+_pw = os.environ.get('TAROCCHI_FTP_PASS', '')
+if not _pw:
+    raise SystemExit('TAROCCHI_FTP_PASS not set in environment')
 ftp = ftplib.FTP('pixie-ss1-ftp.porkbun.com')
-ftp.login('tarocchi.help', 'HxJKsLbZrzKRamxh9Vyq^mCD')
+ftp.login('tarocchi.help', _pw)
 ftp.cwd('data/images')
 items = ftp.nlst()
 print('data/images/ contents:', items)

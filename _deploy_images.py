@@ -3,7 +3,9 @@ import ftplib, os, time
 
 HOST = 'pixie-ss1-ftp.porkbun.com'
 USER = 'tarocchi.help'
-PW   = 'HxJKsLbZrzKRamxh9Vyq^mCD'
+PW   = os.environ.get('TAROCCHI_FTP_PASS', '')
+if not PW:
+    raise SystemExit('TAROCCHI_FTP_PASS not set in environment')
 
 def connect():
     ftp = ftplib.FTP()
