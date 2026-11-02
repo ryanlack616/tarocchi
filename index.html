@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>tarocchi.help — the cards help you think</title>
-<meta name="description" content="A serious tarot reading tool. 78 cards, 5 spreads, AI synthesis.">
+<meta name="description" content="A serious tarot reading tool. 78 cards, 5 spreads, and grounded local synthesis.">
 <meta property="og:title" content="tarocchi.help">
-<meta property="og:description" content="The cards help you think. 78-card reader with AI synthesis.">
+<meta property="og:description" content="The cards help you think. A 78-card reader with five spreads and grounded local synthesis.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://tarocchi.help/">
 <meta name="theme-color" content="#0d0a14">
@@ -172,7 +172,7 @@ body { transition: background 0.3s ease, color 0.3s ease; }
 .spread-card::before {
   content: ''; position: absolute; inset: 0;
   background: var(--violet-glow); opacity: 0;
-  transition: opacity 0.2s;
+  transition: opacity 0.2s; pointer-events: none;
 }
 .spread-card:hover { border-color: var(--accent2); transform: translateY(-2px); }
 .spread-card:hover::before { opacity: 1; }
@@ -627,6 +627,11 @@ body { transition: background 0.3s ease, color 0.3s ease; }
   box-shadow: 0 0 16px var(--accent-glow);
   cursor: pointer;
 }
+@keyframes deal-card {
+  from { opacity: 0; transform: translateY(24px) scale(0.82) rotate(-2deg); }
+  to { opacity: 1; transform: translateY(0) scale(1) rotate(0); }
+}
+.tarot-card.dealing { animation: deal-card 0.45s cubic-bezier(0.2, 0.8, 0.2, 1); }
 
 /* Responsive */
 @media (max-width: 480px) {
@@ -660,7 +665,7 @@ body { transition: background 0.3s ease, color 0.3s ease; }
 
 <!-- ══ LANDING ══ -->
 <div id="view-landing" class="view active">
-  <div class="landing-eyebrow">78 cards · 5 spreads · AI synthesis</div>
+  <div class="landing-eyebrow">78 cards · 5 spreads · local synthesis</div>
   <h1 class="landing-title">tarocchi<span>.</span>help</h1>
   <p class="landing-subtitle">the cards help you think</p>
   <div class="landing-cards-preview">
@@ -688,7 +693,7 @@ body { transition: background 0.3s ease, color 0.3s ease; }
   <div class="art-picker">
     <span>Deck:</span>
     <select class="deck-select" id="deck-picker" onchange="setArtDeck(this.value)">
-      <option value="svg">Minimal SVG (default)</option>
+      <option value="svg">Minimal SVG</option>
     </select>
   </div>
   <div class="deck-note" id="deck-note"></div>
@@ -792,6 +797,16 @@ let SPREADS = [];
 let MANIFEST = {};      // deck_id -> {card_id: path}
 let DECK_META = {};     // deck_id -> {name, date_earliest, ...}
 
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, character => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+  })[character]);
+}
+
 async function loadData() {
   const [cardsResp, spreadsResp, manifestResp, decksResp] = await Promise.all([
     fetch('data/cards.json'),
@@ -799,13 +814,26 @@ async function loadData() {
     fetch('data/images/manifest.json').catch(() => null),
     fetch('data/historical_decks.json').catch(() => null),
   ]);
+  if (!cardsResp.ok || !spreadsResp.ok) {
+    throw new Error('Required tarot data could not be loaded.');
+  }
   CARDS = await cardsResp.json();
   SPREADS = await spreadsResp.json();
-  MANIFEST = manifestResp ? await manifestResp.json() : {};
-  if (decksResp) {
+  MANIFEST = manifestResp?.ok ? await manifestResp.json() : {};
+  if (decksResp?.ok) {
     const dd = await decksResp.json();
     for (const d of (dd.decks || [])) DECK_META[d.id] = d;
   }
+}
+
+function showLoadError() {
+  const error = document.createElement('div');
+  const message = location.protocol === 'file:'
+    ? 'Serve this folder from an HTTP server; browsers block the data files when opened directly.'
+    : 'Reload the page or check that the site deployment includes the data folder.';
+  error.style.cssText = 'position:fixed;inset:0;z-index:200;display:grid;place-items:center;padding:24px;background:var(--bg);color:var(--text);font-family:var(--font-serif);text-align:center';
+  error.innerHTML = `<div><h1 style="font-size:32px;font-weight:400;margin-bottom:12px">The cards are unavailable</h1><p style="color:var(--muted);font-size:16px">${escapeHTML(message)}</p></div>`;
+  document.body.appendChild(error);
 }
 
 // ══════════════════════════════
@@ -857,9 +885,9 @@ function buildSpreadGrid() {
     el.className = 'spread-card';
     el.innerHTML = `
       <div class="spread-card-count">${sp.card_count} card${sp.card_count > 1 ? 's' : ''}</div>
-      <div class="spread-card-name">${sp.name}</div>
-      <div class="spread-card-name-it">${sp.name_it}</div>
-      <div class="spread-card-desc">${sp.description}</div>
+      <div class="spread-card-name">${escapeHTML(sp.name)}</div>
+      <div class="spread-card-name-it">${escapeHTML(sp.name_it)}</div>
+      <div class="spread-card-desc">${escapeHTML(sp.description)}</div>
     `;
     el.onclick = () => selectSpread(sp);
     grid.appendChild(el);
@@ -1032,6 +1060,8 @@ function drawCard() {
 
   const cardEl = document.getElementById(`card-slot-${nextIndex}`);
   cardEl.classList.add('occupied');
+  cardEl.classList.add('dealing');
+  cardEl.addEventListener('animationend', () => cardEl.classList.remove('dealing'), { once: true });
 
   // Fill face content (hidden until card is clicked to reveal)
   const face = cardEl.querySelector('.card-face');
@@ -1039,13 +1069,13 @@ function drawCard() {
   if (imgSrc) {
     face.classList.add('rws-face');
     face.innerHTML = `
-      <img src="${imgSrc}" alt="${card.name}" onerror="this.parentElement.innerHTML='<div style=\'font-family:var(--font-mono);font-size:9px;color:var(--muted);text-align:center;padding:8px\'>${card.name}</div>'">
+      <img src="${escapeHTML(imgSrc)}" alt="${escapeHTML(card.name)}" onerror="this.parentElement.textContent='Image unavailable'">
       ${reversed ? '<div class="card-reversed-label">reversed</div>' : ''}`;
   } else {
     face.innerHTML = `
-      <div class="card-arcana-badge">${card.suit || card.arcana}</div>
+      <div class="card-arcana-badge">${escapeHTML(card.suit || card.arcana)}</div>
       ${renderCardArt(card, 40)}
-      <div class="card-name-display">${card.name}</div>
+      <div class="card-name-display">${escapeHTML(card.name)}</div>
       ${reversed ? '<div class="card-reversed-label">reversed</div>' : ''}
     `;
   }
@@ -1111,10 +1141,10 @@ function buildReadingView() {
     const imgSrc = cardImageSrc(d.card.id);
     const faceClass = `card-face${d.reversed ? ' reversed-face' : ''}${imgSrc ? ' rws-face' : ''}`;
     const faceContent = imgSrc
-      ? `<img src="${imgSrc}" alt="${d.card.name}" onerror="this.style.display='none'">${d.reversed ? '<div class="card-reversed-label">reversed</div>' : ''}`
-      : `<div class="card-arcana-badge">${d.card.suit || d.card.arcana}</div>
+      ? `<img src="${escapeHTML(imgSrc)}" alt="${escapeHTML(d.card.name)}" onerror="this.style.display='none'">${d.reversed ? '<div class="card-reversed-label">reversed</div>' : ''}`
+      : `<div class="card-arcana-badge">${escapeHTML(d.card.suit || d.card.arcana)}</div>
             ${renderCardArt(d.card, 40)}
-            <div class="card-name-display">${d.card.name}</div>
+            <div class="card-name-display">${escapeHTML(d.card.name)}</div>
             ${d.reversed ? '<div class="card-reversed-label">reversed</div>' : ''}`;
     item.innerHTML = `
       <div class="tarot-card">
@@ -1123,8 +1153,8 @@ function buildReadingView() {
           <div class="card-back-face"><div class="card-back-pattern"><div class="card-back-symbol">✦</div></div></div>
         </div>
       </div>
-      <div class="reading-pos-label">${pos.label}</div>
-      <div class="reading-card-name">${d.card.name}${d.reversed ? ' <em>(R)</em>' : ''}</div>
+      <div class="reading-pos-label">${escapeHTML(pos.label)}</div>
+      <div class="reading-card-name">${escapeHTML(d.card.name)}${d.reversed ? ' <em>(R)</em>' : ''}</div>
     `;
     item.onclick = () => scrollToMeaning(i);
     row.appendChild(item);
@@ -1141,13 +1171,13 @@ function buildReadingView() {
     item.className = 'card-meaning-item';
     item.id = `meaning-${i}`;
     item.innerHTML = `
-      <div class="meaning-position">${pos.label}</div>
-      <div class="meaning-card-name">${d.card.name}</div>
-      <div class="meaning-card-name-it">${d.card.name_it}</div>
+      <div class="meaning-position">${escapeHTML(pos.label)}</div>
+      <div class="meaning-card-name">${escapeHTML(d.card.name)}</div>
+      <div class="meaning-card-name-it">${escapeHTML(d.card.name_it)}</div>
       <div class="meaning-keywords">
-        ${kws.map(k => `<span class="keyword-pill${d.reversed ? ' shadow' : ''}">${k}</span>`).join('')}
+        ${kws.map(k => `<span class="keyword-pill${d.reversed ? ' shadow' : ''}">${escapeHTML(k)}</span>`).join('')}
       </div>
-      <div class="meaning-text">${meaning}</div>
+      <div class="meaning-text">${escapeHTML(meaning)}</div>
       ${d.reversed ? '<div class="meaning-orientation">↓ reversed</div>' : ''}
     `;
     meanings.appendChild(item);
@@ -1170,36 +1200,8 @@ async function generateBrief() {
   const brief = document.getElementById('ai-brief-text');
   brief.classList.add('loading');
 
-  // Build context for the AI
-  const cardLines = state.drawn.map((d, i) => {
-    const pos = state.spread.positions[i];
-    const orientation = d.reversed ? 'reversed' : 'upright';
-    const meaning = d.reversed ? d.card.reversed_meaning : d.card.upright_meaning;
-    return `Position: ${pos.label}\nCard: ${d.card.name} (${orientation})\nMeaning: ${meaning}\nKeywords: ${(d.reversed ? d.card.shadow_keywords : d.card.keywords).join(', ')}`;
-  }).join('\n\n');
-
-  const intentionLine = state.intention ? `\nThe querent's question: "${state.intention}"` : '';
-  const prompt = `You are a thoughtful, grounded tarot reader.${intentionLine} The querent has drawn the following cards in a ${state.spread.name} spread:\n\n${cardLines}\n\nWrite a synthesis of 3-5 sentences that weaves these cards together into a coherent, compassionate reading. Focus on actionable insight and honest reflection. Do not be vague or generic. Speak to the specific energies at play. Do not use the word "journey."`;
-
-  // Try speed_layer endpoint first, fall back to static synthesis
-  let text = '';
-  try {
-    const response = await fetch('/ai', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ prompt, max_tokens: 300 }),
-      signal: AbortSignal.timeout(12000)
-    });
-    if (response.ok) {
-      const data = await response.json();
-      text = data.text || data.content || data.response || '';
-    }
-  } catch (e) {
-    // AI unavailable — generate static synthesis
-    text = buildStaticSynthesis();
-  }
-
-  if (!text) text = buildStaticSynthesis();
+  // Generate the local deterministic synthesis.
+  const text = buildStaticSynthesis();
 
   brief.classList.remove('loading');
   typewriterEffect(brief, text);
@@ -1255,11 +1257,11 @@ function loadFromHash() {
   try {
     const data = JSON.parse(atob(hash.slice(3)));
     const spread = SPREADS.find(s => s.id === data.s);
-    if (!spread) return false;
+    if (!spread || !Array.isArray(data.c) || data.c.length !== spread.positions.length) return false;
     state.spread = spread;
     const drawn = data.c.map((entry, i) => {
       const card = CARDS.find(c => c.id === entry.id);
-      if (!card) return null;
+      if (!card || !entry || (entry.r !== 0 && entry.r !== 1)) return null;
       return { card, reversed: entry.r === 1, positionIndex: i };
     }).filter(Boolean);
     if (drawn.length !== data.c.length) return false;
@@ -1283,15 +1285,23 @@ function loadFromHash() {
 //  JOURNAL
 // ══════════════════════════════
 function saveToJournal(reading) {
-  let journal = JSON.parse(localStorage.getItem('tarocchi_journal') || '[]');
-  journal.unshift(reading);
-  journal = journal.slice(0, 10);
-  localStorage.setItem('tarocchi_journal', JSON.stringify(journal));
+  try {
+    const stored = JSON.parse(localStorage.getItem('tarocchi_journal') || '[]');
+    const journal = Array.isArray(stored) ? stored : [];
+    journal.unshift(reading);
+    localStorage.setItem('tarocchi_journal', JSON.stringify(journal.slice(0, 10)));
+  } catch (e) {
+    // Private browsing and disabled storage should not block a reading.
+  }
 }
 
 function buildJournalView() {
   const list = document.getElementById('journal-list');
-  const journal = JSON.parse(localStorage.getItem('tarocchi_journal') || '[]');
+  let journal = [];
+  try {
+    const stored = JSON.parse(localStorage.getItem('tarocchi_journal') || '[]');
+    journal = Array.isArray(stored) ? stored : [];
+  } catch (e) {}
   list.innerHTML = '';
   if (journal.length === 0) {
     list.innerHTML = '<p style="font-family:var(--font-serif);font-style:italic;color:var(--muted);text-align:center;padding:40px">No readings yet.</p>';
@@ -1303,8 +1313,8 @@ function buildJournalView() {
     entry.className = 'journal-entry';
     entry.innerHTML = `
       <div class="journal-entry-date">${date.toLocaleDateString('en-US', { weekday:'long', year:'numeric', month:'long', day:'numeric' })}</div>
-      <div class="journal-entry-spread">${reading.spreadName}</div>
-      <div class="journal-entry-cards">${reading.drawn.map(d => d.card.name + (d.reversed ? ' (R)' : '')).join(' · ')}</div>
+      <div class="journal-entry-spread">${escapeHTML(reading.spreadName)}</div>
+      <div class="journal-entry-cards">${escapeHTML(reading.drawn.map(d => d.card.name + (d.reversed ? ' (R)' : '')).join(' · '))}</div>
     `;
     entry.onclick = () => replayReading(reading);
     list.appendChild(entry);
@@ -1331,10 +1341,11 @@ function replayReading(reading) {
 //   user's deck → rider-waite-smith → null (SVG fallback)
 function cardImageSrc(cardId) {
   if (state.artDeck === 'svg') return null;
+  const manifestCardId = cardId.replace(/^pentacles-/, 'pents-');
   const cur = MANIFEST[state.artDeck];
-  if (cur && cur[cardId]) return cur[cardId];
+  if (cur && (cur[cardId] || cur[manifestCardId])) return cur[cardId] || cur[manifestCardId];
   const rws = MANIFEST['rider-waite-smith'];
-  if (rws && rws[cardId]) return rws[cardId];
+  if (rws && (rws[cardId] || rws[manifestCardId])) return rws[cardId] || rws[manifestCardId];
   return null;
 }
 
@@ -1348,7 +1359,7 @@ function populateDeckPicker() {
   const sel = document.getElementById('deck-picker');
   if (!sel) return;
 
-  // Preserve 'svg' as first option
+  // Preserve SVG as the first option; use RWS when available for a visual default.
   const opts = [];
   const deckIds = Object.keys(MANIFEST)
     .filter(id => Object.keys(MANIFEST[id] || {}).length >= 22)
@@ -1368,17 +1379,17 @@ function populateDeckPicker() {
     const year = meta.date_earliest ? ` (${meta.date_earliest})` : '';
     const name = meta.name || id.replace(/-/g, ' ');
     const coverage = minorCount >= 40 ? '' : ' — majors';
-    opts.push(`<option value="${id}">${name}${year}${coverage}</option>`);
+    opts.push(`<option value="${escapeHTML(id)}">${escapeHTML(name)}${escapeHTML(year)}${escapeHTML(coverage)}</option>`);
   }
 
   // Keep the SVG option + append discovered decks
   sel.innerHTML =
-    `<option value="svg">Minimal SVG (default)</option>` +
+    `<option value="svg">Minimal SVG</option>` +
     opts.join('');
 
   // Restore last choice from localStorage
-  let saved = 'svg';
-  try { saved = localStorage.getItem('tarocchi-deck') || 'svg'; } catch(e){}
+  let saved = 'rider-waite-smith';
+  try { saved = localStorage.getItem('tarocchi-deck') || 'rider-waite-smith'; } catch(e){}
   const valid = saved === 'svg' || (MANIFEST[saved] && Object.keys(MANIFEST[saved]).length >= 22);
   setArtDeck(valid ? saved : 'svg');
 }
@@ -1442,7 +1453,7 @@ const SUIT_SYMBOLS = {
 function renderCardArt(card, size = 48) {
   const imgSrc = cardImageSrc(card.id);
   if (imgSrc) {
-    return `<img src="${imgSrc}" style="width:${size}px;height:${Math.round(size*1.6)}px;object-fit:cover;object-position:center;border-radius:1px;flex-shrink:0" onerror="this.style.display='none'" alt="${card.name}">`;
+    return `<img src="${escapeHTML(imgSrc)}" style="width:${size}px;height:${Math.round(size*1.6)}px;object-fit:cover;object-position:center;border-radius:1px;flex-shrink:0" onerror="this.style.display='none'" alt="${escapeHTML(card.name)}">`;
   }
   const symbol = MAJOR_SYMBOLS[card.id] || SUIT_SYMBOLS[card.suit] || '';
   return `<svg class="card-svg" viewBox="0 0 40 40" width="${size}" height="${size}" fill="none" xmlns="http://www.w3.org/2000/svg" style="color:var(--accent);flex-shrink:0">${symbol}</svg>`;
@@ -1457,12 +1468,17 @@ document.getElementById('nav-journal-btn').addEventListener('click', () => {
 });
 
 async function init() {
-  applyStoredPrefs();
-  await loadData();
-  populateDeckPicker();
-  // Check for shared reading in URL hash
-  if (!loadFromHash()) {
-    showView('view-landing');
+  try {
+    applyStoredPrefs();
+    await loadData();
+    populateDeckPicker();
+    // Check for shared reading in URL hash
+    if (!loadFromHash()) {
+      showView('view-landing');
+    }
+  } catch (error) {
+    console.error(error);
+    showLoadError();
   }
 }
 

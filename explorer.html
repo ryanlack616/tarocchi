@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>tarocchi.help — Historical Explorer</title>
-<meta name="description" content="1100 years of tarot history: 39 decks, genealogy, card witnesses, and the people who shaped the tradition.">
+<meta name="description" content="More than 1,100 years of tarot history: 49 decks, genealogy, card witnesses, and the people who shaped the tradition.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'><rect width='40' height='40' rx='4' fill='%230d0a14'/><path d='M20 6 L24 14 L32 14 L26 19 L28 27 L20 22 L12 27 L14 19 L8 14 L16 14 Z' stroke='%23c9a84c' stroke-width='1.2' fill='none'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -606,7 +606,7 @@ table.wit-table {
 <header class="site-header">
   <a href="index.html" class="back-link">← reader</a>
   <div class="header-title">tarocchi — <span>historical explorer</span></div>
-  <div class="header-sub">39 decks · 1100 years · 65 genealogy edges</div>
+  <div class="header-sub">49 decks · 1,100+ years · 83 genealogy edges</div>
 </header>
 
 <nav class="tab-nav">
@@ -782,7 +782,7 @@ const PEOPLE = [
     role: "Artist / restorer / tarosophist",
     wikipedia: "Alejandro_Jodorowsky",
     bio: "Chilean-French filmmaker and comic artist who devoted decades to restoring the Nicolas Conver 1761 Marseille Tarot. Working with cartographer Philippe Camoin (a descendant of Conver's successors), Jodorowsky's 1997 Tarot de Marseille restoration recovered original woodblock proportions and color relationships considered definitive by the Marseille tradition.",
-    decks: ["Tarot de Marseille (Conver, 1761)"]
+     decks: ["Tarot de Marseille (Conver, 1761)", "Jodorowsky-Camoin Tarot de Marseille"]
   },
   {
     name: "Giuseppe Maria Mitelli",
@@ -845,6 +845,55 @@ const PEOPLE = [
     wikipedia: "Motherpeace_Tarot",
     bio: "American feminist spirituality researchers and artists who collaborated in Berkeley from 1978 to design the Motherpeace Tarot, published 1983. Drawing on second-wave feminism, Marija Gimbutas's goddess-civilization archaeology, and cross-cultural ritual research, they reframed the entire 78-card tarot structure around pre-patriarchal goddess imagery and non-hierarchical court ranks (Daughter/Son/Priestess/Shaman). Motherpeace is the founding document of feminist tarot and the precedent for every post-RWS deck that treats the 78-card structure as a vehicle for reimagined cultural content — including most of the indie-deck wave of the 2010s–2020s.",
     decks: ["Motherpeace Tarot (Karen Vogel & Vicki Noble, 1981)"]
+  },
+  {
+    name: "Lloyd Morgan & Bill Greer",
+    dates: "20th century",
+    role: "Deck creators / artist",
+    bio: "Creators of the Morgan-Greer Tarot (1979), a saturated, borderless Rider-Waite-Smith variant that helped define the late-20th-century commercial RWS revival.",
+    decks: ["Morgan-Greer Tarot"]
+  },
+  {
+    name: "Mary Hanson-Roberts",
+    dates: "20th–21st century",
+    role: "Artist / recolorist",
+    bio: "Artist credited with recoloring the Universal Waite Tarot, a widely used contemporary presentation of Pamela Colman Smith's Rider-Waite-Smith artwork.",
+    decks: ["Universal Waite Tarot"]
+  },
+  {
+    name: "Robin Wood",
+    dates: "1953–2021",
+    role: "Artist / deck designer",
+    bio: "Creator of the Robin Wood Tarot (1991), one of the defining pagan and nature-centered reinterpretations of the Rider-Waite-Smith system.",
+    decks: ["Robin Wood Tarot"]
+  },
+  {
+    name: "Philippe Camoin",
+    dates: "20th–21st century",
+    role: "Cardmaker / restorer",
+    bio: "Marseille cardmaker and collaborator with Alejandro Jodorowsky on the 1997 restoration of a Tarot de Marseille tradition associated with the Camoin family and Nicolas Conver.",
+    decks: ["Jodorowsky-Camoin Tarot de Marseille"]
+  },
+  {
+    name: "Kim Krans",
+    dates: "21st century",
+    role: "Artist / author / deck creator",
+    bio: "Creator of The Wild Unknown Tarot, whose animal, botanical, and minimalist imagery helped define the online-first indie tarot wave of the 2010s.",
+    decks: ["The Wild Unknown Tarot"]
+  },
+  {
+    name: "Chris-Anne",
+    dates: "21st century",
+    role: "Artist / author / deck creator",
+    bio: "Creator of Light Seer's Tarot (2019), a contemporary RWS descendant associated with psychological, spiritual, and self-reflection-focused tarot practice.",
+    decks: ["Light Seer's Tarot"]
+  },
+  {
+    name: "Lisa Sterle",
+    dates: "21st century",
+    role: "Artist / deck creator",
+    bio: "Creator and illustrator of Modern Witch Tarot (2019), a contemporary urban and inclusive reinterpretation of the Rider-Waite-Smith tradition.",
+    decks: ["Modern Witch Tarot"]
   }
 ];
 
@@ -904,9 +953,12 @@ async function init() {
     fetch('data/card_witnesses.json'),
     fetch('data/images/manifest.json').catch(() => null)
   ]);
+  if (!decksRes.ok || !witRes.ok) {
+    throw new Error('Historical explorer data could not be loaded.');
+  }
   const decksData = await decksRes.json();
   const witData = await witRes.json();
-  MANIFEST = manifestRes ? await manifestRes.json() : {};
+  MANIFEST = manifestRes?.ok ? await manifestRes.json() : {};
 
   DECKS = decksData.decks.slice().sort((a, b) => (a.date_earliest || 0) - (b.date_earliest || 0));
   GENEALOGY = decksData.genealogy;
@@ -915,6 +967,16 @@ async function init() {
   renderTimeline();
   renderWitnesses();
   renderPeople();
+}
+
+function showLoadError() {
+  const error = document.createElement('div');
+  const message = location.protocol === 'file:'
+    ? 'Serve this folder from an HTTP server; browsers block the data files when opened directly.'
+    : 'Reload the page or check that the site deployment includes the data folder.';
+  error.style.cssText = 'position:fixed;inset:0;z-index:200;display:grid;place-items:center;padding:24px;background:var(--bg);color:var(--text);font-family:var(--font-serif);text-align:center';
+  error.innerHTML = `<div><h1 style="font-size:32px;font-weight:400;margin-bottom:12px">The explorer is unavailable</h1><p style="color:var(--muted);font-size:16px">${message}</p></div>`;
+  document.body.appendChild(error);
 }
 
 /* ─── timeline ─────────────────────────────── */
@@ -971,7 +1033,7 @@ function renderEdgePill(rel) {
 function renderTimeline() {
   const el = document.getElementById('tab-timeline');
   let lastEra = '';
-  let html = `<p class="timeline-intro">From the Mamluk card game of 14th-century Egypt to Vogel and Noble's feminist Motherpeace circular deck — 39 decks and theoretical corpora across 1100 years, every institution that holds them, and the lineage that connects them.</p>
+  let html = `<p class="timeline-intro">From the Mamluk card game of 14th-century Egypt to Vogel and Noble's feminist Motherpeace circular deck — 49 decks and theoretical corpora across more than 1,100 years, every institution that holds them, and the lineage that connects them.</p>
     <div class="timeline-track">`;
 
   for (const deck of DECKS) {
@@ -1032,6 +1094,8 @@ function renderTimeline() {
               <div class="tc-detail-label">Primary purpose</div>
               <div class="tc-detail-val">${deck.primary_purpose || '—'}</div>
             </div>
+            ${deck.official_url ? `<div><div class="tc-detail-label">Official / source link</div><div class="tc-detail-val"><a href="${deck.official_url}" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">Open source page ↗</a></div></div>` : ''}
+            ${deck.image_status ? `<div><div class="tc-detail-label">Image status</div><div class="tc-detail-val">${deck.image_status}</div></div>` : ''}
           </div>
           <div class="tc-detail-label" style="margin-bottom:8px">Known holdings</div>
           <div class="tc-holdings">${formatHoldings(deck.holdings)}</div>
@@ -1762,11 +1826,8 @@ function toggleTheme() {
 })();
 
 init().catch(err => {
-  document.getElementById('tab-timeline').innerHTML =
-    `<div style="padding:40px;color:var(--muted);font-family:var(--font-mono);font-size:12px">
-    Error loading data: ${err.message}<br><br>
-    Make sure you're serving this page from an HTTP server (not file://).
-    </div>`;
+  console.error(err);
+  showLoadError();
 });
 </script>
 </body>

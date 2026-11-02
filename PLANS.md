@@ -1,10 +1,10 @@
 # tarocchi.help — Project Plans
 
-**Domain:** tarocchi.help (Porkbun static hosting)
-**Concept:** A serious, AI-powered tarot reading tool. "The cards help you think."
-**Stack:** Single-file HTML SPA, vanilla JS, CSS 3D, speed_layer AI interpretation
+**Domain:** tarocchi.help (optional future domain)
+**Concept:** A serious, reflective tarot reading tool. "The cards help you think."
+**Stack:** Single-file HTML SPAs, vanilla JS, CSS 3D, local deterministic synthesis
 **Aesthetic:** Deep violet/candlelight gold, Cormorant Garamond serif + IBM Plex Mono, dark background
-**Deck art:** Minimal symbolic SVG design (original, not Rider-Waite raster)
+**Deck art:** Original symbolic SVG design plus locally hosted historical/publicly sourced deck images
 
 ---
 
@@ -43,7 +43,7 @@ Also includes `data/spreads.json` — 5 spread layouts:
 - Horseshoe (7 cards)
 - Year Ahead (13 cards, one per month + synthesis)
 
-Validation: `_build_cards.py` — checks all 78, required fields, no missing suits, completeness score.
+Validation: `_validate.py` — checks all 78 cards, required meanings and keywords, suit counts, and duplicate IDs.
 
 ---
 
@@ -58,7 +58,7 @@ Single-file SPA. No dependencies except Google Fonts CDN.
 4. **Draw** — click cards from facedown pile, fly to spread position
 5. **Flip** — click each card to reveal, CSS 3D flip animation
 6. **Reversed** — ~30% chance any card lands reversed, tracked in reading
-7. **AI Brief** — per-card meaning tooltip on hover, full synthesis panel at bottom
+7. **Synthesis** — per-card meaning and a deterministic synthesis panel at bottom
 8. **Share** — encode reading in URL hash (card IDs + orientations + spread), copy-link button
 9. **Journal** — localStorage, last 10 readings, accessible from nav
 
@@ -67,11 +67,10 @@ Single-file SPA. No dependencies except Google Fonts CDN.
 - Minor Arcana: suit icon (wand/cup/sword/pentacle) + pip count + court figure for face cards
 - Back design: geometric mandala pattern (CSS/SVG, no external images)
 
-### AI Integration
-- Uses `speed_layer` endpoint at `/ai` OR direct Anthropic API via fetch (configurable)
-- Prompt pattern: position-aware, card + orientation + spread context
-- Streams response into brief panel
-- Graceful fallback: static meanings from cards.json if AI unavailable
+### Synthesis
+- Works entirely in the browser with no API key or backend
+- Uses position, card orientation, keywords, and meanings to build a deterministic brief
+- An authenticated AI endpoint can be added later; do not expose a provider key in this static site
 
 ### Color palette
 ```css
@@ -87,19 +86,14 @@ Single-file SPA. No dependencies except Google Fonts CDN.
 ### Typography
 - Headings: Cormorant Garamond (Google Fonts)
 - Body/UI: Inter
-- AI output: IBM Plex Mono (monospace feel for "synthesis")
+- Synthesis output: IBM Plex Mono (monospace feel for "synthesis")
 
 ---
 
-## Phase 3 — Deploy: tarocchi.help
+## Phase 3 — Deploy: optional static hosting
 
-Porkbun static hosting.
-- FTP host: `pixie-ss1-ftp.porkbun.com`
-- User: `tarocchi.help`
-- Pass: (set after purchase)
-- Files: `index.html` + `data/cards.json` + `data/spreads.json`
-
-Same FTP upload pattern as minarealm.shop, atomus.space, pipecamp.homes.
+The site runs locally with `python3 -m http.server 8000`. It can also be deployed to any static host.
+- Files: `index.html`, `explorer.html`, and the required `data/` assets
 
 ---
 
@@ -116,7 +110,7 @@ Embed lightweight version in minarealm.shop for Mara Divine / Mandy Kay pre-sess
 
 **Files:** `data/historical_decks.json` (source), `data/decks.db` (SQLite, built by `_build_decks_db.py`)
 
-17 decks · 25 genealogy edges · 20 holdings · 27 attributions · 105 tags · 30 card witnesses
+49 decks · 83 genealogy edges · 237 card witnesses in the current data snapshot
 
 ### Schema design decisions
 
@@ -132,80 +126,47 @@ Embed lightweight version in minarealm.shop for Mara Divine / Mandy Kay pre-sess
 
 **Structure is deck-relative.** Mamluk: 52 cards, 0 trumps, no human figures. Minchiate: 97 cards, 41 trumps, zodiac. Tarot: 78, 22 trumps. These are not deviations from a standard — they ARE the history.
 
-### Current deck roster (oldest → newest)
-| Deck | Date | Survival | Cards | Purpose |
-|---|---|---|---|---|
-| Tang Dynasty Leaf Game | c. 850–900 CE | documented | — | gaming |
-| Mamluk Playing Cards | c. 1370–1400 | fragmentary | 15/52 | gaming |
-| Spanish Naipes | c. 1371–1380 | documented | 0/52 | gaming |
-| Charles VI Tarot | c. 1440–1470 | fragmentary | 17/78 | gaming |
-| Visconti di Modrone | c. 1441–1447 | fragmentary | 67/78 | gaming |
-| Visconti-Sforza | c. 1450–1480 | fragmentary | 74/78 | gaming |
-| Sola-Busca | c. 1491–1500 | extant | 78/78 | unknown |
-| Minchiate Fiorentine | c. 1500–1530 | extant | 97/97 | gaming |
-| Tarot de Marseille (Geoffroy, 1557) | 1557 | fragmentary | 22/78 | gaming |
-| Tarot de Besancon | c. 1650–1850 | extant | 78/78 | gaming |
-| Tarot de Marseille (Dodal) | c. 1701–1715 | extant | 78/78 | gaming |
-| Tarot de Marseille (Conver, 1761) | 1761 | extant | 78/78 | gaming |
-| Grand Etteilla | 1789–1791 | extant | 78/78 | cartomancy |
-| Golden Dawn corpus | 1888–1900 | documented | — | esoteric_system |
-| Oswald Wirth (1889) | 1889 | extant | 22/22 | esoteric |
-| Rider-Waite-Smith | December 1909 | extant | 78/78 | divination |
-| Thoth Tarot | 1938–1943 | extant | 78/78 | divination |
+### Current status
+**49 decks · 83 genealogy edges · 237 card witnesses** are represented in the current data files and deployed by `_deploy.py`.
+Timeline spans more than 1,100 years, from Tang-era records through contemporary 21st-century decks. The JSON files are the source of truth; do not maintain a second roster in this document.
 
-### Current status (April 21, 2026)
-**30 decks · 49 genealogy edges · 60 card witnesses** deployed to tarocchi.help/explorer.html.
+### Modern deck additions
+The current corpus now includes seven influential modern decks in metadata form:
+- Morgan-Greer Tarot (1979)
+- Universal Waite Tarot (1990)
+- Robin Wood Tarot (1991)
+- Jodorowsky-Camoin Tarot de Marseille (1997)
+- The Wild Unknown Tarot (2012)
+- Light Seer's Tarot (2019)
+- Modern Witch Tarot (2019)
 
-Timeline now spans ~1000 years (Tang c.868 → B.O.T.A. 1929). The 1826–1888 theoretical gap (Lévi, Paul Christian) is closed. Bolognese (Mitelli), Swiss (1JJ), and American-esoteric (B.O.T.A.) branches now represented.
-
-### Next wave — 9 decks to add (April 21, 2026)
-
-Prioritized by structural necessity over completism. The 4 Tier A nodes close documented gaps in the 15th c. corpus. Tier B fills the Marseille lineage. Tier C establishes the 20th c. indie era.
-
-**Tier A — Critical 15th c. structural nodes (4):**
-- `rosenwald-sheet-c1500` — National Gallery of Art, Washington DC. Three uncut woodblock sheets (trumps, cups/coins, swords/batons). Companion to Cary Sheet; together they are the primary evidence for early printed Italian tarot.
-- `steele-sermon-c1495` — *De ludo cum aliis* Franciscan sermon manuscript. Contains the earliest complete written list of the 22 trumps in canonical order. Not a deck but a document — the ur-source for the Milanese trump ordering that propagates through Marseille to RWS.
-- `pierpont-morgan-bergamo-c1500` (PMB) — Third surviving Visconti-lineage deck, distinct from Visconti-Sforza. Split between Morgan Library (NY), Accademia Carrara, and Colleoni Collection. Workshop-attributed to Bembo circle.
-- `ferrara-este-c1470` — Este court fragments (Yale Art Gallery + Museo Civico Ferrara). Third early regional center alongside Milan and Bologna; non-Visconti tradition.
-
-**Tier B — Marseille lineage fills (2):**
-- `madenie-1709` — Pierre Madenié, Dijon. Earliest definitive Tarot de Marseille Type II, the direct source Conver 1761 copied from. Sits between Noblet (Type I, Paris 1650) and Dodal/Conver.
-- `grimaud-marteau-1930` — Paul Marteau's Grimaud recoloring. The standard 20th c. Marseille every reader used before Jodorowsky's 1997 restoration.
-
-**Tier C — 20th c. indie / post-RWS (3):**
-- `aquarian-palladini-1970` — David Palladini's Art Nouveau-influenced RWS variant. First major "mod" American deck; bridges the RWS-tradition and the indie era.
-- `hermetic-dowson-1979` — Godfrey Dowson's Hermetic Tarot. Most precise visual transcription of Golden Dawn ritual symbolism ever made; companion to the Thoth.
-- `motherpeace-1981` — Karen Vogel & Vicki Noble. First feminist circular deck; founding document of indie/reclaiming-era tarot; major pedagogical influence on 1980s–90s revival.
-
-After this wave: **39 decks**, timeline extends to 1981, Marseille lineage complete from Noblet 1650 → Madenié 1709 → Dodal c.1710 → Conver 1761 → Grimaud 1930, and post-RWS indie era begins.
-
-### Future waves (deferred)
-- **Tarocco Piemontese (c.1830)** — Piedmontese regional Italian, still played
-- **Crowley Book of Thoth text corpus (1944)** — textual companion to Thoth deck, mirror of Lévi 1855 pattern
-- **Haindl Tarot (Hermann Haindl, 1988)** — first major ecumenical/cross-cultural deck
-- **Wild Unknown (Kim Krans, 2012)** — indie minimalist pillar, influential on 2010s aesthetic
-- **Spanish / Iberian Latin-suit regional variants** — Naipes Comuneros, Baraja Española; fills the Iberian gameplay branch
+These records include creators, dates, structure, significance, source notes, official links, and genealogy edges. Their card art is copyrighted and is not mirrored locally. The explorer displays the image-rights status and source link instead.
 
 ### Historical Explorer UI
 `explorer.html` — standalone SPA that loads `data/historical_decks.json` + `data/card_witnesses.json` via fetch.
 - **Timeline tab** — vertical chronological rail, click deck to expand detail panel (holdings, attributions, genealogy edges, significance)
 - **Genealogy tab** — SVG force-directed graph of deck relationships; edge type color-coded; click node to highlight lineage
 - **Witnesses tab** — filterable table of card borrowings across decks; filter by deck, card, confidence level
-- **People tab** — key figures (Waite, Smith, Etteilla, Crowley, Harris, Bembo, Levi, Wirth, de Guaita, Jodorowsky) with dates, role, and decks affected
+- **People tab** — key figures (Waite, Smith, Etteilla, Crowley, Harris, Bembo, Levi, Wirth, de Guaita, Jodorowsky, and modern deck creators) with dates, role, and decks affected
 
 Same aesthetic as index.html (dark violet, Cormorant Garamond, IBM Plex Mono). Nav link from index.html.
 
 ---
 
-## File Tree (target)
+## File Tree (current)
 ```
 tarocchi/
-  index.html          ← full SPA
-  PLANS.md            ← this file
+  index.html          ← reader SPA
+  explorer.html       ← historical deck explorer
+  PLANS.md            ← project notes and operating plan
   data/
     cards.json        ← 78-card corpus
     spreads.json      ← 5 spread layouts
-  _build_cards.py     ← validation + seed script
+    historical_decks.json
+    card_witnesses.json
+    images/            ← local artwork and manifest (copyright status varies)
+  _validate.py        ← portable corpus validation
+  _deploy.py          ← FTPS deployment
 ```
 
 ---
@@ -213,17 +174,26 @@ tarocchi/
 ## Key Decisions
 - No external image CDN — all art inline SVG/CSS
 - No framework — vanilla JS only
-- AI optional — works without it, better with it
+- No backend dependency — the reader works from static assets alone
 - Public domain positioning: original art, original data schema
+- Copyrighted deck art is linked to official sources rather than copied into the repository
 - `.help` TLD frames purpose: this tool helps you think, not predict
 
 ---
 
 ## Status
-- [ ] Phase 1: corpus
-- [ ] Phase 2: reader SPA
-- [ ] Phase 3: deploy
+- [x] Phase 1: corpus
+- [x] Phase 2: reader SPA
+- [x] Phase 3: static site ready (local HTTP server verified)
 - [ ] Phase 4: minarealm bridge
-- [x] Phase 5: historical decks database (17 decks, 25 edges, 30 witnesses)
-- [ ] Phase 5b: explorer.html UI
+- [x] Phase 5: historical decks database (49 decks, 83 edges, 237 witnesses)
+- [x] Phase 5b: explorer.html UI
 - [ ] Phase 6: minarealm bridge embed
+
+## Maintenance Notes
+
+- Keep the local HTTP workflow documented and working: `python3 -m http.server 8000`.
+- Keep JSON-backed HTML interpolation escaped.
+- Keep copyrighted modern deck art linked to official sources rather than copied into the repository.
+- Consolidate the root data-acquisition scripts only after confirming which historical downloads are still reproducible.
+- Add a CSP and compressed share encoding before public hosting becomes a priority.

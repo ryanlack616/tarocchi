@@ -1,9 +1,12 @@
 import json
-m = json.loads(open(r'C:\rje\dev\tarocchi\data\images\manifest.json', encoding='utf-8-sig').read())
-c = m['marseille-conver-1761']
-print("CONVER keys:", sorted(c.keys()))
-print()
-# RWS keys
-r = m['rider-waite-smith']
-print("RWS keys:", sorted(r.keys()))
-print("RWS count:", len(r))
+from pathlib import Path
+
+
+manifest_path = Path(__file__).resolve().parent / 'data' / 'images' / 'manifest.json'
+with manifest_path.open(encoding='utf-8-sig') as handle:
+    manifest = json.load(handle)
+
+for deck_id in ('marseille-conver-1761', 'rider-waite-smith'):
+    cards = manifest.get(deck_id, {})
+    print(f'{deck_id} count:', len(cards))
+    print(f'{deck_id} keys:', sorted(cards))
